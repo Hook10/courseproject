@@ -36,7 +36,7 @@
                 <td><input type="text" name="address" /></td>
             </tr>
             <tr>
-                <td>iin</td>
+                <td>IIN</td>
                 <td><input type="text" name="iin" /></td>
             </tr>
         </table>
