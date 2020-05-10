@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+
+
 public class LoginServlet extends HttpServlet {
+//    private static final long serialVersionUID = 1L;
 
-    private LoginDao loginDao = new LoginDao();
+    private LoginDao loginDao= new LoginDao();
 
-        public void init() {
-       loginDao = new LoginDao();
-   }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,14 +34,18 @@ public class LoginServlet extends HttpServlet {
         Customer customer = new Customer();
         customer.setEmail(email);
         customer.setPassword(password);
+        System.out.println("doPost method");
 
         try {
             if(loginDao.validate(customer)) {
+                System.out.println("servlet loginsuccess redirect");
+                RequestDispatcher dispatcher  = request.getRequestDispatcher("/WEB-INF/view/loginsuccess.jsp");
+                dispatcher.forward(request, response);
 
-                response.sendRedirect("loginsuccess.jsp");
             } else {
                 HttpSession session = request.getSession();
-                response.sendRedirect("login.jsp");
+                RequestDispatcher dispatcher  = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
+                dispatcher.forward(request, response);
 
             }
         } catch (IOException e) {
