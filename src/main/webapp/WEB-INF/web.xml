@@ -5,6 +5,16 @@
          version="3.1">
 
   <servlet>
+    <servlet-name>Start</servlet-name>
+    <servlet-class>servlets.MainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Start</servlet-name>
+    <url-pattern>/homepage</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
     <servlet-name>Register</servlet-name>
     <servlet-class>servlets.CustomerServlet</servlet-class>
   </servlet>
@@ -12,6 +22,22 @@
     <servlet-name>Register</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
+
+<!--just test how works new conditions-->
+  <servlet>
+    <servlet-name>loginTestCustomer</servlet-name>
+    <servlet-class>servlets.test.LoginTestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loginTestCustomer</servlet-name>
+    <url-pattern>/homepage/login</url-pattern>
+  </servlet-mapping>
+
+
+
+
+
+
   
   <servlet>
     <servlet-name>loginCustomer</servlet-name>

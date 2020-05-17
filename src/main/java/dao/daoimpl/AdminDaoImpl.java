@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminDaoImpl implements BaseDAO<Admin> {
-
-
-
+    
     @Override
     public void add(Admin admin) throws SQLException {
 

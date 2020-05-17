@@ -20,7 +20,8 @@ public class DBUtil {
         try {
 
             properties = new Properties();
-            properties.load(new FileInputStream("C:/java_projects/courseproject/src/database.properties"));
+            properties.load(new FileInputStream("C:/java_projects/courseproject/src/main/resources/database.properties"));
+          //  properties.load(new FileInputStream("src/main/resources/database.properties"));
 
             dataSource = new HikariDataSource();
             dataSource.setDriverClassName(properties.getProperty(DB_DRIVER_CLASS));

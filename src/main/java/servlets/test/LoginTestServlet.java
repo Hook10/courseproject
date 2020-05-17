@@ -1,4 +1,4 @@
-package servlets;
+package servlets.test;
 
 import dao.services.LoginDao;
 import entity.Customer;
@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-
-
-public class LoginServlet extends HttpServlet {
-   private static final long serialVersionUID = 1L;
+public class LoginTestServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
     private LoginDao loginDao= new LoginDao();
 
@@ -25,7 +23,7 @@ public class LoginServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
         dispatcher.forward(request, response);
-        }
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,11 +32,11 @@ public class LoginServlet extends HttpServlet {
         Customer customer = new Customer();
         customer.setEmail(email);
         customer.setPassword(password);
-
+        System.out.println("doPost method");
 
         try {
             if(loginDao.validate(customer)) {
-
+                System.out.println("servlet loginsuccess redirect");
                 RequestDispatcher dispatcher  = request.getRequestDispatcher("/WEB-INF/view/loginsuccess.jsp");
                 dispatcher.forward(request, response);
 
@@ -54,4 +52,3 @@ public class LoginServlet extends HttpServlet {
 
     }
 }
-
