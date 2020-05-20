@@ -3,21 +3,31 @@ package dao.daoimpl;
 import connectionpool.DBUtil;
 import dao.BaseDAO;
 import entity.Customer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDaoImpl implements BaseDAO<Customer> {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerDaoImpl.class);
+    private static final String ADD_CUSTOMER =  "INSERT INTO CUSTOMERS(ID, FIRST_NAME, SURNAME, EMAIL, PASSWORD, CITY, " +
+            "ADDRESS, IIN) VALUES(?,?,?,?,?,?,?,?)";
+    private static final String GET_ALL_CUSTOMERS = "SELECT ID, FIRST_NAME, SURNAME, EMAIL, PASSWORD, CITY, ADDRESS, " +
+            "IIN FROM CUSTOMERS";
+    private static final String GET_CUSTOMER_BY_ID = "SELECT ID, FIRST_NAME, SURNAME, EMAIL, PASSWORD, CITY, ADDRESS, " +
+            "IIN FROM CUSTOMERS WHERE ID = ?";
+    private static final String UPDATE_CUSTOMERS = "UPDATE CUSTOMERS SET FIRST_NAME =?, SURNAME=?,EMAIL=?, PASSWORD=?, " +
+            "CITY=?, ADDRESS=?, IIN=? WHERE ID = ?";
+    private static final String DELETE_CUSTOMER_BY_ID = "DELETE FROM CUSTOMERS WHERE ID=?";
+    private static final String GET_CUSTOMER_BY_EMAIL_AND_PASSWORD = "select * from customers where email = ? and password = ? ";
 
     @Override
     public void add(Customer customer) throws SQLException {
 
-        String sql = "INSERT INTO CUSTOMERS(ID, FIRST_NAME, SURNAME, EMAIL, PASSWORD, CITY, ADDRESS, IIN) " +
-                "VALUES(?,?,?,?,?,?,?,?)";
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD_CUSTOMER)) {
             preparedStatement.setLong(1, customer.getId());
             preparedStatement.setString(2, customer.getFirstName());
             preparedStatement.setString(3, customer.getSurname());
@@ -29,6 +39,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -37,12 +48,10 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
     public List<Customer> getAll() throws SQLException {
         List<Customer> customerList = new ArrayList<>();
 
-        String sql = "SELECT ID, FIRST_NAME, SURNAME, EMAIL, PASSWORD, CITY, ADDRESS, IIN FROM CUSTOMERS";
-
         try (Connection connection = DBUtil.getDataSource().getConnection();
              Statement statement = connection.createStatement()) {
 
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery(GET_ALL_CUSTOMERS);
             while (resultSet.next()) {
                 Customer customer = new Customer();
                 customer.setId(resultSet.getLong("ID"));
@@ -57,6 +66,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
                 customerList.add(customer);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return customerList;
@@ -65,10 +75,9 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
     @Override
     public Customer getById(Long id) throws SQLException {
 
-        String sql = "SELECT ID, FIRST_NAME, SURNAME, EMAIL, PASSWORD, CITY, ADDRESS, IIN FROM CUSTOMERS WHERE ID = ?";
         Customer customer = new Customer();
         try(Connection connection = DBUtil.getDataSource().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_CUSTOMER_BY_ID)) {
 
             preparedStatement.setLong(1, id);
 
@@ -85,6 +94,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return customer;
@@ -93,9 +103,8 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
     @Override
     public void update(Customer customer) throws SQLException {
 
-        String sql = "UPDATE CUSTOMERS SET FIRST_NAME =?, SURNAME=?,EMAIL=?, PASSWORD=?, CITY=?, ADDRESS=?, IIN=? WHERE ID = ?";
         try(Connection connection = DBUtil.getDataSource().getConnection();
-            PreparedStatement preparedStatement= connection.prepareStatement(sql) ) {
+            PreparedStatement preparedStatement= connection.prepareStatement(UPDATE_CUSTOMERS) ) {
 
             preparedStatement.setString(1, customer.getFirstName());
             preparedStatement.setString(2, customer.getSurname());
@@ -108,6 +117,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -115,14 +125,37 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
     @Override
     public void remove(Customer customer) throws SQLException {
 
-        String sql = "DELETE FROM CUSTOMERS WHERE ID=?";
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CUSTOMER_BY_ID)) {
             preparedStatement.setLong(1, customer.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }
+
+    public Customer getCustomerByEmailAndPassword(String email, String password)  {
+
+        Customer customer = null;
+
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_CUSTOMER_BY_EMAIL_AND_PASSWORD)) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            customer.setEmail(resultSet.getString("EMAIL"));
+            customer.setPassword(resultSet.getString("PASSWORD"));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return customer;
+    }
+
 }
 

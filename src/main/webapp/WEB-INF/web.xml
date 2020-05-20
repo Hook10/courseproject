@@ -4,47 +4,25 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+  <welcome-file-list>
+    <welcome-file>home/index</welcome-file>
+  </welcome-file-list>
+  
   <servlet>
-    <servlet-name>Start</servlet-name>
+    <servlet-name>controller</servlet-name>
     <servlet-class>servlets.MainController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Start</servlet-name>
-    <url-pattern>/homepage</url-pattern>
+    <servlet-name>controller</servlet-name>
+    <url-pattern>/home/*</url-pattern>
   </servlet-mapping>
-
-
-  <servlet>
-    <servlet-name>Register</servlet-name>
-    <servlet-class>servlets.CustomerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Register</servlet-name>
-    <url-pattern>/register</url-pattern>
-  </servlet-mapping>
-
-<!--just test how works new conditions-->
-  <servlet>
-    <servlet-name>loginTestCustomer</servlet-name>
-    <servlet-class>servlets.test.LoginTestServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>loginTestCustomer</servlet-name>
-    <url-pattern>/homepage/login</url-pattern>
-  </servlet-mapping>
-
-
-
-
-
-
   
-  <servlet>
-    <servlet-name>loginCustomer</servlet-name>
-    <servlet-class>servlets.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>loginCustomer</servlet-name>
-    <url-pattern>/login</url-pattern>
-  </servlet-mapping>
+  <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>Filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>

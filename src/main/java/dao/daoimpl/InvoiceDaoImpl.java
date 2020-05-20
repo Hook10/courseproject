@@ -3,19 +3,29 @@ package dao.daoimpl;
 import connectionpool.DBUtil;
 import dao.BaseDAO;
 import entity.Invoice;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InvoiceDaoImpl implements BaseDAO<Invoice> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceDaoImpl.class);
+    private static final String ADD_INVOICE = "INSERT INTO INVOICES(id_invoice, ID_SUP, ID_CUST, MONTH, COST) " +
+            "VALUES(?,?,?,?,?)";
+    private static final String GET_ALL_INVOICES = "SELECT ID_INVOICE, ID_SUP, ID_CUST, MONTH, COST FROM INVOICES";
+    private static final String GET_INVOICE_BY_ID = "SELECT ID_INVOICE, ID_SUP, ID_CUST, MONTH, COST FROM INVOICES " +
+            "WHERE id_invoice=?";
+    private static final String UPDATE_INVOICE = "UPDATE INVOICES SET ID_SUP=?, ID_CUST=?, MONTH=?, COST=? " +
+            "WHERE ID_INVOICE=?";
+    private static final String DELETE_INVOICE_BY_ID = "DELETE FROM INVOICES WHERE id_invoice = ?";
 
     @Override
     public void add(Invoice invoice) throws SQLException {
 
-        String sql = "INSERT INTO INVOICES(id_invoice, ID_SUP, ID_CUST, MONTH, COST) VALUES(?,?,?,?,?)";
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD_INVOICE)) {
 
             preparedStatement.setLong(1, invoice.getIdInvoice());
             preparedStatement.setLong(2, invoice.getIdSupplier());
@@ -25,6 +35,7 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -33,12 +44,10 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
     public List<Invoice> getAll() throws SQLException {
         List<Invoice> invoicesList = new ArrayList<>();
 
-        String sql = "SELECT ID_INVOICE, ID_SUP, ID_CUST, MONTH, COST FROM INVOICES";
-
         try (Connection connection = DBUtil.getDataSource().getConnection();
              Statement statement = connection.createStatement()) {
 
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery(GET_ALL_INVOICES);
             while (resultSet.next()) {
                 Invoice invoice = new Invoice();
                 invoice.setIdInvoice(resultSet.getLong("ID"));
@@ -50,6 +59,7 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
                 invoicesList.add(invoice);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return invoicesList;
@@ -58,11 +68,9 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
     @Override
     public Invoice getById(Long id) throws SQLException {
 
-        String sql = "SELECT ID_INVOICE, ID_SUP, ID_CUST, MONTH, COST FROM INVOICES WHERE id_invoice=?";
-
         Invoice invoice = new Invoice();
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_INVOICE_BY_ID)) {
 
             preparedStatement.setLong(1, id);
 
@@ -76,6 +84,7 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return invoice;
@@ -84,9 +93,8 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
     @Override
     public void update(Invoice invoice) throws SQLException {
 
-        String sql = "UPDATE INVOICES SET ID_SUP=?, ID_CUST=?, MONTH=?, COST=? WHERE ID_INVOICE=?";
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_INVOICE)) {
             preparedStatement.setLong(1, invoice.getIdSupplier());
             preparedStatement.setLong(2, invoice.getIdCustomer());
             preparedStatement.setString(3, invoice.getMonth());
@@ -95,6 +103,7 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -102,12 +111,12 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
     @Override
     public void remove(Invoice invoice) throws SQLException {
 
-        String sql = "DELETE FROM INVOICES WHERE id_invoice = ?";
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_INVOICE_BY_ID)) {
             preparedStatement.setLong(1, invoice.getIdInvoice());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }

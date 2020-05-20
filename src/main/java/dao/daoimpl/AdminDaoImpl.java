@@ -3,20 +3,32 @@ package dao.daoimpl;
 import connectionpool.DBUtil;
 import dao.BaseDAO;
 import entity.Admin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import servlets.MainController;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdminDaoImpl implements BaseDAO<Admin> {
-    
+    private static final Logger LOGGER = LoggerFactory.getLogger(AdminDaoImpl.class);
+    private static final String ADD_ADMIN = "INSERT INTO ADMIN(ID, LOGIN, PASSWORD, SUPPLIER_ID, EMAIL, COMPANY_NAME) " +
+            "VALUES(?,?,?,?,?,?)";
+    private static final String GET_ALL_ADMINS = "SELECT ID, LOGIN, PASSWORD, SUPPLIER_ID, EMAIL, COMPANY_NAME FROM ADMIN";
+    private static final String GET_ADMIN_BY_ID = "SELECT ID, LOGIN, PASSWORD, SUPPLIER_ID, EMAIL, COMPANY_NAME FROM " +
+            "ADMIN WHERE ID = ?";
+    private static final String UPDATE_ADMIN = "UPDATE ADMIN SET LOGIN=?, PASSWORD=?, SUPPLIER_ID=?, EMAIL=?, " +
+            "COMPANY_NAME=? WHERE ID = ?";
+    private static final String DELETE_ADMIN_BY_ID = "DELETE FROM ADMIN WHERE ID = ?";
+
+
     @Override
     public void add(Admin admin) throws SQLException {
 
-        String sql = "INSERT INTO ADMIN(ID, LOGIN, PASSWORD, SUPPLIER_ID, EMAIL, COMPANY_NAME) " +
-                "VALUES(?,?,?,?,?,?)";
+
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD_ADMIN)) {
             preparedStatement.setLong(1, admin.getId());
             preparedStatement.setString(2, admin.getLogin());
             preparedStatement.setString(3, admin.getPassword());
@@ -26,6 +38,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
 
@@ -35,10 +48,9 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
     public List<Admin> getAll() throws SQLException {
         List<Admin> adminList = new ArrayList<>();
 
-        String sql = "SELECT ID, LOGIN, PASSWORD, SUPPLIER_ID, EMAIL, COMPANY_NAME FROM ADMIN";
         try ( Connection connection = DBUtil.getDataSource().getConnection();
               Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery(GET_ALL_ADMINS);
 
             while (resultSet.next()) {
                 Admin admin = new Admin();
@@ -52,6 +64,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
                 adminList.add(admin);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return adminList;
@@ -60,10 +73,9 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
     @Override
     public Admin getById(Long id) throws SQLException {
 
-        String sql = "SELECT ID, LOGIN, PASSWORD, SUPPLIER_ID, EMAIL, COMPANY_NAME FROM ADMIN WHERE ID = ?";
         Admin admin = new Admin();
         try(Connection connection = DBUtil.getDataSource().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_ADMIN_BY_ID)) {
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -78,6 +90,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return admin;
@@ -86,9 +99,8 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
     @Override
     public void update(Admin admin) throws SQLException {
 
-        String sql = "UPDATE ADMIN SET LOGIN=?, PASSWORD=?, SUPPLIER_ID=?, EMAIL=?, COMPANY_NAME=? WHERE ID = ?";
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ADMIN)) {
             preparedStatement.setString(2, admin.getLogin());
             preparedStatement.setString(3, admin.getPassword());
             preparedStatement.setInt(4, admin.getSupplier_id());
@@ -96,6 +108,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
             preparedStatement.setString(6, admin.getCompanyName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -103,13 +116,13 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
     @Override
     public void remove(Admin admin) throws SQLException {
 
-        String sql = "DELETE FROM ADMIN WHERE ID = ?";
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ADMIN_BY_ID)) {
 
             preparedStatement.setLong(1, admin.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }

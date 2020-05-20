@@ -3,19 +3,29 @@ package dao.daoimpl;
 import connectionpool.DBUtil;
 import dao.BaseDAO;
 import entity.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataDaoImpl implements BaseDAO<Data> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DataDaoImpl.class);
+    private static final String ADD_DATA = "INSERT INTO data_table(ID, MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER) " +
+            "VALUES (?,?,?,?,?)";
+    private static final String GET_ALL_DATA = "SELECT ID, MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER FROM DATA_TABLE";
+    private static final String GET_DATA_BY_ID = "SELECT ID, MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER FROM DATA_TABLE" +
+            " WHERE ID = ?";
+    private static final String UPDATE_DATA = "UPDATE DATA_TABLE SET MONTH=?, DATA=?, ID_CUSTOMER=?, ID_SUPPLIER=? " +
+            "WHERE ID=?";
+    private static final String DELETE_DATA_BY_ID = "DELETE FROM DATA_TABLE WHERE ID=?";
 
     @Override
     public void add(Data data) throws SQLException {
 
-        String sql = "INSERT INTO data_table(ID, MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER) VALUES (?,?,?,?,?)";
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD_DATA)) {
 
             preparedStatement.setLong(1, data.getId());
             preparedStatement.setString(2, data.getMonth());
@@ -25,6 +35,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -33,12 +44,10 @@ public class DataDaoImpl implements BaseDAO<Data> {
     public List<Data> getAll() throws SQLException {
         List<Data> dataList = new ArrayList<>();
 
-        String sql = "SELECT ID, MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER FROM DATA_TABLE";
-
         try (Connection connection = DBUtil.getDataSource().getConnection();
              Statement statement = connection.createStatement()) {
 
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery(GET_ALL_DATA);
             while (resultSet.next()) {
                 Data data = new Data();
                 data.setId(resultSet.getLong("ID"));
@@ -50,6 +59,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
                 dataList.add(data);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return dataList;
@@ -58,10 +68,9 @@ public class DataDaoImpl implements BaseDAO<Data> {
     @Override
     public Data getById(Long id) throws SQLException {
 
-        String sql = "SELECT ID, MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER FROM DATA_TABLE WHERE ID = ?";
         Data data = new Data();
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_DATA_BY_ID)) {
 
             preparedStatement.setLong(1, id);
 
@@ -75,6 +84,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return data;
@@ -83,10 +93,8 @@ public class DataDaoImpl implements BaseDAO<Data> {
     @Override
     public void update(Data data) throws SQLException {
 
-        String sql = "UPDATE DATA_TABLE SET MONTH=?, DATA=?, ID_CUSTOMER=?, ID_SUPPLIER=? WHERE ID=?";
-
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_DATA)) {
             preparedStatement.setString(1, data.getMonth());
             preparedStatement.setString(2, data.getData());
             preparedStatement.setLong(3, data.getIdCustomer());
@@ -95,6 +103,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }
@@ -102,12 +111,12 @@ public class DataDaoImpl implements BaseDAO<Data> {
     @Override
     public void remove(Data data) throws SQLException {
 
-        String sql = "DELETE FROM DATA_TABLE WHERE ID=?";
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_DATA_BY_ID)) {
             preparedStatement.setLong(1, data.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }
