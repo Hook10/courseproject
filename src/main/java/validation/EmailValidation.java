@@ -1,23 +1,22 @@
 package validation;
 
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EmailValidation {
-    private static final String REGEX = "^([a-z0-9_\\.-]+)@([a-z0-9_\\.-]+)\\.([a-z\\.]{2,6})$";
-    private Pattern pattern;
+
+    private String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+    private Pattern emailPat;
     private Matcher matcher;
-    private boolean result;
 
-    public boolean isEmailValid(String email) {
-        pattern = Pattern.compile(REGEX, Pattern.CASE_INSENSITIVE);
-        matcher = pattern.matcher(email);
-
-        if (matcher.find()) {
-            result = true;
-        } else {
-            result = false;
-        }
-        return result;
+    public EmailValidation() {
+        emailPat = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
     }
+
+    public  boolean isValidEmail(String input) {
+        matcher = emailPat.matcher(input);
+        return matcher.matches();
+    }
+
 }

@@ -11,6 +11,6 @@
     <title>Error</title>
 </head>
 <body>
-Error vse propalo ShEf
+Error vse propalo ShEf <h3>${requestScope.message}</h3>
 </body>
 </html>

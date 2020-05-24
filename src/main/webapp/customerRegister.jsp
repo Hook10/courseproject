@@ -3,13 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <jsp:include page="style.jsp"/>
     <meta charset="UTF-8">
     <title>Insert title here</title>
 </head>
 <body>
 <div align="center">
     <h1>Customer Register Form</h1>
-    <form action="<%= request.getContextPath() %>/register" method="post">
+    <form action="${pageContext.request.contextPath}/home/register" method="post">
         <table style="with: 80%">
             <tr>
                 <td>First Name</td>

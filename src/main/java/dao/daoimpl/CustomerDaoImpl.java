@@ -98,6 +98,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
             e.printStackTrace();
         }
         return customer;
+
     }
 
     @Override

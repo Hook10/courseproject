@@ -18,12 +18,14 @@ public class MainController extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getAction(request, response);
-    }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         getAction(request, response);
     }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        getAction(request, response);
+    }
+
 
 
 

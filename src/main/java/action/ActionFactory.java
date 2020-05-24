@@ -1,6 +1,6 @@
 package action;
 
-import action.actionImpl.LandingPageAction;
+import action.actionImpl.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -17,6 +17,13 @@ public class ActionFactory {
 
     static {
         actions.put("/index", new LandingPageAction());
+        actions.put("/login", new LoginCustomerAction());
+        actions.put("/login_button", new LoginReferenceOnIndexPageAction());
+        actions.put("/register", new RegisterCustomerAction());
+        actions.put("/register_button", new RegistrationOnIndexPageAction());
+        actions.put("/customerPersonalAccountPage", new EnterInCustomerPersonalAccountPageAction());
+
+
     }
 
     public static ActionFactory getInstance() {
