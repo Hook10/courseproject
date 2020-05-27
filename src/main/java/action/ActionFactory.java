@@ -22,6 +22,8 @@ public class ActionFactory {
         actions.put("/register", new RegisterCustomerAction());
         actions.put("/register_button", new RegistrationOnIndexPageAction());
         actions.put("/customerPersonalAccountPage", new EnterInCustomerPersonalAccountPageAction());
+        actions.put("/login_admin_button", new AdminLoginReferenceOnIndexPageAction());
+        actions.put("/adminLogin", new LoginAdminAction());
 
 
     }

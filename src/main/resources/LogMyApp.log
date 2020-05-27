@@ -1,51 +1,39 @@
-2020-05-26 09:05:24 DEBUG HikariConfig:946 - Driver class com.mysql.cj.jdbc.Driver found in Thread context class loader sun.misc.Launcher$AppClassLoader@18b4aac2
-2020-05-26 09:05:24 DEBUG HikariConfig:1066 - HikariPool-1 - configuration:
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - allowPoolSuspension.............false
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - autoCommit......................true
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - catalog.........................none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - connectionInitSql...............none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - connectionTestQuery.............none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - connectionTimeout...............30000
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - dataSource......................none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - dataSourceClassName.............none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - dataSourceJNDI..................none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - dataSourceProperties............{password=<masked>}
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - driverClassName................."com.mysql.cj.jdbc.Driver"
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - exceptionOverrideClassName......none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - healthCheckProperties...........{}
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - healthCheckRegistry.............none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - idleTimeout.....................600000
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - initializationFailTimeout.......1
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - isolateInternalQueries..........false
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - jdbcUrl.........................jdbc:mysql://localhost:3306/espp
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - leakDetectionThreshold..........0
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - maxLifetime.....................1800000
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - maximumPoolSize.................2000
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - metricRegistry..................none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - metricsTrackerFactory...........none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - minimumIdle.....................100
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - password........................<masked>
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - poolName........................"HikariPool-1"
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - readOnly........................false
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - registerMbeans..................false
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - scheduledExecutor...............none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - schema..........................none
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - threadFactory...................internal
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - transactionIsolation............default
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - username........................"root"
-2020-05-26 09:05:24 DEBUG HikariConfig:1098 - validationTimeout...............5000
-2020-05-26 09:05:24 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
-2020-05-26 09:05:24 DEBUG HikariPool:564 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@55040f2f
-2020-05-26 09:05:24 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
-2020-05-26 09:05:25 ERROR ClassA:42 - Before start of result set
-java.sql.SQLException: Before start of result set
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
-	at com.mysql.cj.jdbc.result.ResultSetImpl.checkRowPos(ResultSetImpl.java:484)
-	at com.mysql.cj.jdbc.result.ResultSetImpl.getString(ResultSetImpl.java:834)
-	at com.mysql.cj.jdbc.result.ResultSetImpl.getString(ResultSetImpl.java:852)
-	at com.zaxxer.hikari.pool.HikariProxyResultSet.getString(HikariProxyResultSet.java)
-	at ClassA.getCustomerByEmailAndPassword(ClassA.java:37)
-	at ClassA.main(ClassA.java:23)
+2020-05-27 12:08:39 DEBUG HikariConfig:946 - Driver class com.mysql.cj.jdbc.Driver found in Thread context class loader sun.misc.Launcher$AppClassLoader@18b4aac2
+2020-05-27 12:08:40 DEBUG HikariConfig:1066 - HikariPool-1 - configuration:
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - allowPoolSuspension.............false
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - autoCommit......................true
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - catalog.........................none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - connectionInitSql...............none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - connectionTestQuery.............none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - connectionTimeout...............30000
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - dataSource......................none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - dataSourceClassName.............none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - dataSourceJNDI..................none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - dataSourceProperties............{password=<masked>}
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - driverClassName................."com.mysql.cj.jdbc.Driver"
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - exceptionOverrideClassName......none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - healthCheckProperties...........{}
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - healthCheckRegistry.............none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - idleTimeout.....................600000
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - initializationFailTimeout.......1
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - isolateInternalQueries..........false
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - jdbcUrl.........................jdbc:mysql://localhost:3306/espp
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - leakDetectionThreshold..........0
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - maxLifetime.....................1800000
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - maximumPoolSize.................2000
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - metricRegistry..................none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - metricsTrackerFactory...........none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - minimumIdle.....................100
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - password........................<masked>
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - poolName........................"HikariPool-1"
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - readOnly........................false
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - registerMbeans..................false
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - scheduledExecutor...............none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - schema..........................none
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - threadFactory...................internal
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - transactionIsolation............default
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - username........................"root"
+2020-05-27 12:08:40 DEBUG HikariConfig:1098 - validationTimeout...............5000
+2020-05-27 12:08:40 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2020-05-27 12:08:40 DEBUG HikariPool:564 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@55040f2f
+2020-05-27 12:08:40 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.

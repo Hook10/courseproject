@@ -1,8 +1,10 @@
 package dao.daoimpl;
 
+import Encoder.HashFunction;
 import connectionpool.DBUtil;
 import dao.BaseDAO;
 import entity.Admin;
+import entity.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import servlets.MainController;
@@ -21,6 +23,10 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
     private static final String UPDATE_ADMIN = "UPDATE ADMIN SET LOGIN=?, PASSWORD=?, SUPPLIER_ID=?, EMAIL=?, " +
             "COMPANY_NAME=? WHERE ID = ?";
     private static final String DELETE_ADMIN_BY_ID = "DELETE FROM ADMIN WHERE ID = ?";
+    private static final String GET_ADMIN_BY_LOGIN_AND_PASSWORD = "select * from ADMIN where login = ? and password = ? ";
+
+    private HashFunction hashPassword = new HashFunction();
+
 
 
     @Override
@@ -31,7 +37,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_ADMIN)) {
             preparedStatement.setLong(1, admin.getId());
             preparedStatement.setString(2, admin.getLogin());
-            preparedStatement.setString(3, admin.getPassword());
+            preparedStatement.setString(3, hashPassword.getHashFunction(admin.getPassword()));
             preparedStatement.setLong(4, admin.getSupplier_id());
             preparedStatement.setString(5, admin.getEmail());
             preparedStatement.setString(6, admin.getCompanyName());
@@ -54,12 +60,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
 
             while (resultSet.next()) {
                 Admin admin = new Admin();
-                admin.setId(resultSet.getLong("ID"));
-                admin.setLogin(resultSet.getString("LOGIN"));
-                admin.setPassword(resultSet.getString("PASSWORD"));
-                admin.setSupplier_id(resultSet.getInt("SUPPLIER_ID"));
-                admin.setEmail(resultSet.getString("EMAIL"));
-                admin.setCompanyName(resultSet.getString("COMPANY_NAME"));
+                getAdmin(admin, resultSet);
 
                 adminList.add(admin);
             }
@@ -80,18 +81,26 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            admin.setId(resultSet.getLong("ID"));
-            admin.setLogin(resultSet.getString("LOGIN"));
-            admin.setPassword(resultSet.getString("PASSWORD"));
-            admin.setSupplier_id(resultSet.getInt("SUPPLIER_ID"));
-            admin.setEmail(resultSet.getString("EMAIL"));
-            admin.setCompanyName(resultSet.getString("COMPANY_NAME"));
+            getAdmin(admin, resultSet);
 
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
+        }
+        return admin;
+    }
+
+    private Admin getAdmin(Admin admin, ResultSet resultSet) throws SQLException {
+        if (resultSet.next()) {
+            admin = new Admin();
+            admin.setId(resultSet.getLong("ID"));
+            admin.setLogin(resultSet.getString("LOGIN"));
+            admin.setPassword(resultSet.getString("PASSWORD"));
+            admin.setSupplier_id(resultSet.getInt("SUPPLIER_ID"));
+            admin.setEmail(resultSet.getString("EMAIL"));
+            admin.setCompanyName(resultSet.getString("COMPANY_NAME"));
         }
         return admin;
     }
@@ -111,6 +120,22 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
+    }
+    public Admin getAdminByLoginAndPassword(String login, String password)  {
+
+        Admin admin = null;
+
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ADMIN_BY_LOGIN_AND_PASSWORD)) {
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            return getAdmin(admin, preparedStatement.executeQuery());
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return admin;
     }
 
     @Override

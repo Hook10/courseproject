@@ -14,6 +14,7 @@
 
 <a href="${pageContext.request.contextPath}/home/login_button" type="button" class="btn btn-secondary">Вход</a>
 <a href="${pageContext.request.contextPath}/home/register_button" type="button" class="btn btn-secondary">Регистрация</a>
+<a href="${pageContext.request.contextPath}/home/login_admin_button" type="button" class="btn btn-secondary">Администрация</a>
 
 </body>
 </html>

@@ -4,8 +4,9 @@
 
 <html>
 <head>
+    <jsp:include page="style.jsp"/>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Guru Login Form</title>
+    <title>Customer Login Form</title>
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/home/login" method="post">
