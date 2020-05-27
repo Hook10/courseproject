@@ -9,7 +9,7 @@
 </head>
 <body>
 <div align="center">
-    <h1>Customer Register Form</h1>
+    <h1>Customer Registration Form</h1>
     <form action="${pageContext.request.contextPath}/home/register" method="post">
         <table style="with: 80%">
             <tr>

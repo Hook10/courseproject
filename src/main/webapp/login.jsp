@@ -12,7 +12,7 @@
     <table style="with: 50%">
 
         <tr>
-            <td>UserName</td>
+            <td>Email</td>
             <td><input type="text" name="email" /></td>
         </tr>
         <tr>

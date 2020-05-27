@@ -54,13 +54,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
             ResultSet resultSet = statement.executeQuery(GET_ALL_CUSTOMERS);
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                customer.setId(resultSet.getLong("ID"));
-                customer.setFirstName(resultSet.getString("FIRST_NAME"));
-                customer.setSurname(resultSet.getString("SURNAME"));
-                customer.setEmail(resultSet.getString("EMAIL"));
-                customer.setPassword(resultSet.getString("PASSWORD"));
-                customer.setCity(resultSet.getString("CITY"));
-                customer.setAddress(resultSet.getString("ADDRESS"));
+                getCustomer(customer, resultSet);
                 customer.setIin(resultSet.getString("Iin"));
 
                 customerList.add(customer);
@@ -83,13 +77,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            customer.setId(resultSet.getLong("ID"));
-            customer.setFirstName(resultSet.getString("FIRST_NAME"));
-            customer.setSurname(resultSet.getString("SURNAME"));
-            customer.setEmail(resultSet.getString("EMAIL"));
-            customer.setPassword(resultSet.getString("PASSWORD"));
-            customer.setCity(resultSet.getString("CITY"));
-            customer.setAddress(resultSet.getString("ADDRESS"));
+            getCustomer(customer, resultSet);
             customer.setIin(resultSet.getString("iin"));
 
             preparedStatement.executeUpdate();
@@ -99,6 +87,20 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
         }
         return customer;
 
+    }
+
+    public Customer getCustomer(Customer customer, ResultSet resultSet) throws SQLException {
+        if (resultSet.next()) {
+            customer = new Customer();
+            customer.setId(resultSet.getLong("ID"));
+            customer.setFirstName(resultSet.getString("FIRST_NAME"));
+            customer.setSurname(resultSet.getString("SURNAME"));
+            customer.setEmail(resultSet.getString("EMAIL"));
+            customer.setPassword(resultSet.getString("PASSWORD"));
+            customer.setCity(resultSet.getString("CITY"));
+            customer.setAddress(resultSet.getString("ADDRESS"));
+        }
+        return customer;
     }
 
     @Override
@@ -144,12 +146,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
              PreparedStatement preparedStatement = connection.prepareStatement(GET_CUSTOMER_BY_EMAIL_AND_PASSWORD)) {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
-
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            customer.setEmail(resultSet.getString("EMAIL"));
-            customer.setPassword(resultSet.getString("PASSWORD"));
-            preparedStatement.executeUpdate();
+            return getCustomer(customer, preparedStatement.executeQuery());
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
@@ -158,5 +155,27 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
         return customer;
     }
 
-}
+//}
+//    public Customer getCustomerByEmailAndPassword(String email, String password)  {
+//
+//        Customer customer = null;
+//
+//        try (Connection connection = DBUtil.getDataSource().getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(GET_CUSTOMER_BY_EMAIL_AND_PASSWORD)) {
+//            preparedStatement.setString(1, email);
+//            preparedStatement.setString(2, password);
+//
+//
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            customer.setEmail(resultSet.getString("EMAIL"));
+//            customer.setPassword(resultSet.getString("PASSWORD"));
+//            preparedStatement.executeUpdate();
+//
+//        } catch (SQLException e) {
+//            LOGGER.error(e.getMessage(), e);
+//            e.printStackTrace();
+//        }
+//        return customer;
+//    }
 
+}

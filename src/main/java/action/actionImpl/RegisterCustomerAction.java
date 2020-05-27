@@ -52,7 +52,7 @@ public class RegisterCustomerAction implements Action {
             return;
         }
 
-        password = hashFunction.getHash(password);
+      password = hashFunction.getHashFunction(password);
 
         Customer customer = new Customer();
         customer.setFirstName(firstName);

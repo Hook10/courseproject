@@ -13,22 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+
 import static constants.ActionConstants.CUSTOMER_PERSONAL_ACCOUNT_PAGE;
 import static constants.ActionConstants.ERROR_URL;
 
 public class LoginCustomerAction implements Action {
+    String email ;
+    String password;
     private  HashFunction hashPassword = new HashFunction();
     private Customer customer;
+    CustomerDaoImpl customerDao;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        customer.setEmail(email);
-        customer.setPassword(password);
+        email = request.getParameter("email");
+        password = request.getParameter("password");
+
 
         if (email.isEmpty() || password.isEmpty()) {
             request.setAttribute("message", "Empty fields");
@@ -42,8 +45,8 @@ public class LoginCustomerAction implements Action {
             return;
         }
 
-        password = hashPassword.getHash(password);
-        CustomerDaoImpl customerDao = new CustomerDaoImpl();
+        password = hashPassword.getHashFunction(password);
+        customerDao = new CustomerDaoImpl();
         customer = customerDao.getCustomerByEmailAndPassword(email, password);
 
         if (customer != null) {
@@ -51,25 +54,8 @@ public class LoginCustomerAction implements Action {
             request.getRequestDispatcher(CUSTOMER_PERSONAL_ACCOUNT_PAGE).forward(request, response);
         } else {
             request.setAttribute("message", "the customer does not exist");
+            request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
-
-//
-//        try {
-//            if (loginDao.validate(customer)) {
-//
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/loginsuccess.jsp");
-//                dispatcher.forward(request, response);
-//
-//            } else {
-//
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
-//                dispatcher.forward(request, response);
-//
-//
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
     }
 }
