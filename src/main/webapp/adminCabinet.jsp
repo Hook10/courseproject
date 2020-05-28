@@ -11,6 +11,7 @@
    ${sessionScope.admin.login} ${sessionScope.admin.email}
 </h3>
     <a href="${pageContext.request.contextPath}/home/create_admin_button" type="button" class="btn btn-secondary">Create admin</a>
+    <a href="${pageContext.request.contextPath}/home/create_supplier_button" type="button" class="btn btn-secondary">Create supplier</a>
 
 </body>
 </html>

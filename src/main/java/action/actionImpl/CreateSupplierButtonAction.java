@@ -7,13 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static constants.ActionConstants.CREATE_ADMIN;
-import static constants.ActionConstants.CUSTOMER_REGISTRATION_PAGE;
+import static constants.ActionConstants.CREATE_SUPPLIER;
+import static constants.ActionConstants.LOGIN_CUSTOMER;
 
-public class CreateAdminButtonAction implements Action {
-
+public class CreateSupplierButtonAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher(CREATE_ADMIN).forward(request, response);
+        request.getRequestDispatcher(CREATE_SUPPLIER).forward(request, response);
     }
 }

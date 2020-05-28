@@ -8,7 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <jsp:include page="style.jsp"/>
+    <title>Create Admin</title>
 </head>
 <body>
 <div align="center">

@@ -26,6 +26,8 @@ public class ActionFactory {
         actions.put("/adminLogin", new LoginAdminAction());
         actions.put("/create_admin_button", new CreateAdminButtonAction());
         actions.put("/create_admin", new CreateAdminAction());
+        actions.put("/create_supplier_button", new CreateSupplierButtonAction());
+        actions.put("/create_supplier", new CreateSupplierAction());
 
 
     }
