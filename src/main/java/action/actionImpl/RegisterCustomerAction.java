@@ -31,22 +31,17 @@ public class RegisterCustomerAction implements Action {
         String address = request.getParameter("address");
         String iin = request.getParameter("iin");
 
-        if (firstName.isEmpty() ||
-                surName.isEmpty() ||
-                email.isEmpty() ||
-                password.isEmpty() ||
-                city.isEmpty() ||
-                address.isEmpty() ||
+        if (firstName.isEmpty() || surName.isEmpty() ||
+                email.isEmpty() || password.isEmpty() ||
+                city.isEmpty() || address.isEmpty() ||
                 iin.isEmpty()) {
             request.setAttribute("message", "empty fields");
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
 
-        if (!new NameValidation().isValidUserName(firstName) ||
-                !new NameValidation().isValidUserName(surName) ||
-                !new EmailValidation().isValidEmail(email) ||
-                !new IINValidation().isValidIIN(iin)) {
+        if (!new NameValidation().isValidUserName(firstName) || !new NameValidation().isValidUserName(surName) ||
+                !new EmailValidation().isValidEmail(email) || !new IINValidation().isValidIIN(iin)) {
             request.setAttribute("message", "Incorrect  input");
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;

@@ -6,6 +6,8 @@ import dao.daoimpl.AdminDaoImpl;
 import dao.daoimpl.CustomerDaoImpl;
 import entity.Admin;
 import entity.Customer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import static constants.ActionConstants.ADMIN_CABINET;
 import static constants.ActionConstants.ERROR_URL;
 
 public class LoginAdminAction implements Action {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginAdminAction.class);
     String login ;
     String password;
     private HashFunction hashPassword = new HashFunction();
@@ -25,6 +28,7 @@ public class LoginAdminAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
 
         HttpSession session = request.getSession();
 

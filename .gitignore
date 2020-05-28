@@ -1,4 +1,4 @@
-../esppversion2/.idea
+.idea
 .classpath
 target
 *.iml

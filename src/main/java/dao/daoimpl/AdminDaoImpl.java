@@ -38,7 +38,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
             preparedStatement.setLong(1, admin.getId());
             preparedStatement.setString(2, admin.getLogin());
             preparedStatement.setString(3, hashPassword.getHashFunction(admin.getPassword()));
-            preparedStatement.setLong(4, admin.getSupplier_id());
+            preparedStatement.setString(4, admin.getSupplier_id());
             preparedStatement.setString(5, admin.getEmail());
             preparedStatement.setString(6, admin.getCompanyName());
 
@@ -98,7 +98,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
             admin.setId(resultSet.getLong("ID"));
             admin.setLogin(resultSet.getString("LOGIN"));
             admin.setPassword(resultSet.getString("PASSWORD"));
-            admin.setSupplier_id(resultSet.getInt("SUPPLIER_ID"));
+            admin.setSupplier_id(resultSet.getString("SUPPLIER_ID"));
             admin.setEmail(resultSet.getString("EMAIL"));
             admin.setCompanyName(resultSet.getString("COMPANY_NAME"));
         }
@@ -112,7 +112,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ADMIN)) {
             preparedStatement.setString(2, admin.getLogin());
             preparedStatement.setString(3, admin.getPassword());
-            preparedStatement.setInt(4, admin.getSupplier_id());
+            preparedStatement.setString(4, admin.getSupplier_id());
             preparedStatement.setString(5, admin.getEmail());
             preparedStatement.setString(6, admin.getCompanyName());
             preparedStatement.executeUpdate();

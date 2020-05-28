@@ -24,6 +24,8 @@ public class ActionFactory {
         actions.put("/customerPersonalAccountPage", new EnterInCustomerPersonalAccountPageAction());
         actions.put("/login_admin_button", new AdminLoginReferenceOnIndexPageAction());
         actions.put("/adminLogin", new LoginAdminAction());
+        actions.put("/create_admin_button", new CreateAdminButtonAction());
+        actions.put("/create_admin", new CreateAdminAction());
 
 
     }
