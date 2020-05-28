@@ -7,14 +7,14 @@ public class Admin implements Serializable {
     private long id;
     private String login;
     private String password;
-    private String supplier_id;
+    private long supplier_id;
     private String email;
     private String companyName;
 
     public Admin() {
     }
 
-    public Admin(long id, String login, String password, String supplier_id, String email, String companyName) {
+    public Admin(long id, String login, String password, long supplier_id, String email, String companyName) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -47,11 +47,11 @@ public class Admin implements Serializable {
         this.password = password;
     }
 
-    public String getSupplier_id() {
+    public long getSupplier_id() {
         return supplier_id;
     }
 
-    public void setSupplier_id(String supplier_id) {
+    public void setSupplier_id(long supplier_id) {
         this.supplier_id = supplier_id;
     }
 

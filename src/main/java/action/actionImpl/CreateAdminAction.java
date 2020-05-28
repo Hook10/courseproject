@@ -31,12 +31,12 @@ public class CreateAdminAction implements Action {
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        String supplier_id = request.getParameter("supplier_id");
+        Long supplier_id = Long.parseLong(request.getParameter("supplier_id"));
         String email = request.getParameter("email");
         String company_name = request.getParameter("company_name");
 
         if(login.isEmpty() || password.isEmpty() ||
-        supplier_id.isEmpty() || email.isEmpty() ||
+          email.isEmpty() ||
         company_name.isEmpty()) {
             request.setAttribute("message", "empty fields");
             request.getRequestDispatcher(ERROR_URL).forward(request,response);
@@ -49,7 +49,7 @@ public class CreateAdminAction implements Action {
             return;
         }
 
-        password = hashFunction.getHashFunction(password);
+
         Admin admin = new Admin();
         admin.setLogin(login);
         admin.setPassword(password);
