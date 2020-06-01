@@ -10,4 +10,5 @@ public class ActionConstants {
     public static final String ADMIN_CABINET = "/adminCabinet.jsp";
     public static final String CREATE_ADMIN = "/createAdmin.jsp";
     public static final String CREATE_SUPPLIER = "/createSupplier.jsp";
+    public static final String SHOW_DATA_PERSON_LIST = "/show_gas.jsp";
 }

@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Data implements Serializable {
     private long id;
     private String month;
-    private String data;
+    private long data;
     private long idCustomer;
     private int idSupplier;
 
@@ -14,7 +14,7 @@ public class Data implements Serializable {
 
     }
 
-    public Data(long id, String month, String data, long idCustomer, int idSupplier) {
+    public Data(long id, String month, long data, long idCustomer, int idSupplier) {
         this.id = id;
         this.month = month;
         this.data = data;
@@ -38,11 +38,11 @@ public class Data implements Serializable {
         this.month = month;
     }
 
-    public String getData() {
+    public long getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(long data) {
         this.data = data;
     }
 
@@ -68,10 +68,10 @@ public class Data implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Data data1 = (Data) o;
         return id == data1.id &&
+                data == data1.data &&
                 idCustomer == data1.idCustomer &&
                 idSupplier == data1.idSupplier &&
-                month.equals(data1.month) &&
-                data.equals(data1.data);
+                month.equals(data1.month);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Data implements Serializable {
         return "Data{" +
                 "id=" + id +
                 ", month='" + month + '\'' +
-                ", data='" + data + '\'' +
+                ", data=" + data +
                 ", idCustomer=" + idCustomer +
                 ", idSupplier=" + idSupplier +
                 '}';

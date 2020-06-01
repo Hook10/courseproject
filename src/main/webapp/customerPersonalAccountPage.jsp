@@ -3,14 +3,22 @@
 <html>
 <head>
     <jsp:include page="style.jsp"/>
+
     <title>Your cabinet</title>
 </head>
-<body>
+
+<div class="container-sm">
+<br>
 <h3>
     This is your cabinet
-${sessionScope.customer.firstName} ${sessionScope.customer.email}
+${sessionScope.customer.firstName}Your email is:  ${sessionScope.customer.email}
 
 </h3>
-Welcome to your personal online cabinet.
+<br>
+    <div class="btn-group-toggle " role="group" aria-label="Basic example">
+    <a href="${pageContext.request.contextPath}/home/show_gas" type="button" class="btn btn-info">Gas</a>
+    </div>
+
+</div>
 </body>
 </html>
