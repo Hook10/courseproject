@@ -12,14 +12,15 @@ import java.util.List;
 
 public class DataDaoImpl implements BaseDAO<Data> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataDaoImpl.class);
-    private static final String ADD_DATA = "INSERT INTO data_table(MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER) " +
-            "VALUES (?,?,?,?)";
+    private static final String ADD_DATA = "INSERT INTO data_table(ID, MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER) " +
+            "VALUES (?,?,?,?,?)";
     private static final String GET_ALL_DATA = "SELECT ID, MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER FROM DATA_TABLE";
     private static final String GET_DATA_BY_ID = "SELECT ID, MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER FROM DATA_TABLE" +
             " WHERE ID = ?";
     private static final String UPDATE_DATA = "UPDATE DATA_TABLE SET MONTH=?, DATA=?, ID_CUSTOMER=?, ID_SUPPLIER=? " +
             "WHERE ID=?";
     private static final String DELETE_DATA_BY_ID = "DELETE FROM DATA_TABLE WHERE ID=?";
+    private static final String GET_ALL_DATA_BY_CUSTOMER_ID = "select * from data_table where ID_CUSTOMER = ? ";
 
     @Override
     public void add(Data data) throws SQLException {
@@ -120,29 +121,29 @@ public class DataDaoImpl implements BaseDAO<Data> {
             e.printStackTrace();
         }
     }
-//    @Override
-//    public List<Data> getAllByCustomerId(long id) throws SQLException {
-//        List<Data> dataList = new ArrayList<>();
-//
-//        try (Connection connection = DBUtil.getDataSource().getConnection();
-//             Statement statement = connection.createStatement()) {
-//
-//            ResultSet resultSet = statement.executeQuery(GET_ALL_DATA_BY_CUSTOMER_ID);
-//            while (resultSet.next()) {
-//                Data data = new Data();
-//                data.setId(resultSet.getLong("ID"));
-//                data.setMonth(resultSet.getString("MONTH"));
-//                data.setData(resultSet.getString("DATA"));
-//                data.setIdCustomer(resultSet.getLong("ID_CUSTOMER"));
-//                data.setIdSupplier(resultSet.getInt("ID_SUPPLIER"));
-//
-//                dataList.add(data);
-//            }
-//        } catch (SQLException e) {
-//            LOGGER.error(e.getMessage(), e);
-//            e.printStackTrace();
-//        }
-//        return dataList;
-//    }
+
+    public List<Data> getAllByCustomerId(long id) throws SQLException {
+        List<Data> dataList = new ArrayList<>();
+
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             Statement statement = connection.createStatement()) {
+
+            ResultSet resultSet = statement.executeQuery(GET_ALL_DATA_BY_CUSTOMER_ID);
+            while (resultSet.next()) {
+                Data data = new Data();
+                data.setId(resultSet.getLong("ID"));
+                data.setMonth(resultSet.getString("MONTH"));
+                data.setData(resultSet.getLong("DATA"));
+                data.setIdCustomer(resultSet.getLong("ID_CUSTOMER"));
+                data.setIdSupplier(resultSet.getInt("ID_SUPPLIER"));
+
+                dataList.add(data);
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return dataList;
+    }
 }
 

@@ -11,4 +11,8 @@ public class ActionConstants {
     public static final String CREATE_ADMIN = "/createAdmin.jsp";
     public static final String CREATE_SUPPLIER = "/createSupplier.jsp";
     public static final String SHOW_DATA_PERSON_LIST = "/show_gas.jsp";
+    public static final String CREATE_DATA_CUSTOMER = "/create_data.jsp";
+    public static final String FORWARD_TO_SHOW_DATA = "/home/show_gas";
+
+
 }

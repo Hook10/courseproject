@@ -11,7 +11,9 @@
 <h3>
     This is your Gas page
 </h3>
-<table class = "table table-sm">
+    <br>
+
+<table class = "table table-info">
     <thead>
         <tr>
             <th scope="col">ID</th>

@@ -11,12 +11,13 @@
 <br>
 <h3>
     This is your cabinet
-${sessionScope.customer.firstName}Your email is:  ${sessionScope.customer.email}
+${sessionScope.customer.firstName} Your email is:  ${sessionScope.customer.email}
 
 </h3>
 <br>
     <div class="btn-group-toggle " role="group" aria-label="Basic example">
-    <a href="${pageContext.request.contextPath}/home/show_gas" type="button" class="btn btn-info">Gas</a>
+    <a href="${pageContext.request.contextPath}/home/show_gas" type="button" class="btn btn-info">Show Gas data</a>
+    <a href="${pageContext.request.contextPath}/home/add_gas_data" type="button" class="btn btn-info">Add Gas data</a>
     </div>
 
 </div>

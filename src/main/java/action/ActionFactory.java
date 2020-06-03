@@ -29,7 +29,8 @@ public class ActionFactory {
         actions.put("/create_supplier_button", new CreateSupplierButtonAction());
         actions.put("/create_supplier", new CreateSupplierAction());
         actions.put("/show_gas", new ShowGasAction());
-        actions.put("/add_gas_data", new AddGasDataAction());
+        actions.put("/add_gas_data", new AddGasDataButtonAction());
+        actions.put("/add_customer_gas_data", new AddGasDataAction());
 
 
     }

@@ -36,8 +36,7 @@ public class CreateAdminAction implements Action {
         String company_name = request.getParameter("company_name");
 
         if(login.isEmpty() || password.isEmpty() ||
-          email.isEmpty() ||
-        company_name.isEmpty()) {
+          email.isEmpty() || company_name.isEmpty()) {
             request.setAttribute("message", "empty fields");
             request.getRequestDispatcher(ERROR_URL).forward(request,response);
             return;
