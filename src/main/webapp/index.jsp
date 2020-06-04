@@ -1,21 +1,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <fmt:setBundle basename="language"/>
+<jsp:include page="navbar.jsp"/>
+
 <html lang="en">
+
 <head>
     <jsp:include page="style.jsp"/>
-
 
     <title>Main Page</title>
 </head>
 <body>
 
-<a href="${pageContext.request.contextPath}/home/login_button" type="button" class="btn btn-secondary">Login</a>
-<a href="${pageContext.request.contextPath}/home/register_button" type="button" class="btn btn-secondary">Registration</a>
-<a href="${pageContext.request.contextPath}/home/login_admin_button" type="button" class="btn btn-secondary">Administration</a>
+<div class="container-xl">
 
+
+
+<a href="${pageContext.request.contextPath}/home/login_button" type="button" class="btn btn-info">Login</a>
+<a href="${pageContext.request.contextPath}/home/register_button" type="button" class="btn btn-info">Registration</a>
+<a href="${pageContext.request.contextPath}/home/login_admin_button" type="button" class="btn btn-info">Administration</a>
+
+
+</div>
 </body>
 </html>
 

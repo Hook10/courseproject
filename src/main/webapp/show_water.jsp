@@ -8,7 +8,7 @@
 <body>
 <div class="container-sm">
     <h3>
-        This is your Gas page
+        This is your Water page
     </h3>
     <br>
 
