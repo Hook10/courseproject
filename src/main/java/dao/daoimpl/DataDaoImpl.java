@@ -20,7 +20,8 @@ public class DataDaoImpl implements BaseDAO<Data> {
     private static final String UPDATE_DATA = "UPDATE DATA_TABLE SET MONTH=?, DATA=?, ID_CUSTOMER=?, ID_SUPPLIER=? " +
             "WHERE ID=?";
     private static final String DELETE_DATA_BY_ID = "DELETE FROM DATA_TABLE WHERE ID=?";
-    private static final String GET_ALL_DATA_BY_CUSTOMER_ID = "select * from data_table where ID_CUSTOMER = ? ";
+    private static final String GET_ALL_DATA_BY_CUSTOMER_ID = "SELECT * FROM DATA_TABLE WHERE ID_CUSTOMER = ? ";
+    private static final String GET_ALL_DATA_BY_SUPPLIER_ID = "SELECT * FROM DATA_TABLE WHERE ID_SUPPLIER = ?";
 
     @Override
     public void add(Data data) throws SQLException {
@@ -139,6 +140,34 @@ public class DataDaoImpl implements BaseDAO<Data> {
 
                 dataList.add(data);
             }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+    public List<Data> getAllBySupplierId(long id) throws SQLException {
+        List<Data> dataList = new ArrayList<>();
+
+
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_DATA_BY_SUPPLIER_ID)) {
+
+            preparedStatement.setLong(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Data data = new Data();
+                data.setId(resultSet.getLong("ID"));
+                data.setMonth(resultSet.getString("MONTH"));
+                data.setData(resultSet.getLong("DATA"));
+                data.setIdCustomer(resultSet.getLong("ID_CUSTOMER"));
+                data.setIdSupplier(resultSet.getInt("ID_SUPPLIER"));
+
+                dataList.add(data);
+            }
+
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();

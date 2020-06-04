@@ -31,6 +31,8 @@ public class ActionFactory {
         actions.put("/show_gas", new ShowGasAction());
         actions.put("/add_gas_data", new AddGasDataButtonAction());
         actions.put("/add_customer_gas_data", new AddGasDataAction());
+        actions.put("/show_water", new ShowWaterAction());
+        actions.put("/show_electricity", new ShowElectrAction());
 
 
     }

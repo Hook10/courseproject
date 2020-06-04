@@ -10,9 +10,12 @@ public class ActionConstants {
     public static final String ADMIN_CABINET = "/adminCabinet.jsp";
     public static final String CREATE_ADMIN = "/createAdmin.jsp";
     public static final String CREATE_SUPPLIER = "/createSupplier.jsp";
-    public static final String SHOW_DATA_PERSON_LIST = "/show_gas.jsp";
+    public static final String SHOW_GAS_DATA_PERSON_LIST = "/show_gas.jsp";
     public static final String CREATE_DATA_CUSTOMER = "/create_data.jsp";
-    public static final String FORWARD_TO_SHOW_DATA = "/home/show_gas";
+    public static final String FORWARD_TO_SHOW_GAS_DATA = "/home/show_gas";
+    public static final String FORWARD_TO_SHOW_WATER_DATA = "/home/show_water";
+    public static final String FORWARD_TO_SHOW_ELECTR_DATA = "/home/show_electricity";
+    public static final String SHOW_WATER_DATA_PERSON_LIST = "/show_water.jsp";
 
 
 }

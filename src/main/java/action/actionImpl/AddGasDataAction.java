@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import static action.actionImpl.ShowElectrAction.ELECTRICITY_SUPPLIER;
+import static action.actionImpl.ShowWaterAction.WATER_SUPPLIER;
 import static constants.ActionConstants.*;
 
 public class AddGasDataAction implements Action {
@@ -22,7 +24,7 @@ public class AddGasDataAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         Customer customer= null;
 
         if(request.getSession().getAttribute("customer") instanceof Customer) {
@@ -35,7 +37,8 @@ public class AddGasDataAction implements Action {
         String month = request.getParameter("month");
         long data = Long.parseLong(request.getParameter("Gas_data"));
         long id_customer = customer.getId();
-        int id_supplier = GAS_SUPPLIER;
+        int id_supplier = Integer.parseInt(request.getParameter("id_supplier"));
+
 
         Data dataFromCustomer = new Data();
         DataDaoImpl dataDao = new DataDaoImpl();
@@ -49,42 +52,22 @@ public class AddGasDataAction implements Action {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//
-        RequestDispatcher dispatcher =  request.getRequestDispatcher(FORWARD_TO_SHOW_DATA);
-        dispatcher.forward(request, response);
-
-
-
- /*       LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
-        DataDaoImpl dataDao = new DataDaoImpl();
-
-        String month = request.getParameter("month");
-        Long data = Long.parseLong(request.getParameter("Gas_data"));
-        Long idCustomer = Long.parseLong(request.getParameter("id_customer"));
-        int idSupplier = Integer.parseInt(request.getParameter("id_supplier"));
-
-        if(month.isEmpty() || request.getParameter("Gas_data").equals("") ||
-        request.getParameter("id_customer").equals("") ||
-        request.getParameter("id_supplier").equals("")) {
-            request.setAttribute("message", "empty fields");
-            request.getRequestDispatcher(ERROR_URL).forward(request,response);
+        if(id_supplier == GAS_SUPPLIER){
+            RequestDispatcher dispatcher =  request.getRequestDispatcher(FORWARD_TO_SHOW_GAS_DATA);
+            dispatcher.forward(request, response);
+        } else if(id_supplier == WATER_SUPPLIER){
+            RequestDispatcher dispatcher =  request.getRequestDispatcher(FORWARD_TO_SHOW_WATER_DATA);
+            dispatcher.forward(request, response);
+        } else if(id_supplier == ELECTRICITY_SUPPLIER){
+            RequestDispatcher dispatcher =  request.getRequestDispatcher(FORWARD_TO_SHOW_ELECTR_DATA);
+            dispatcher.forward(request, response);
+        } else {
+            request.setAttribute("message", "wrong supplier");
+            RequestDispatcher dispatcher =  request.getRequestDispatcher(ERROR_URL);
+            dispatcher.forward(request, response);
         }
 
-        Data data1 = new Data();
-        data1.setMonth(month);
-        data1.setData(data);
-        data1.setIdCustomer(idCustomer);
-        data1.setIdSupplier(idSupplier);
 
-        try{
-            dataDao.add(data1);
-        } catch (SQLException e ) {
-            LOGGER.info("Data creating sql error");
-            e.printStackTrace();
-        }
-        RequestDispatcher dispatcher =  request.getRequestDispatcher(SHOW_DATA_PERSON_LIST);
-        dispatcher.forward(request, response);
 
-  */
     }
 }

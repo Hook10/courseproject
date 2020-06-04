@@ -17,7 +17,18 @@ ${sessionScope.customer.firstName} Your email is:  ${sessionScope.customer.email
 <br>
     <div class="btn-group-toggle " role="group" aria-label="Basic example">
     <a href="${pageContext.request.contextPath}/home/show_gas" type="button" class="btn btn-info">Show Gas data</a>
-    <a href="${pageContext.request.contextPath}/home/add_gas_data" type="button" class="btn btn-info">Add Gas data</a>
+    <a href="${pageContext.request.contextPath}/home/add_gas_data" type="button" class="btn btn-info">Add Your data</a>
+    </div>
+    <br>
+    <div class="btn-group-toggle " role="group" aria-label="Basic example">
+    <a href="${pageContext.request.contextPath}/home/show_water" type="button" class="btn btn-info">Show Water data</a>
+
+
+    </div>
+    <div class="btn-group-toggle " role="group" aria-label="Basic example">
+    <a href="${pageContext.request.contextPath}/home/show_electricity" type="button" class="btn btn-info">Show Electricity data</a>
+
+
     </div>
 
 </div>
