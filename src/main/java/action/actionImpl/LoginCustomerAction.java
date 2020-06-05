@@ -1,9 +1,11 @@
 package action.actionImpl;
 
 import Encoder.HashFunction;
+
 import action.Action;
 import dao.daoimpl.CustomerDaoImpl;
 import entity.Customer;
+import userstatus.UserStatus;
 import validation.EmailValidation;
 import validation.PasswordValidation;
 
@@ -51,6 +53,7 @@ public class LoginCustomerAction implements Action {
 
         if (customer != null) {
             session.setAttribute("customer", customer);
+            session.setAttribute("status", UserStatus.CUSTOMER);
             request.getRequestDispatcher(CUSTOMER_PERSONAL_ACCOUNT_PAGE).forward(request, response);
         } else {
             request.setAttribute("message", "the customer does not exist");

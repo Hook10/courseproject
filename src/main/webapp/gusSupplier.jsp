@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
     <title>Gus</title>
 </head>

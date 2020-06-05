@@ -2,26 +2,31 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <fmt:setBundle basename="language"/>
-<jsp:include page="navbar.jsp"/>
+
 
 <html lang="en">
 
 <head>
+    <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
 
     <title>Main Page</title>
 </head>
 <body>
 
-<div class="container-xl">
+<div class="container-sm">
 
-
+<c:choose>
+    <c:when test="${sessionScope.status == 'GUEST' || sessionScope.status == null}">
 
 <a href="${pageContext.request.contextPath}/home/login_button" type="button" class="btn btn-info">Login</a>
 <a href="${pageContext.request.contextPath}/home/register_button" type="button" class="btn btn-info">Registration</a>
 <a href="${pageContext.request.contextPath}/home/login_admin_button" type="button" class="btn btn-info">Administration</a>
-
-
+    </c:when>
+    <c:otherwise>
+    <a href="${pageContext.request.contextPath}/home/customerPersonalAccountPage" type="button" class="btn btn-info">Personal Cabinet</a>
+    </c:otherwise>
+</c:choose>
 </div>
 </body>
 </html>

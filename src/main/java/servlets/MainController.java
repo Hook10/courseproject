@@ -4,11 +4,13 @@ import action.Action;
 import action.ActionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import userstatus.UserStatus;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -19,6 +21,7 @@ public class MainController extends HttpServlet {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         getAction(request, response);
     }
 
@@ -27,16 +30,11 @@ public class MainController extends HttpServlet {
     }
 
 
-
-
     private void getAction(HttpServletRequest request, HttpServletResponse response) {
         try {
             Action action = ActionFactory.getInstance().getAction(request);
             action.execute(request, response);
-        } catch (ServletException e) {
-            LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }

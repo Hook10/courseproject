@@ -2,10 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
     <title>Your water page</title>
 </head>
 <body>
+<c:choose>
+    <c:when test="${sessionScope.status == 'CUSTOMER' ||sessionScope.status == 'WEBSITEADMIN' }">
 <div class="container-sm">
     <h3>
         This is your Water page
@@ -36,6 +39,12 @@
 
     </table>
 </div>
-
+    </c:when>
+    <c:otherwise>
+<div class="container-sm">
+        <a href="${pageContext.request.contextPath}/home/login_button" type="button" class="btn btn-info">Login</a>
+</div>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>

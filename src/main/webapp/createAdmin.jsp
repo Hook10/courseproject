@@ -1,17 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: sapas
-  Date: 28.05.2020
-  Time: 0:06
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
     <title>Create Admin</title>
 </head>
 <body>
+<c:choose>
+    <c:when test="${sessionScope.status == 'WEBSITEADMIN' }">
 <div align="center">
     <h1>Customer Registration Form</h1>
     <form action="${pageContext.request.contextPath}/home/create_admin" method="post">
@@ -43,5 +40,10 @@
         <input type="submit" value="Submit" />
     </form>
 </div>
+    </c:when>
+    <c:otherwise>
+        <a href="${pageContext.request.contextPath}/home/login_admin_button" type="button" class="btn btn-info">Administration</a>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>

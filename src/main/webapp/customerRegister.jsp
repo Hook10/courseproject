@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
     <meta charset="UTF-8">
     <title>Insert title here</title>

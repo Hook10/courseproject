@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container-sm">
     <nav class="navbar navbar-dark bg-primary">
         <a class="navbar-brand" href="${pageContext.request.contextPath}/">Home</a>
@@ -8,19 +8,24 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+
+                <c:if test="${sessionScope.status != 'GUEST' || sessionScope.status == null}">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/home/logout">Logout <span class="sr-only">(current)</span></a>
                 </li>
+                </c:if>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/">Main Page</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                        Additional
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/home/show_gas">Gas Page</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/home/show_water">Water Page</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/home/show_electricity">Electricity Page</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>

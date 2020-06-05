@@ -6,11 +6,14 @@
 
 
 <head>
+    <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
 
     <title>Create data</title>
 </head>
 <body>
+<c:choose>
+    <c:when test="${sessionScope.status == 'CUSTOMER' ||sessionScope.status == 'WEBSITEADMIN' }">
 <div class="container-sm">
 <div align="center">
     <h1>Enter Your Data Here</h1>
@@ -36,23 +39,15 @@
                     </select>
                 </td>
             </tr>
-
-<%--            <div class="input-group mb-3">--%>
-<%--                <div class="input-group-prepend">--%>
-<%--                    <label class="input-group-text" for="inputGroupSelect01">Choose Supplier</label>--%>
-<%--                </div>--%>
-<%--                <select class="custom-select" id="inputGroupSelect01">--%>
-<%--                    <option selected>Choose...</option>--%>
-<%--                    <option value="1">Gas</option>--%>
-<%--                    <option value="2">Water</option>--%>
-<%--                    <option value="3">Electricity</option>--%>
-<%--                </select>--%>
-<%--            </div>--%>
-
         </table>
         <input type="submit" value="Submit" />
     </form>
 </div>
 </div>
+    </c:when>
+<c:otherwise>
+    <a href="${pageContext.request.contextPath}/home/login_button" type="button" class="btn btn-info">Login</a>
+</c:otherwise>
+</c:choose>
 </body>
 </html>

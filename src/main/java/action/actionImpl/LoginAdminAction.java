@@ -1,13 +1,13 @@
 package action.actionImpl;
 
 import Encoder.HashFunction;
+
 import action.Action;
 import dao.daoimpl.AdminDaoImpl;
-import dao.daoimpl.CustomerDaoImpl;
 import entity.Admin;
-import entity.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import userstatus.UserStatus;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -47,6 +47,7 @@ public class LoginAdminAction implements Action {
 
         if(admin != null)   {
             session.setAttribute("admin", admin);
+            session.setAttribute("status", UserStatus.WEBSITEADMIN);
             request.getRequestDispatcher(ADMIN_CABINET).forward(request,response);
         } else {
             request.setAttribute("message", "the admin does not exist");

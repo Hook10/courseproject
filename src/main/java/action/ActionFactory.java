@@ -33,6 +33,7 @@ public class ActionFactory {
         actions.put("/add_customer_gas_data", new AddGasDataAction());
         actions.put("/show_water", new ShowWaterAction());
         actions.put("/show_electricity", new ShowElectrAction());
+        actions.put("/logout", new LogoutAction());
 
 
     }
