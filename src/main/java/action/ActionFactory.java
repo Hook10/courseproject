@@ -29,11 +29,14 @@ public class ActionFactory {
         actions.put("/create_supplier_button", new CreateSupplierButtonAction());
         actions.put("/create_supplier", new CreateSupplierAction());
         actions.put("/show_gas", new ShowGasAction());
-        actions.put("/add_gas_data", new AddGasDataButtonAction());
-        actions.put("/add_customer_gas_data", new AddGasDataAction());
+        actions.put("/add_data", new AddDataButtonAction());
+        actions.put("/add_customer_data", new AddDataAction());
         actions.put("/show_water", new ShowWaterAction());
         actions.put("/show_electricity", new ShowElectrAction());
         actions.put("/logout", new LogoutAction());
+        actions.put("/editCustomersDataButton", new EditCustomerDataButtonAction());
+        actions.put("/editCustomersData", new EditCustomerDataAction());
+
 
 
     }

@@ -18,9 +18,9 @@ import static action.actionImpl.ShowElectrAction.ELECTRICITY_SUPPLIER;
 import static action.actionImpl.ShowWaterAction.WATER_SUPPLIER;
 import static constants.ActionConstants.*;
 
-public class AddGasDataAction implements Action {
+public class AddDataAction implements Action {
     public static final int GAS_SUPPLIER = 1;
-    private static final Logger LOGGER = LoggerFactory.getLogger(AddGasDataButtonAction.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AddDataButtonAction.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

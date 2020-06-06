@@ -29,7 +29,8 @@
     </div>
     <br>
 
-    <a href="${pageContext.request.contextPath}/home/add_gas_data" type="button" class="btn btn-info">Add Your data</a>
+    <a href="${pageContext.request.contextPath}/home/add_data" type="button" class="btn btn-info">Add Your data</a>
+    <a href="${pageContext.request.contextPath}/home//editCustomersDataButton" type="button" class="btn btn-info">Edit your data</a>
 
 
 </div>

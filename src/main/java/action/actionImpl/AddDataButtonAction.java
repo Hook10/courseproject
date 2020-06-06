@@ -11,8 +11,8 @@ import java.io.IOException;
 
 import static constants.ActionConstants.*;
 
-public class AddGasDataButtonAction implements Action {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AddGasDataButtonAction.class);
+public class AddDataButtonAction implements Action {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AddDataButtonAction.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

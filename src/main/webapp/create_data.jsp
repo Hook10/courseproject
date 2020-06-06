@@ -17,7 +17,7 @@
 <div class="container-sm">
 <div align="center">
     <h1>Enter Your Data Here</h1>
-    <form action="${pageContext.request.contextPath}/home/add_customer_gas_data"  method="post">
+    <form action="${pageContext.request.contextPath}/home/add_customer_data"  method="post">
 
         <table style="align-items: center">
             <tr>

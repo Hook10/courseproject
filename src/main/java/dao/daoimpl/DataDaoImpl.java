@@ -23,6 +23,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
     private static final String GET_ALL_DATA_BY_CUSTOMER_ID = "SELECT * FROM DATA_TABLE WHERE ID_CUSTOMER = ? ";
     private static final String GET_ALL_DATA_BY_SUPPLIER_ID = "SELECT * FROM DATA_TABLE WHERE ID_SUPPLIER = ?";
 
+
     @Override
     public void add(Data data) throws SQLException {
 

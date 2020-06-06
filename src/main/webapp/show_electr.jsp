@@ -23,6 +23,7 @@
             <th scope="col">data</th>
             <th scope="col">ID_customer</th>
             <th scope="col">ID_supplier</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +34,9 @@
                 <td>${dataList.data}</td>
                 <td>${dataList.idCustomer}</td>
                 <td>${dataList.idSupplier}</td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/home/add_customer_gas_data?action=EDIT&id=${dataList.id}">Edit</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

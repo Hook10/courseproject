@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: sapas
-  Date: 20.05.2020
-  Time: 9:18
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,6 +7,11 @@
     <title>Error</title>
 </head>
 <body>
-Error vse propalo ShEf <h3>${requestScope.message}</h3>
+<div class="container-sm">
+     Warning!!!
+     Error <h3>${requestScope.message}</h3>
+
+</div>
+
 </body>
 </html>
