@@ -35,8 +35,14 @@
                 <td>${dataList.idCustomer}</td>
                 <td>${dataList.idSupplier}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/home/add_customer_gas_data?action=EDIT&id=${dataList.id}">Edit</a>
+                    <form action="${pageContext.request.contextPath}/home/editCustomerDataButton" method="post">
+                        <input type="hidden" name="id_customer" value="${dataList.idCustomer}">
+                        <input type="hidden" name="id" value="${dataList.id}">
+                        <button type="submit"
+                                class="btn  btn-sm btn-info">Edit</button>
+                    </form>
                 </td>
+
             </tr>
         </c:forEach>
         </tbody>

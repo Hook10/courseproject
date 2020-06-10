@@ -1,19 +1,28 @@
 package action.actionImpl;
 
 import action.Action;
+import dao.daoimpl.DataDaoImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import static constants.ActionConstants.EDIT_CUSTOMER_DATA;
+import static constants.ActionConstants.LOGIN_CUSTOMER;
 
 public class EditCustomerDataButtonAction implements Action {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EditCustomerDataButtonAction.class);
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
+
         request.setAttribute("id", request.getParameter("id"));
-        request.getRequestDispatcher(EDIT_CUSTOMER_DATA)
-                .forward(request, response);
+        request.setAttribute("id_customer", request.getParameter("id_customer"));
+        request.getRequestDispatcher(EDIT_CUSTOMER_DATA).forward(request, response);
     }
 }

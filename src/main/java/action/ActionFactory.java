@@ -34,8 +34,8 @@ public class ActionFactory {
         actions.put("/show_water", new ShowWaterAction());
         actions.put("/show_electricity", new ShowElectrAction());
         actions.put("/logout", new LogoutAction());
-        actions.put("/editCustomersDataButton", new EditCustomerDataButtonAction());
-        actions.put("/editCustomersData", new EditCustomerDataAction());
+        actions.put("/editCustomerDataButton", new EditCustomerDataButtonAction());
+        actions.put("/editCustomerData", new EditCustomerDataAction());
 
 
 

@@ -83,7 +83,7 @@ public class SupplierDaoImpl implements BaseDAO<Supplier> {
     }
 
     @Override
-    public void update(Supplier supplier) throws SQLException {
+    public void update(long id, Supplier supplier) throws SQLException {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SUPPLIER)) {

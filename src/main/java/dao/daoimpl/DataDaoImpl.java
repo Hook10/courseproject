@@ -17,8 +17,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
     private static final String GET_ALL_DATA = "SELECT ID, MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER FROM DATA_TABLE";
     private static final String GET_DATA_BY_ID = "SELECT ID, MONTH, DATA, ID_CUSTOMER, ID_SUPPLIER FROM DATA_TABLE" +
             " WHERE ID = ?";
-    private static final String UPDATE_DATA = "UPDATE DATA_TABLE SET MONTH=?, DATA=?, ID_CUSTOMER=?, ID_SUPPLIER=? " +
-            "WHERE ID=?";
+    private static final String UPDATE_DATA = "UPDATE DATA_TABLE SET MONTH = ?, DATA = ?, ID_CUSTOMER = ?, ID_SUPPLIER = ?  WHERE ID = ? ";
     private static final String DELETE_DATA_BY_ID = "DELETE FROM DATA_TABLE WHERE ID=?";
     private static final String GET_ALL_DATA_BY_CUSTOMER_ID = "SELECT * FROM DATA_TABLE WHERE ID_CUSTOMER = ? ";
     private static final String GET_ALL_DATA_BY_SUPPLIER_ID = "SELECT * FROM DATA_TABLE WHERE ID_SUPPLIER = ?";
@@ -92,17 +91,17 @@ public class DataDaoImpl implements BaseDAO<Data> {
         }
         return data;
     }
-
     @Override
-    public void update(Data data) throws SQLException {
+    public void update(long id, Data data) throws SQLException {
+
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_DATA)) {
+            preparedStatement.setLong(5, id);
             preparedStatement.setString(1, data.getMonth());
             preparedStatement.setLong(2, data.getData());
             preparedStatement.setLong(3, data.getIdCustomer());
             preparedStatement.setInt(4, data.getIdSupplier());
-            preparedStatement.setLong(5, data.getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -110,6 +109,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void remove(Data data) throws SQLException {
@@ -147,6 +147,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
         }
         return dataList;
     }
+
     public List<Data> getAllBySupplierId(long id) throws SQLException {
         List<Data> dataList = new ArrayList<>();
 

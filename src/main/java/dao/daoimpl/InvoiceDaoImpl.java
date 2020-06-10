@@ -91,7 +91,7 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
     }
 
     @Override
-    public void update(Invoice invoice) throws SQLException {
+    public void update(long id, Invoice invoice) throws SQLException {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_INVOICE)) {

@@ -107,7 +107,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
     }
 
     @Override
-    public void update(Admin admin) throws SQLException {
+    public void update(long id, Admin admin) throws SQLException {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ADMIN)) {

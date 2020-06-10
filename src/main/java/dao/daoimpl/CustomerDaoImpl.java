@@ -104,7 +104,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
     }
 
     @Override
-    public void update(Customer customer) throws SQLException {
+    public void update(long id, Customer customer) throws SQLException {
 
         try(Connection connection = DBUtil.getDataSource().getConnection();
             PreparedStatement preparedStatement= connection.prepareStatement(UPDATE_CUSTOMERS) ) {

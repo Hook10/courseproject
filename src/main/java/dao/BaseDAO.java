@@ -13,7 +13,7 @@ public interface BaseDAO <T extends Serializable>  {
     T getById( Long id) throws SQLException;
 
     //update
-    void update( T entity) throws SQLException;
+    void update( long id, T entity) throws SQLException;
 
     //delete
     void remove( T entity) throws SQLException;
