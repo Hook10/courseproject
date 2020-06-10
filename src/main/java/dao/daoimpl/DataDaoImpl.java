@@ -123,6 +123,19 @@ public class DataDaoImpl implements BaseDAO<Data> {
             e.printStackTrace();
         }
     }
+    public void removeOneById(long id) {
+
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_DATA_BY_ID)) {
+
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+    }
+
 
     public List<Data> getAllByCustomerId(long id) throws SQLException {
         List<Data> dataList = new ArrayList<>();

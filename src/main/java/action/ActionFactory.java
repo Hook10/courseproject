@@ -36,6 +36,7 @@ public class ActionFactory {
         actions.put("/logout", new LogoutAction());
         actions.put("/editCustomerDataButton", new EditCustomerDataButtonAction());
         actions.put("/editCustomerData", new EditCustomerDataAction());
+        actions.put("/delete_data", new DeleteDataAction());
 
 
 

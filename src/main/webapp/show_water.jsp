@@ -24,6 +24,7 @@
             <th scope="col">ID_customer</th>
             <th scope="col">ID_supplier</th>
             <th scope="col">Actions</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -40,6 +41,14 @@
                         <input type="hidden" name="id" value="${dataList.id}">
                         <button type="submit"
                                 class="btn  btn-sm btn-info">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/home/delete_data" method="post">
+                        <input type="hidden" name="id_supplier" value="${dataList.idSupplier}">
+                        <input type="hidden" name="id" value="${dataList.id}">
+                        <button type="submit"
+                                class="btn  btn-sm btn-info">Delete</button>
                     </form>
                 </td>
             </tr>

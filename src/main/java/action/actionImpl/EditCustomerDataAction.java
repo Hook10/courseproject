@@ -48,7 +48,11 @@ public class EditCustomerDataAction implements Action {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (id_supplier == GAS_SUPPLIER) {
+        supplierForward(request, response, id_supplier, GAS_SUPPLIER);
+    }
+
+    static void supplierForward(HttpServletRequest request, HttpServletResponse response, int id_supplier, int gasSupplier) throws ServletException, IOException {
+        if (id_supplier == gasSupplier) {
             RequestDispatcher dispatcher = request.getRequestDispatcher(FORWARD_TO_SHOW_GAS_DATA);
             dispatcher.forward(request, response);
         } else if (id_supplier == WATER_SUPPLIER) {
