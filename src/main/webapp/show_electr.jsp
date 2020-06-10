@@ -14,7 +14,6 @@
         This is your Electricity page
     </h3>
     <br>
-
     <table class = "table table-info">
         <thead>
         <tr>
@@ -56,6 +55,5 @@
         </div>
     </c:otherwise>
 </c:choose>
-
 </body>
 </html>

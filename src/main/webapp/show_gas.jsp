@@ -24,6 +24,7 @@
             <th scope="col">data</th>
             <th scope="col">ID_customer</th>
             <th scope="col">ID_supplier</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -34,10 +35,17 @@
         <td>${dataList.data}</td>
         <td>${dataList.idCustomer}</td>
         <td>${dataList.idSupplier}</td>
+        <td>
+            <form action="${pageContext.request.contextPath}/home/editCustomerDataButton" method="post">
+                <input type="hidden" name="id_customer" value="${dataList.idCustomer}">
+                <input type="hidden" name="id" value="${dataList.id}">
+                <button type="submit"
+                        class="btn  btn-sm btn-info">Edit</button>
+            </form>
+        </td>
     </tr>
     </c:forEach>
     </tbody>
-
 </table>
 </div>
     </c:when>

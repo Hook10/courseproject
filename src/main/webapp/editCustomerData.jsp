@@ -23,7 +23,7 @@
 
                 <input type="hidden" name="id" value="${requestScope.id}">
                 <input type="hidden" name="id_customer" value="${requestScope.id_customer}">
-                <table style="align-items: center">
+                <table style="align-items: normal">
                     <tr>
                         <td>month</td>
                         <td><input type="month"  name="month" /></td>
@@ -35,7 +35,7 @@
 
                     <tr>
                         <td>
-                            <select name="id_supplier">
+                            <select  name="id_supplier">
                                 <option value="1">Gas</option>
                                 <option value="2">Water</option>
                                 <option value="3">Electricity</option>
