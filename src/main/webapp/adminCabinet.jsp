@@ -7,6 +7,7 @@
     <title>AdminCabinet</title>
 </head>
 <body>
+<div class="container-sm">
 <c:choose>
     <c:when test="${sessionScope.status == 'WEBSITEADMIN'}">
 <h3>
@@ -21,5 +22,6 @@
         <a href="${pageContext.request.contextPath}/home/login_admin_button" type="button" class="btn btn-info">Administration</a>
     </c:otherwise>
 </c:choose>
+</div>
 </body>
 </html>
