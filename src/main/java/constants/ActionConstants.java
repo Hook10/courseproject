@@ -19,6 +19,8 @@ public class ActionConstants {
     public static final String SHOW_ELECTR_DATA_PERSON_LIST = "/show_electr.jsp";
     public static final String EDIT_CUSTOMER_DATA="/editCustomerData.jsp";
     public static final String PAY_INVOICE="/payInvoice.jsp";
+    public static final String PAY_INVOICE_FORM="/payInvoiceForm.jsp";
+
 
 
 

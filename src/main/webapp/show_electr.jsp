@@ -62,7 +62,6 @@
                                 class="btn  btn-sm btn-info">Pay</button>
                     </form>
                 </td>
-
             </tr>
         </c:forEach>
         </tbody>

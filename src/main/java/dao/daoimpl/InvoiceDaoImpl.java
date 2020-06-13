@@ -13,11 +13,13 @@ import java.util.List;
 
 public class InvoiceDaoImpl implements BaseDAO<Invoice> {
     private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceDaoImpl.class);
-    private static final String ADD_INVOICE = "INSERT INTO INVOICES(ID_INVOICE, ID_DATA,  ID_SUP, ID_CUST, MONTH, DATA, COST) " +
+    private static final String ADD_INVOICE = "INSERT INTO INVOICES(ID_INVOICE,  ID_DATA,  ID_SUP, ID_CUST, MONTH, DATA, COST) " +
             "VALUES(?,?,?,?,?,?,?)";
     private static final String GET_ALL_INVOICES = "SELECT ID_INVOICE, ID_DATA,ID_SUP, ID_CUST, MONTH, DATA, COST FROM INVOICES";
     private static final String GET_INVOICE_BY_ID = "SELECT ID_INVOICE, ID_SUP, ID_CUST, MONTH, DATA, COST FROM INVOICES " +
             " WHERE id_invoice=?";
+    private static final String GET_INVOICE_BY_DATA_ID = "SELECT ID_INVOICE,  ID_DATA, ID_SUP, ID_CUST, MONTH, DATA, COST FROM INVOICES " +
+            " WHERE id_data=?";
     private static final String UPDATE_INVOICE = "UPDATE INVOICES SET ID_DATA, ID_SUP=?, ID_CUST=?, MONTH=?, DATA=?, COST=? " +
             " WHERE ID_INVOICE=?";
     private static final String DELETE_INVOICE_BY_ID = "DELETE FROM INVOICES WHERE id_invoice = ?";
@@ -145,6 +147,36 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
 
             while (resultSet.next()) {
                Invoice invoice = new Invoice();
+                invoice.setIdInvoice(resultSet.getLong("ID_INVOICE"));
+                invoice.setIdData(resultSet.getLong("ID_DATA"));
+                invoice.setIdSupplier(resultSet.getLong("ID_SUP"));
+                invoice.setIdCustomer(resultSet.getLong("ID_CUST"));
+                invoice.setMonth(resultSet.getString("MONTH"));
+                invoice.setData(resultSet.getLong("DATA"));
+                invoice.setCost(resultSet.getLong("COST"));
+                invoicesList.add(invoice);
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return invoicesList;
+    }
+    public List<Invoice> getAllByDataId(long id_data) throws SQLException {
+        List<Invoice> invoicesList = new ArrayList<>();
+
+
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_INVOICE_BY_DATA_ID)) {
+
+            preparedStatement.setLong(1, id_data);
+
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Invoice invoice = new Invoice();
                 invoice.setIdInvoice(resultSet.getLong("ID_INVOICE"));
                 invoice.setIdData(resultSet.getLong("ID_DATA"));
                 invoice.setIdSupplier(resultSet.getLong("ID_SUP"));

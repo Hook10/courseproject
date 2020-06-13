@@ -20,13 +20,19 @@ public class ShowInvoiceAction implements Action {
 //        long id_data = Long.parseLong(request.getParameter("id_data"));
         long id_supplier = Long.parseLong(request.getParameter("id_supplier"));
         long id_customer = Long.parseLong(request.getParameter("id_customer"));
+        long id_data = Long.parseLong(request.getParameter("id_data"));
 //        String month = request.getParameter("month");
 //        long data = Long.parseLong(String.valueOf(request.getParameter("data")));
 
         InvoiceDaoImpl invoiceDao1 = new InvoiceDaoImpl();
+//        try {
+//            invoiceDao1.getAllByDataId(id_data);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         List<Invoice> invoicesList=null;
         try{
-            invoicesList = invoiceDao1.getAllBySupplierIdAndCustomerId(id_supplier, id_customer);
+            invoicesList = invoiceDao1.getAllByDataId(id_data);
         } catch (SQLException e) {
             e.printStackTrace();
         }
