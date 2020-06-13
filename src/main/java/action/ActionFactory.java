@@ -37,8 +37,8 @@ public class ActionFactory {
         actions.put("/editCustomerDataButton", new EditCustomerDataButtonAction());
         actions.put("/editCustomerData", new EditCustomerDataAction());
         actions.put("/delete_data", new DeleteDataAction());
-
-
+        actions.put("/payInvoiceButton", new PayInvoiceButtonAction());
+        actions.put("/showInvoice", new ShowInvoiceAction());
 
     }
 

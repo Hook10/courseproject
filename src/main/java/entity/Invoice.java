@@ -5,21 +5,41 @@ import java.util.Objects;
 
 public class Invoice implements Serializable {
     private long idInvoice;
+    private long idData;
     private long idSupplier;
     private long idCustomer;
     private String month;
+    private long data;
     private long cost;
 
     public Invoice(){
 
     }
 
-    public Invoice(int idInvoice, int idSupplier, int idCustomer, String month, long cost) {
+    public Invoice(long idInvoice, long idData, long idSupplier, long idCustomer, String month, long data, long cost) {
         this.idInvoice = idInvoice;
+        this.idData = idData;
         this.idSupplier = idSupplier;
         this.idCustomer = idCustomer;
         this.month = month;
+        this.data = data;
         this.cost = cost;
+    }
+
+    public long getData() {
+        return data;
+    }
+
+    public void setData(long data) {
+        this.data = data;
+    }
+
+    public long getIdData() {
+        return idData;
+    }
+
+    public void setIdData(long idData) {
+        this.idData = idData;
     }
 
     public long getIdInvoice() {
@@ -68,24 +88,28 @@ public class Invoice implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Invoice invoice = (Invoice) o;
         return idInvoice == invoice.idInvoice &&
+                idData == invoice.idData &&
                 idSupplier == invoice.idSupplier &&
                 idCustomer == invoice.idCustomer &&
+                data == invoice.data &&
                 cost == invoice.cost &&
-                month.equals(invoice.month);
+                Objects.equals(month, invoice.month);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idInvoice, idSupplier, idCustomer, month, cost);
+        return Objects.hash(idInvoice, idData, idSupplier, idCustomer, month, data, cost);
     }
 
     @Override
     public String toString() {
         return "Invoice{" +
                 "idInvoice=" + idInvoice +
+                ", idData=" + idData +
                 ", idSupplier=" + idSupplier +
                 ", idCustomer=" + idCustomer +
                 ", month='" + month + '\'' +
+                ", data=" + data +
                 ", cost=" + cost +
                 '}';
     }

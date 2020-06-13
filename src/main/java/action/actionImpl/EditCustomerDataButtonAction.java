@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import static constants.ActionConstants.EDIT_CUSTOMER_DATA;
-import static constants.ActionConstants.LOGIN_CUSTOMER;
+
 
 public class EditCustomerDataButtonAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditCustomerDataButtonAction.class);
@@ -24,5 +24,7 @@ public class EditCustomerDataButtonAction implements Action {
         request.setAttribute("id", request.getParameter("id"));
         request.setAttribute("id_customer", request.getParameter("id_customer"));
         request.getRequestDispatcher(EDIT_CUSTOMER_DATA).forward(request, response);
+
+
     }
 }
