@@ -1,7 +1,15 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="theLocale"
+       value="${not empty param.theLocale ? param.theLocale : pageContext.request.locale}"
+       scope="session" />
+<fmt:setLocale value="${theLocale}" />
+<fmt:setBundle basename="myLabels" />
+
 <div class="container-sm">
     <nav class="navbar navbar-dark bg-primary">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/">Home</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/"><fmt:message key="home"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

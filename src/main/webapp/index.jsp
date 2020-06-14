@@ -1,8 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<fmt:setBundle basename="language"/>
-
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="theLocale"
+       value="${not empty param.theLocale ? param.theLocale : pageContext.request.locale}"
+       scope="session" />
+<fmt:setLocale value="${theLocale}" />
+<fmt:setBundle basename="myLabels" />
 
 <html lang="en">
 
@@ -13,12 +16,19 @@
     <title>Main Page</title>
 </head>
 <body>
+<div class="container-lg">
+    View this page in: <br/>
+    <a href="${pageContext.request.contextPath}/home/login_button?theLocale=en_US" type="button" class="btn btn-info">English (US)</a>  |
+    <a href="${pageContext.request.contextPath}/home/login_button?theLocale=ru_RU" type="button" class="btn btn-info">Русский (RU)</a>
+    <br/><br/>
+    Selected language: ${theLocale}
+    <hr>
+
+</div>
 
 <div class="container-sm">
-
 <c:choose>
     <c:when test="${sessionScope.status == 'GUEST' || sessionScope.status == null}">
-
 <a href="${pageContext.request.contextPath}/home/login_button" type="button" class="btn btn-info">Login</a>
 <a href="${pageContext.request.contextPath}/home/register_button" type="button" class="btn btn-info">Registration</a>
 <a href="${pageContext.request.contextPath}/home/login_admin_button" type="button" class="btn btn-info">Administration</a>
