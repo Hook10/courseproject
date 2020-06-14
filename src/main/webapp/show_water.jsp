@@ -25,6 +25,7 @@
             <th scope="col">ID_supplier</th>
             <th scope="col">Actions</th>
             <th scope="col">Actions</th>
+            <th scope="col">Pay</th>
         </tr>
         </thead>
         <tbody>
@@ -49,6 +50,17 @@
                         <input type="hidden" name="id" value="${dataList.id}">
                         <button type="submit"
                                 class="btn  btn-sm btn-info">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/home/payInvoiceButton" method="post">
+                        <input type="hidden" name="id_supplier" value="${dataList.idSupplier}">
+                        <input type="hidden" name="id_customer" value="${dataList.idCustomer}">
+                        <input type="hidden" name="month" value="${dataList.month}">
+                        <input type="hidden" name="data" value="${dataList.data}">
+                        <input type="hidden" name="id_data" value="${dataList.id}">
+                        <button type="submit"
+                                class="btn  btn-sm btn-info">Pay</button>
                     </form>
                 </td>
             </tr>

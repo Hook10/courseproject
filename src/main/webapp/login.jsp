@@ -1,4 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="theLocale"
+       value="${not empty param.theLocale ? param.theLocale : pageContext.request.locale}"
+       scope="session" />
+<fmt:setLocale value="${theLocale}" />
+<fmt:setBundle basename="src.main.resources.myLabels.properties" />
 <html>
 <head>
     <jsp:include page="navbar.jsp"/>
@@ -8,6 +15,15 @@
 
 </head>
 <body>
+View this page in: <br/>
+<a href="login.jsp?theLocale=en_US">English (US)</a>  |
+<a href="login.jsp?theLocale=ru_RU">Русский (RU)</a>
+<br/><br/>
+Selected language: ${theLocale}
+<hr>
+<br/><br/>
+
+
 <div class="container-lg">
     <div class="d-flex justify-content-center h-100">
         <div class="card-title">
