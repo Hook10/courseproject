@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<c:set var="theLocale"
-       value="${not empty param.theLocale ? param.theLocale : pageContext.request.locale}"
+<c:set var="theLocale" value="${not empty param.theLocale ? param.theLocale : not empty theLocale ? theLocale : pageContext.request.locale}"
        scope="session" />
 <fmt:setLocale value="${theLocale}" />
 <fmt:setBundle basename="myLabels" />
@@ -10,13 +9,13 @@
 <head>
     <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
-    <title>Edit data</title>
+    <title><fmt:message key="edit.data"/></title>
 </head>
 <body>
 <div class="container-lg">
     View this page in: <br/>
-    <a href="${pageContext.request.contextPath}/home/login_button?theLocale=en_US">English (US)</a>  |
-    <a href="${pageContext.request.contextPath}/home/login_button?theLocale=ru_RU">Русский (RU)</a>
+    <a href="${pageContext.request.contextPath}/home/editCustomerDataButton?theLocale=en_US">English (US)</a>  |
+    <a href="${pageContext.request.contextPath}/home/editCustomerDataButton?theLocale=ru_RU">Русский (RU)</a>
     <br/><br/>
     Selected language: ${theLocale}
     <hr>
@@ -25,7 +24,7 @@
 <c:choose>
     <c:when test="${sessionScope.status == 'CUSTOMER' || sessionScope.status == 'WEBSITEADMIN' }">
 
-            <h3>Edit Product!!!</h3>
+            <h3><fmt:message key="edit.data"/></h3>
 
 <div class="container">
 
@@ -38,20 +37,20 @@
                 <input type="hidden" name="id_customer" value="${requestScope.id_customer}">
                 <table style="align-items: normal">
                     <tr>
-                        <td>month</td>
+                        <td><fmt:message key="month"/></td>
                         <td><input type="month"  name="month" /></td>
                     </tr>
                     <tr>
-                        <td>Add Data </td>
+                        <td><fmt:message key="add.your.data"/> </td>
                         <td><input type="number"  name="data" /></td>
                     </tr>
 
                     <tr>
                         <td>
                             <select  name="id_supplier">
-                                <option value="1">Gas</option>
-                                <option value="2">Water</option>
-                                <option value="3">Electricity</option>
+                                <option value="1"><fmt:message key="gas"/></option>
+                                <option value="2"><fmt:message key="water"/></option>
+                                <option value="3"><fmt:message key="electricity"/></option>
 
                             </select>
                         </td>
@@ -66,7 +65,7 @@
 </div>
     </c:when>
     <c:otherwise>
-        <a href="${pageContext.request.contextPath}/home/login_button" type="button" class="btn btn-info">Login</a>
+        <a href="${pageContext.request.contextPath}/home/login_button" type="button" class="btn btn-info"><fmt:message key="login"/></a>
     </c:otherwise>
 </c:choose>
 

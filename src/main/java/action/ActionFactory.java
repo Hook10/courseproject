@@ -40,6 +40,8 @@ public class ActionFactory {
         actions.put("/payInvoiceButton", new PayInvoiceButtonAction());
         actions.put("/showInvoice", new ShowInvoiceAction());
         actions.put("/paymentForm", new PaymentFormAction());
+        actions.put("/show_all_customers", new ShowAllCustomersAction());
+        actions.put("/delete_customer", new DeleteCustomerAction());
 
 
     }

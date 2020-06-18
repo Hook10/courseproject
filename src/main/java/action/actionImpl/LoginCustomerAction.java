@@ -30,9 +30,9 @@ public class LoginCustomerAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
         email = request.getParameter("email");
         password = request.getParameter("password");
+
 
 
         if (email.isEmpty() || password.isEmpty()) {

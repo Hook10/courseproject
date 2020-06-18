@@ -67,30 +67,4 @@ public class RegisterCustomerAction implements Action {
         dispatcher.forward(request, response);
     }
 }
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        String firstName = request.getParameter("firstName");
-//        String surName = request.getParameter("surname");
-//        String login = request.getParameter("email");
-//        String password = request.getParameter("password");
-//        String city = request.getParameter("city");
-//        String address = request.getParameter("address");
-//        String iin = request.getParameter("iin");
-//
-//        Customer customer = new Customer();
-//        customer.setFirstName(firstName);
-//        customer.setSurname(surName);
-//        customer.setEmail(login);
-//        customer.setPassword(password);
-//        customer.setCity(city);
-//        customer.setAddress(address);
-//        customer.setIin(iin);
-//
-//        try {
-//            customerDao.add(customer);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        RequestDispatcher dispatcher  = request.getRequestDispatcher("/WEB-INF/view/customerDetails.jsp");
-//        dispatcher.forward(request, response);
-//    }
+

@@ -49,14 +49,20 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
         List<Customer> customerList = new ArrayList<>();
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
-             Statement statement = connection.createStatement()) {
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_CUSTOMERS)) {
 
-            ResultSet resultSet = statement.executeQuery(GET_ALL_CUSTOMERS);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                getCustomer(customer, resultSet);
-                customer.setIin(resultSet.getString("Iin"));
-
+                customer.setId(resultSet.getLong("ID"));
+                customer.setFirstName(resultSet.getString("FIRST_NAME"));
+                customer.setSurname(resultSet.getString("SURNAME"));
+                customer.setEmail(resultSet.getString("EMAIL"));
+                customer.setPassword(resultSet.getString("PASSWORD"));
+                customer.setCity(resultSet.getString("CITY"));
+                customer.setAddress(resultSet.getString("ADDRESS"));
+                customer.setAddress(resultSet.getString("IIN"));
                 customerList.add(customer);
             }
         } catch (SQLException e) {
@@ -135,6 +141,18 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
+        }
+    }
+    public void removeOneById(long id) {
+
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CUSTOMER_BY_ID)) {
+
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
         }
     }
 

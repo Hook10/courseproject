@@ -22,7 +22,14 @@
     <filter-name>AuthenticationFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-
+  <filter>
+    <filter-name>SessionLocaleFilter</filter-name>
+    <filter-class>Filter.SessionLocaleFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  <filter-name>SessionLocaleFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <servlet>
     <servlet-name>controller</servlet-name>
     <servlet-class>servlets.MainController</servlet-class>

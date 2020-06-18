@@ -1,15 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="theLocale" value="${not empty param.theLocale ? param.theLocale : not empty theLocale ? theLocale : pageContext.request.locale}"
+       scope="session" />
+<fmt:setLocale value="${theLocale}" />
+<fmt:setBundle basename="myLabels" />
+<html lang="${theLocale}">
 <head>
     <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
-    <title>Pay form</title>
+    <title><fmt:message key="pay.page"/></title>
 </head>
 <body>
 <div class="container-sm">
 <h3>
-    Your payment received
+    <fmt:message key="payment.received.message"/>
 </h3>
 
 </div>

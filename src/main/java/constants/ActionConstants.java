@@ -20,6 +20,7 @@ public class ActionConstants {
     public static final String EDIT_CUSTOMER_DATA="/editCustomerData.jsp";
     public static final String PAY_INVOICE="/payInvoice.jsp";
     public static final String PAY_INVOICE_FORM="/payInvoiceForm.jsp";
+    public static final String SHOW_CUSTOMERS="/showCustomers.jsp";
 
 
 
