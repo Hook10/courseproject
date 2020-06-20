@@ -42,6 +42,8 @@ public class ActionFactory {
         actions.put("/paymentForm", new PaymentFormAction());
         actions.put("/show_all_customers", new ShowAllCustomersAction());
         actions.put("/delete_customer", new DeleteCustomerAction());
+        actions.put("/editCustomerButton", new EditCustomerButtonAction());
+        actions.put("/editCustomer", new EditCustomerAction());
 
 
     }

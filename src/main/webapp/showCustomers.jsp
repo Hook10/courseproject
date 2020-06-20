@@ -46,9 +46,15 @@
                         <td>${customer.iin}</td>
 
                         <td>
-                            <form action="${pageContext.request.contextPath}/home/editCustomerDataButton" method="post">
-                                <input type="hidden" name="id_customer" value="${dataList.idCustomer}">
-                                <input type="hidden" name="id" value="${dataList.id}">
+                            <form action="${pageContext.request.contextPath}/home/editCustomerButton" method="post">
+                                <input type="hidden" name="id" value="${customer.id}">
+                                <input type="hidden" name="firstName" value="${customer.firstName}">
+                                <input type="hidden" name="surname" value="${customer.surname}">
+                                <input type="hidden" name="email" value="${customer.email}">
+                                <input type="hidden" name="password" value="${customer.password}">
+                                <input type="hidden" name="city" value="${customer.city}">
+                                <input type="hidden" name="address" value="${customer.address}">
+                                <input type="hidden" name="iin" value="${customer.iin}">
                                 <button type="submit"
                                         class="btn  btn-sm btn-info"><fmt:message key="Edit"/></button>
                             </form>

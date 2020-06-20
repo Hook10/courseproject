@@ -18,11 +18,11 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
             "IIN FROM CUSTOMERS";
     private static final String GET_CUSTOMER_BY_ID = "SELECT ID, FIRST_NAME, SURNAME, EMAIL, PASSWORD, CITY, ADDRESS, " +
             "IIN FROM CUSTOMERS WHERE ID = ?";
-    private static final String UPDATE_CUSTOMERS = "UPDATE CUSTOMERS SET FIRST_NAME =?, SURNAME=?,EMAIL=?, PASSWORD=?, " +
-            "CITY=?, ADDRESS=?, IIN=? WHERE ID = ?";
+    private static final String UPDATE_CUSTOMERS = "UPDATE CUSTOMERS SET FIRST_NAME =?, SURNAME=?, EMAIL=?, PASSWORD=?,  " +
+            "CITY=?, ADDRESS=?, IIN=? WHERE ID = ? ";
     private static final String DELETE_CUSTOMER_BY_ID = "DELETE FROM CUSTOMERS WHERE ID=?";
     private static final String GET_CUSTOMER_BY_EMAIL_AND_PASSWORD = "select * from customers where email = ? and password = ? ";
-
+//PASSWORD=?,
     @Override
     public void add(Customer customer) throws SQLException {
 
@@ -55,14 +55,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
 
             while (resultSet.next()) {
                 Customer customer = new Customer();
-                customer.setId(resultSet.getLong("ID"));
-                customer.setFirstName(resultSet.getString("FIRST_NAME"));
-                customer.setSurname(resultSet.getString("SURNAME"));
-                customer.setEmail(resultSet.getString("EMAIL"));
-                customer.setPassword(resultSet.getString("PASSWORD"));
-                customer.setCity(resultSet.getString("CITY"));
-                customer.setAddress(resultSet.getString("ADDRESS"));
-                customer.setAddress(resultSet.getString("IIN"));
+                SetFields(resultSet, customer);
                 customerList.add(customer);
             }
         } catch (SQLException e) {
@@ -70,6 +63,17 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
             e.printStackTrace();
         }
         return customerList;
+    }
+
+    private void SetFields(ResultSet resultSet, Customer customer) throws SQLException {
+        customer.setId(resultSet.getLong("ID"));
+        customer.setFirstName(resultSet.getString("FIRST_NAME"));
+        customer.setSurname(resultSet.getString("SURNAME"));
+        customer.setEmail(resultSet.getString("EMAIL"));
+        customer.setPassword(resultSet.getString("PASSWORD"));
+        customer.setCity(resultSet.getString("CITY"));
+        customer.setAddress(resultSet.getString("ADDRESS"));
+        customer.setIin(resultSet.getString("IIN"));
     }
 
     @Override
@@ -84,7 +88,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             getCustomer(customer, resultSet);
-            customer.setIin(resultSet.getString("iin"));
+            SetFields(resultSet, customer);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -98,23 +102,17 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
     public Customer getCustomer(Customer customer, ResultSet resultSet) throws SQLException {
         if (resultSet.next()) {
             customer = new Customer();
-            customer.setId(resultSet.getLong("ID"));
-            customer.setFirstName(resultSet.getString("FIRST_NAME"));
-            customer.setSurname(resultSet.getString("SURNAME"));
-            customer.setEmail(resultSet.getString("EMAIL"));
-            customer.setPassword(resultSet.getString("PASSWORD"));
-            customer.setCity(resultSet.getString("CITY"));
-            customer.setAddress(resultSet.getString("ADDRESS"));
+            SetFields(resultSet, customer);
         }
         return customer;
     }
 
     @Override
     public void update(long id, Customer customer) throws SQLException {
-
+        System.out.println("Update MySql Customer");
         try(Connection connection = DBUtil.getDataSource().getConnection();
             PreparedStatement preparedStatement= connection.prepareStatement(UPDATE_CUSTOMERS) ) {
-
+            preparedStatement.setLong(8, id);
             preparedStatement.setString(1, customer.getFirstName());
             preparedStatement.setString(2, customer.getSurname());
             preparedStatement.setString(3, customer.getEmail());
@@ -122,7 +120,6 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
             preparedStatement.setString(5, customer.getCity());
             preparedStatement.setString(6, customer.getAddress());
             preparedStatement.setString(7, customer.getIin());
-            preparedStatement.setLong(8, customer.getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -172,28 +169,5 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
         }
         return customer;
     }
-
-//}
-//    public Customer getCustomerByEmailAndPassword(String email, String password)  {
-//
-//        Customer customer = null;
-//
-//        try (Connection connection = DBUtil.getDataSource().getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(GET_CUSTOMER_BY_EMAIL_AND_PASSWORD)) {
-//            preparedStatement.setString(1, email);
-//            preparedStatement.setString(2, password);
-//
-//
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            customer.setEmail(resultSet.getString("EMAIL"));
-//            customer.setPassword(resultSet.getString("PASSWORD"));
-//            preparedStatement.executeUpdate();
-//
-//        } catch (SQLException e) {
-//            LOGGER.error(e.getMessage(), e);
-//            e.printStackTrace();
-//        }
-//        return customer;
-//    }
 
 }

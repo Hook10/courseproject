@@ -49,22 +49,30 @@ public class DataDaoImpl implements BaseDAO<Data> {
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_DATA)) {
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Data data = new Data();
-                data.setId(resultSet.getLong("ID"));
-                data.setMonth(resultSet.getString("MONTH"));
-                data.setData(resultSet.getLong("DATA"));
-                data.setIdCustomer(resultSet.getLong("ID_CUSTOMER"));
-                data.setIdSupplier(resultSet.getInt("ID_SUPPLIER"));
-
-                dataList.add(data);
-            }
+            SetFields(dataList, preparedStatement);
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return dataList;
+    }
+
+    private void SetFields(List<Data> dataList, PreparedStatement preparedStatement) throws SQLException {
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultNext(dataList, resultSet);
+    }
+
+    private void resultNext(List<Data> dataList, ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            Data data = new Data();
+            data.setId(resultSet.getLong("ID"));
+            data.setMonth(resultSet.getString("MONTH"));
+            data.setData(resultSet.getLong("DATA"));
+            data.setIdCustomer(resultSet.getLong("ID_CUSTOMER"));
+            data.setIdSupplier(resultSet.getInt("ID_SUPPLIER"));
+
+            dataList.add(data);
+        }
     }
 
     @Override
@@ -144,16 +152,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
              Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(GET_ALL_DATA_BY_CUSTOMER_ID);
-            while (resultSet.next()) {
-                Data data = new Data();
-                data.setId(resultSet.getLong("ID"));
-                data.setMonth(resultSet.getString("MONTH"));
-                data.setData(resultSet.getLong("DATA"));
-                data.setIdCustomer(resultSet.getLong("ID_CUSTOMER"));
-                data.setIdSupplier(resultSet.getInt("ID_SUPPLIER"));
-
-                dataList.add(data);
-            }
+            resultNext(dataList, resultSet);
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
@@ -170,18 +169,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
 
             preparedStatement.setLong(1, id);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Data data = new Data();
-                data.setId(resultSet.getLong("ID"));
-                data.setMonth(resultSet.getString("MONTH"));
-                data.setData(resultSet.getLong("DATA"));
-                data.setIdCustomer(resultSet.getLong("ID_CUSTOMER"));
-                data.setIdSupplier(resultSet.getInt("ID_SUPPLIER"));
-
-                dataList.add(data);
-            }
+            SetFields(dataList, preparedStatement);
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);

@@ -55,23 +55,27 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
              Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(GET_ALL_INVOICES);
-            while (resultSet.next()) {
-                Invoice invoice = new Invoice();
-                invoice.setIdInvoice(resultSet.getLong("ID"));
-                invoice.setIdData(resultSet.getLong("ID_DATA"));
-                invoice.setIdSupplier(resultSet.getLong("ID_SUP"));
-                invoice.setIdCustomer(resultSet.getLong("ID_CUST"));
-                invoice.setMonth(resultSet.getString("MONTH"));
-                invoice.setData(resultSet.getLong("DATA"));
-                invoice.setCost(resultSet.getLong("COST"));
-
-                invoicesList.add(invoice);
-            }
+            resultSetNext(invoicesList, resultSet);
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return invoicesList;
+    }
+
+    private void resultSetNext(List<Invoice> invoicesList, ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            Invoice invoice = new Invoice();
+            invoice.setIdInvoice(resultSet.getLong("ID_INVOICE"));
+            invoice.setIdData(resultSet.getLong("ID_DATA"));
+            invoice.setIdSupplier(resultSet.getLong("ID_SUP"));
+            invoice.setIdCustomer(resultSet.getLong("ID_CUST"));
+            invoice.setMonth(resultSet.getString("MONTH"));
+            invoice.setData(resultSet.getLong("DATA"));
+            invoice.setCost(resultSet.getLong("COST"));
+
+            invoicesList.add(invoice);
+        }
     }
 
     @Override
@@ -145,17 +149,7 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-               Invoice invoice = new Invoice();
-                invoice.setIdInvoice(resultSet.getLong("ID_INVOICE"));
-                invoice.setIdData(resultSet.getLong("ID_DATA"));
-                invoice.setIdSupplier(resultSet.getLong("ID_SUP"));
-                invoice.setIdCustomer(resultSet.getLong("ID_CUST"));
-                invoice.setMonth(resultSet.getString("MONTH"));
-                invoice.setData(resultSet.getLong("DATA"));
-                invoice.setCost(resultSet.getLong("COST"));
-                invoicesList.add(invoice);
-            }
+            resultSetNext(invoicesList, resultSet);
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
@@ -175,17 +169,7 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                Invoice invoice = new Invoice();
-                invoice.setIdInvoice(resultSet.getLong("ID_INVOICE"));
-                invoice.setIdData(resultSet.getLong("ID_DATA"));
-                invoice.setIdSupplier(resultSet.getLong("ID_SUP"));
-                invoice.setIdCustomer(resultSet.getLong("ID_CUST"));
-                invoice.setMonth(resultSet.getString("MONTH"));
-                invoice.setData(resultSet.getLong("DATA"));
-                invoice.setCost(resultSet.getLong("COST"));
-                invoicesList.add(invoice);
-            }
+            resultSetNext(invoicesList, resultSet);
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
