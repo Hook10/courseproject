@@ -1,8 +1,7 @@
-package dao.daoimpl;
+package dao.impl;
 
 import connectionpool.DBUtil;
 import dao.BaseDAO;
-import entity.Data;
 import entity.Invoice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

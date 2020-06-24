@@ -1,13 +1,11 @@
-package dao.daoimpl;
+package dao.impl;
 
-import Encoder.HashFunction;
+import encoder.HashFunction;
 import connectionpool.DBUtil;
 import dao.BaseDAO;
 import entity.Admin;
-import entity.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import servlets.MainController;
 
 import java.sql.*;
 import java.util.ArrayList;

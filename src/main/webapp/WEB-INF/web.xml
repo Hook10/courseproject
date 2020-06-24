@@ -8,7 +8,7 @@
 
   <filter>
     <filter-name>EncodingFilter</filter-name>
-    <filter-class>Filter.EncodingFilter</filter-class>
+    <filter-class>filter.EncodingFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
@@ -16,7 +16,7 @@
   </filter-mapping>
   <filter>
     <filter-name>AuthenticationFilter</filter-name>
-    <filter-class>Filter.AuthenticationFilter</filter-class>
+    <filter-class>filter.AuthenticationFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>AuthenticationFilter</filter-name>
@@ -24,7 +24,7 @@
   </filter-mapping>
   <filter>
     <filter-name>SessionLocaleFilter</filter-name>
-    <filter-class>Filter.SessionLocaleFilter</filter-class>
+    <filter-class>filter.SessionLocaleFilter</filter-class>
   </filter>
   <filter-mapping>
   <filter-name>SessionLocaleFilter</filter-name>
@@ -32,7 +32,7 @@
   </filter-mapping>
   <servlet>
     <servlet-name>controller</servlet-name>
-    <servlet-class>servlets.MainController</servlet-class>
+    <servlet-class>servlet.MainController</servlet-class>
   </servlet>
 
   <servlet-mapping>

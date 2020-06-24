@@ -1,22 +1,16 @@
 package action.actionImpl;
 
 import action.Action;
-import dao.daoimpl.DataDaoImpl;
+import dao.impl.DataDaoImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
-import static action.actionImpl.ShowElectrAction.ELECTRICITY_SUPPLIER;
 import static action.actionImpl.ShowGasAction.GAS_SUPPLIER;
-import static action.actionImpl.ShowWaterAction.WATER_SUPPLIER;
-import static constants.ActionConstants.*;
-import static constants.ActionConstants.ERROR_URL;
 
 public class DeleteDataAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(DeleteDataAction.class);

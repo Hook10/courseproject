@@ -1,4 +1,4 @@
-package dao.daoimpl;
+package dao.impl;
 
 import connectionpool.DBUtil;
 import dao.BaseDAO;

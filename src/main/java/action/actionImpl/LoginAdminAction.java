@@ -1,9 +1,9 @@
 package action.actionImpl;
 
-import Encoder.HashFunction;
+import encoder.HashFunction;
 
 import action.Action;
-import dao.daoimpl.AdminDaoImpl;
+import dao.impl.AdminDaoImpl;
 import entity.Admin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

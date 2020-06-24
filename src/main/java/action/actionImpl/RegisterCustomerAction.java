@@ -1,8 +1,8 @@
 package action.actionImpl;
 
-import Encoder.HashFunction;
+import encoder.HashFunction;
 import action.Action;
-import dao.daoimpl.CustomerDaoImpl;
+import dao.impl.CustomerDaoImpl;
 import entity.Customer;
 import validation.EmailValidation;
 import validation.IINValidation;

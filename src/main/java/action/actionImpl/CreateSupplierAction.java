@@ -1,7 +1,7 @@
 package action.actionImpl;
 
 import action.Action;
-import dao.daoimpl.SupplierDaoImpl;
+import dao.impl.SupplierDaoImpl;
 import entity.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

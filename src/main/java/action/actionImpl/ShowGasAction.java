@@ -1,15 +1,12 @@
 package action.actionImpl;
 
 import action.Action;
-import com.mysql.cj.Session;
-import dao.daoimpl.DataDaoImpl;
-import entity.Customer;
+import dao.impl.DataDaoImpl;
 import entity.Data;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;

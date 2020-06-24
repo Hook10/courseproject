@@ -35,8 +35,10 @@
 <a href="${pageContext.request.contextPath}/home/login_admin_button" type="button" class="btn btn-info"><fmt:message key="administration"/></a>
     </c:when>
     <c:otherwise>
+    <div class="container-sm">
     <a href="${pageContext.request.contextPath}/home/customerPersonalAccountPage" type="button" class="btn btn-info"><fmt:message key="personal.cabinet"/></a>
-    </c:otherwise>
+    </div>
+        </c:otherwise>
 </c:choose>
 </div>
 </body>

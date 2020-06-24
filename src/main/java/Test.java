@@ -1,23 +1,18 @@
-import Encoder.HashFunction;
+import encoder.HashFunction;
 import connectionpool.DBUtil;
-import dao.daoimpl.AdminDaoImpl;
 import entity.Admin;
-import entity.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 //for test only
 
-public class ClassA {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClassA.class);
+public class Test {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Test.class);
     public static void main(String[] args) {
         Admin admin = new Admin();
 

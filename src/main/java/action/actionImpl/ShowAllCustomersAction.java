@@ -1,7 +1,7 @@
 package action.actionImpl;
 
 import action.Action;
-import dao.daoimpl.CustomerDaoImpl;
+import dao.impl.CustomerDaoImpl;
 import entity.Customer;
 
 import javax.servlet.ServletException;

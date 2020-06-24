@@ -1,4 +1,4 @@
-package Filter;
+package filter;
 
 
 import userstatus.UserStatus;
@@ -13,7 +13,7 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-        //
+
     }
 
 
@@ -34,7 +34,7 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void destroy() {
-        //
+
     }
 
 

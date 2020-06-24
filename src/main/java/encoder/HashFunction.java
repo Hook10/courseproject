@@ -1,6 +1,5 @@
-package Encoder;
+package encoder;
 
-import javax.xml.bind.DatatypeConverter;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

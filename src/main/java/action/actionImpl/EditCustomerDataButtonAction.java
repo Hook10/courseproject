@@ -1,7 +1,6 @@
 package action.actionImpl;
 
 import action.Action;
-import dao.daoimpl.DataDaoImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static constants.ActionConstants.EDIT_CUSTOMER_DATA;
 

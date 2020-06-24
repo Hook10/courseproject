@@ -1,7 +1,7 @@
 package action.actionImpl;
 
 import action.Action;
-import dao.daoimpl.DataDaoImpl;
+import dao.impl.DataDaoImpl;
 import entity.Customer;
 import entity.Data;
 import org.slf4j.Logger;
