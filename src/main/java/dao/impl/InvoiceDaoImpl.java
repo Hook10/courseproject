@@ -136,6 +136,7 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
             e.printStackTrace();
         }
     }
+
     public List<Invoice> getAllBySupplierIdAndCustomerId(long id_supplier, long id_customer) throws SQLException {
         List<Invoice> invoicesList = new ArrayList<>();
 
@@ -156,18 +157,16 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
         }
         return invoicesList;
     }
+
     public List<Invoice> getAllByDataId(long id_data) throws SQLException {
         List<Invoice> invoicesList = new ArrayList<>();
-
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_INVOICE_BY_DATA_ID)) {
 
             preparedStatement.setLong(1, id_data);
 
-
             ResultSet resultSet = preparedStatement.executeQuery();
-
             resultSetNext(invoicesList, resultSet);
 
         } catch (SQLException e) {

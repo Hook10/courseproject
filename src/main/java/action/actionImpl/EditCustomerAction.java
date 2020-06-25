@@ -6,12 +6,17 @@ import dao.impl.CustomerDaoImpl;
 import entity.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import validation.EmailValidation;
+import validation.IINValidation;
+import validation.NameValidation;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+
+import static constants.ActionConstants.ERROR_URL;
 
 public class EditCustomerAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditCustomerAction.class);
@@ -24,15 +29,28 @@ public class EditCustomerAction implements Action {
         CustomerDaoImpl customerDao = new CustomerDaoImpl();
 
         long id = Long.parseLong(String.valueOf(request.getParameter("id")));
-        System.out.println(id);
-        String firstName=request.getParameter("firstName");
-        String surName=request.getParameter("surname");
-        String email=request.getParameter("email");
-        String password=request.getParameter("password");
-        String city=request.getParameter("city");
-        String address=request.getParameter("address");
-        String iin=request.getParameter("iin");
-        System.out.println("first_name="+firstName);
+        String firstName = request.getParameter("firstName");
+        String surName = request.getParameter("surname");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String city = request.getParameter("city");
+        String address = request.getParameter("address");
+        String iin = request.getParameter("iin");
+
+        if (firstName.isEmpty() || surName.isEmpty() ||
+                email.isEmpty() || password.isEmpty() ||
+                city.isEmpty() || address.isEmpty() ||
+                iin.isEmpty()) {
+            request.setAttribute("message", "empty fields");
+            request.getRequestDispatcher(ERROR_URL).forward(request, response);
+            return;
+        }
+        if (!new NameValidation().isValidUserName(firstName) || !new NameValidation().isValidUserName(surName) ||
+                !new EmailValidation().isValidEmail(email) || !new IINValidation().isValidIIN(iin)) {
+            request.setAttribute("message", "Incorrect  input");
+            request.getRequestDispatcher(ERROR_URL).forward(request, response);
+            return;
+        }
 
         password = hashFunction.getHashFunction(password);
 
@@ -51,15 +69,6 @@ public class EditCustomerAction implements Action {
             e.printStackTrace();
         }
 
-//        request.getRequestDispatcher(SHOW_CUSTOMERS).forward(request, response);
-        new ShowAllCustomersAction().execute(request,response);
-
-//        firstName = request.getParameter("firstName");
-//        surName = request.getParameter("surname");
-//        email = request.getParameter("email");
-//        city = request.getParameter("city");
-//        password=request.getParameter("password")
-//        address = request.getParameter("address");
-//        iin = request.getParameter("iin");
+        new ShowAllCustomersAction().execute(request, response);
     }
 }

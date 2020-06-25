@@ -27,12 +27,6 @@ public class PayInvoiceButtonAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
 
-//        request.setAttribute("id_data", request.getParameter("id"));
-//        request.setAttribute("id_supplier", request.getParameter("id_supplier"));
-//        request.setAttribute("id_customer", request.getParameter("id_customer"));
-//        request.setAttribute("month", request.getParameter("month"));
-//        request.setAttribute("data", request.getParameter("data"));
-
         Invoice invoice = new Invoice();
         long id_data = Long.parseLong(request.getParameter("id_data"));
         long id_supplier = Long.parseLong(request.getParameter("id_supplier"));
@@ -43,9 +37,9 @@ public class PayInvoiceButtonAction implements Action {
 
         long cost = 0;
         if (id_supplier == GAS_SUPPLIER) {
-           cost = data * GAS_TARIFF_FROM_11_06_2020_KZT_FOR_1_CUBIC_METER;
+            cost = data * GAS_TARIFF_FROM_11_06_2020_KZT_FOR_1_CUBIC_METER;
         } else if (id_supplier == WATER_SUPPLIER) {
-           cost = data * WATER_TARIFF_FROM_11_06_2020_KZT_FOR_1_CUBIC_METER;
+            cost = data * WATER_TARIFF_FROM_11_06_2020_KZT_FOR_1_CUBIC_METER;
         } else if (id_supplier == ELECTRICITY_SUPPLIER) {
             cost = data * ELECTR_TARIFF_FROM_11_06_2020__KZT_FOR_1_KILOWATT;
         } else {
@@ -62,19 +56,12 @@ public class PayInvoiceButtonAction implements Action {
         invoice.setCost(cost);
 
         InvoiceDaoImpl invoiceDao = new InvoiceDaoImpl();
-        try{
+        try {
             invoiceDao.add(invoice);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-//        InvoiceDaoImpl invoiceDao1 = new InvoiceDaoImpl();
-//        List<Invoice> invoicesList=null;
-//        try{
-//            invoicesList = invoiceDao1.getAllBySupplierIdAndCustomerId(id_supplier, id_customer);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
         request.setAttribute("id_data", request.getParameter("id"));
         request.setAttribute("id_supplier", request.getParameter("id_supplier"));
         request.setAttribute("id_customer", request.getParameter("id_customer"));
@@ -82,7 +69,5 @@ public class PayInvoiceButtonAction implements Action {
         request.setAttribute("data", request.getParameter("data"));
 
         new ShowInvoiceAction().execute(request, response);
-///        request.setAttribute("invoicesList", invoicesList);
-//        request.getRequestDispatcher(PAY_INVOICE).forward(request, response);
     }
 }

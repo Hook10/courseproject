@@ -16,12 +16,13 @@ public class DBUtil {
 
     private static Properties properties = null;
     private static HikariDataSource dataSource;
+
     static {
         try {
 
             properties = new Properties();
             properties.load(new FileInputStream("C:/java_projects/courseproject/src/main/resources/database.properties"));
-          //  properties.load(new FileInputStream("src/main/resources/database.properties"));
+
 
             dataSource = new HikariDataSource();
             dataSource.setDriverClassName(properties.getProperty(DB_DRIVER_CLASS));
@@ -34,11 +35,12 @@ public class DBUtil {
             dataSource.setMaximumPoolSize(2000);
             dataSource.setAutoCommit(true);
             dataSource.setLoginTimeout(3);
-        } catch (IOException | SQLException e ) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }
-    public static DataSource getDataSource(){
+
+    public static DataSource getDataSource() {
         return dataSource;
     }
 }

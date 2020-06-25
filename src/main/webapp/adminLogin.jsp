@@ -41,17 +41,7 @@
                         <button type="submit" class="btn btn-primary"><fmt:message key="login"/></button>
                     </div>
 
-<%--                    <table style="with: 50%">--%>
-<%--                        <tr>--%>
-<%--                            <td><fmt:message key="login"/></td>--%>
-<%--                            <td><input type="text" name="login"/></td>--%>
-<%--                        </tr>--%>
-<%--                        <tr>--%>
-<%--                            <td><fmt:message key="password"/></td>--%>
-<%--                            <td><input type="password" name="password"/></td>--%>
-<%--                        </tr>--%>
-<%--                    </table>--%>
-<%--                    <input type="submit" value="Login"/>--%>
+
                 </form>
             </div>
         </div>

@@ -10,6 +10,5 @@ import java.io.IOException;
 public class PayInvoiceAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

@@ -21,6 +21,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
     private static final String DELETE_DATA_BY_ID = "DELETE FROM DATA_TABLE WHERE ID=?";
     private static final String GET_ALL_DATA_BY_CUSTOMER_ID = "SELECT * FROM DATA_TABLE WHERE ID_CUSTOMER = ? ";
     private static final String GET_ALL_DATA_BY_SUPPLIER_ID = "SELECT * FROM DATA_TABLE WHERE ID_SUPPLIER = ?";
+    private static final String GET_ALL_DATA_BY_SUPPLIER_ID_AND_CUSTOMER_ID = "SELECT * FROM DATA_TABLE WHERE ID_SUPPLIER = ? AND ID_CUSTOMER=?";
 
 
     @Override
@@ -99,6 +100,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
         }
         return data;
     }
+
     @Override
     public void update(long id, Data data) throws SQLException {
 
@@ -131,6 +133,7 @@ public class DataDaoImpl implements BaseDAO<Data> {
             e.printStackTrace();
         }
     }
+
     public void removeOneById(long id) {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
@@ -168,6 +171,25 @@ public class DataDaoImpl implements BaseDAO<Data> {
              PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_DATA_BY_SUPPLIER_ID)) {
 
             preparedStatement.setLong(1, id);
+
+            SetFields(dataList, preparedStatement);
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+
+    public List<Data> getAllBySupplierIdAndCustomerId(long id_supplier, long id_customer) throws SQLException {
+        List<Data> dataList = new ArrayList<>();
+
+
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_DATA_BY_SUPPLIER_ID_AND_CUSTOMER_ID)) {
+
+            preparedStatement.setLong(1, id_supplier);
+            preparedStatement.setLong(2, id_customer);
 
             SetFields(dataList, preparedStatement);
 

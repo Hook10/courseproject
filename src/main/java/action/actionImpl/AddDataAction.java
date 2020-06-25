@@ -52,6 +52,7 @@ public class AddDataAction implements Action {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         if (id_supplier == GAS_SUPPLIER) {
             RequestDispatcher dispatcher = request.getRequestDispatcher(FORWARD_TO_SHOW_GAS_DATA);
             dispatcher.forward(request, response);

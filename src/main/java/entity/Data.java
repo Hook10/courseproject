@@ -10,7 +10,7 @@ public class Data implements Serializable {
     private long idCustomer;
     private int idSupplier;
 
-    public Data(){
+    public Data() {
 
     }
 

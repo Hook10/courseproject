@@ -34,19 +34,18 @@ public class CreateAdminAction implements Action {
         String email = request.getParameter("email");
         String company_name = request.getParameter("company_name");
 
-        if(login.isEmpty() || password.isEmpty() ||
-          email.isEmpty() || company_name.isEmpty()) {
+        if (login.isEmpty() || password.isEmpty() ||
+                email.isEmpty() || company_name.isEmpty()) {
             request.setAttribute("message", "empty fields");
-            request.getRequestDispatcher(ERROR_URL).forward(request,response);
-            return;
-        }
-
-        if(!new NameValidation().isValidUserName(login) || !new EmailValidation().isValidEmail(email)){
-            request.setAttribute("message", "Incorrect input");
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
 
+        if (!new NameValidation().isValidUserName(login) || !new EmailValidation().isValidEmail(email)) {
+            request.setAttribute("message", "Incorrect input");
+            request.getRequestDispatcher(ERROR_URL).forward(request, response);
+            return;
+        }
 
         Admin admin = new Admin();
         admin.setLogin(login);
@@ -63,7 +62,6 @@ public class CreateAdminAction implements Action {
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher(LOGIN_ADMIN);
         dispatcher.forward(request, response);
-
 
 
     }

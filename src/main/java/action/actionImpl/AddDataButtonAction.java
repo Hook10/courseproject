@@ -18,7 +18,5 @@ public class AddDataButtonAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         request.getRequestDispatcher(CREATE_DATA_CUSTOMER).forward(request, response);
-
-
     }
 }

@@ -7,7 +7,7 @@ import dao.impl.AdminDaoImpl;
 import entity.Admin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import userstatus.UserStatus;
+import entity.UserStatus;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ import static constants.ActionConstants.ERROR_URL;
 
 public class LoginAdminAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginAdminAction.class);
-    String login ;
+    String login;
     String password;
     private HashFunction hashPassword = new HashFunction();
     private Admin admin;
@@ -35,7 +35,7 @@ public class LoginAdminAction implements Action {
         login = request.getParameter("login");
         password = request.getParameter("password");
 
-        if(login.isEmpty() || password.isEmpty()) {
+        if (login.isEmpty() || password.isEmpty()) {
             request.setAttribute("message", "Empty fields");
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
@@ -45,13 +45,13 @@ public class LoginAdminAction implements Action {
         adminDao = new AdminDaoImpl();
         admin = adminDao.getAdminByLoginAndPassword(login, password);
 
-        if(admin != null)   {
+        if (admin != null) {
             session.setAttribute("admin", admin);
             session.setAttribute("status", UserStatus.WEBSITEADMIN);
-            request.getRequestDispatcher(ADMIN_CABINET).forward(request,response);
+            request.getRequestDispatcher(ADMIN_CABINET).forward(request, response);
         } else {
             request.setAttribute("message", "the admin does not exist");
-            request.getRequestDispatcher(ERROR_URL).forward(request,response);
+            request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
     }
 }

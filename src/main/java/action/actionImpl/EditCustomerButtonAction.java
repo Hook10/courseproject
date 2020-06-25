@@ -14,6 +14,7 @@ import static constants.ActionConstants.EDIT_CUSTOMER_DATA;
 
 public class EditCustomerButtonAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditCustomerButtonAction.class);
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());

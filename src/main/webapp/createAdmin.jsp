@@ -1,10 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<c:set var="theLocale" value="${not empty param.theLocale ? param.theLocale : not empty theLocale ? theLocale : pageContext.request.locale}"
-       scope="session" />
-<fmt:setLocale value="${theLocale}" />
-<fmt:setBundle basename="myLabels" />
+<c:set var="theLocale"
+       value="${not empty param.theLocale ? param.theLocale : not empty theLocale ? theLocale : pageContext.request.locale}"
+       scope="session"/>
+<fmt:setLocale value="${theLocale}"/>
+<fmt:setBundle basename="myLabels"/>
 <html>
 <head>
     <jsp:include page="navbar.jsp"/>
@@ -14,7 +15,7 @@
 <body>
 <div class="container-lg">
     View this page in: <br/>
-    <a href="${pageContext.request.contextPath}/home/create_admin_button?theLocale=en_US">English (US)</a>  |
+    <a href="${pageContext.request.contextPath}/home/create_admin_button?theLocale=en_US">English (US)</a> |
     <a href="${pageContext.request.contextPath}/home/create_admin_button?theLocale=ru_RU">Русский (RU)</a>
     <br/><br/>
     Selected language: ${theLocale}
@@ -23,37 +24,36 @@
 </div>
 <c:choose>
     <c:when test="${sessionScope.status == 'WEBSITEADMIN' }">
-<div align="center">
-    <h1>Customer Registration Form</h1>
-    <form action="${pageContext.request.contextPath}/home/create_admin" method="post">
-        <table style="with: 80%">
-            <tr>
-                <td><fmt:message key="login"/></td>
-                <td><input type="text" name="login" /></td>
-            </tr>
-            <tr>
-                <td><fmt:message key="password"/></td>
-                <td><input type="password" name="password" /></td>
-            </tr>
-            <tr>
-                <td><fmt:message key="ID_supplier"/></td>
-                <td><input type="text" name="supplier_id" /></td>
-            </tr>
-            <tr>
-                <td><fmt:message key="email"/></td>
-                <td><input type="text" name="email" /></td>
-            </tr>
-            <tr>
-                <td>Company name</td>
-                <td><input type="text" name="company_name" /></td>
-            </tr>
+        <div align="center">
+            <h1>Customer Registration Form</h1>
+            <form action="${pageContext.request.contextPath}/home/create_admin" method="post">
+                <table style="with: 80%">
+                    <tr>
+                        <td><fmt:message key="login"/></td>
+                        <td><input type="text" name="login"/></td>
+                    </tr>
+                    <tr>
+                        <td><fmt:message key="password"/></td>
+                        <td><input type="password" name="password"/></td>
+                    </tr>
+                    <tr>
+                        <td><fmt:message key="ID_supplier"/></td>
+                        <td><input type="text" name="supplier_id"/></td>
+                    </tr>
+                    <tr>
+                        <td><fmt:message key="email"/></td>
+                        <td><input type="text" name="email"/></td>
+                    </tr>
+                    <tr>
+                        <td>Company name</td>
+                        <td><input type="text" name="company_name"/></td>
+                    </tr>
 
 
-
-        </table>
-        <input type="submit" value="Submit" />
-    </form>
-</div>
+                </table>
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
     </c:when>
     <c:otherwise>
         <a href="${pageContext.request.contextPath}/home/login_admin_button" type="button" class="btn btn-info">Administration</a>

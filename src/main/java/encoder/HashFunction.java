@@ -10,7 +10,7 @@ public class HashFunction {
         MessageDigest messageDigest = null;
         byte[] digest = new byte[0];
 
-        try{
+        try {
             messageDigest = MessageDigest.getInstance("MD5");
             messageDigest.reset();
             messageDigest.update(string.getBytes());
@@ -18,7 +18,7 @@ public class HashFunction {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        BigInteger bigInt = new BigInteger(1,digest  );
+        BigInteger bigInt = new BigInteger(1, digest);
         String md5Hex = bigInt.toString(16);
 
         while (md5Hex.length() < 32) {

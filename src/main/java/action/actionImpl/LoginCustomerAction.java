@@ -5,7 +5,7 @@ import encoder.HashFunction;
 import action.Action;
 import dao.impl.CustomerDaoImpl;
 import entity.Customer;
-import userstatus.UserStatus;
+import entity.UserStatus;
 import validation.EmailValidation;
 import validation.PasswordValidation;
 
@@ -20,9 +20,9 @@ import static constants.ActionConstants.CUSTOMER_PERSONAL_ACCOUNT_PAGE;
 import static constants.ActionConstants.ERROR_URL;
 
 public class LoginCustomerAction implements Action {
-    String email ;
+    String email;
     String password;
-    private  HashFunction hashPassword = new HashFunction();
+    private HashFunction hashPassword = new HashFunction();
     private Customer customer;
     CustomerDaoImpl customerDao;
 
@@ -32,8 +32,6 @@ public class LoginCustomerAction implements Action {
         HttpSession session = request.getSession();
         email = request.getParameter("email");
         password = request.getParameter("password");
-
-
 
         if (email.isEmpty() || password.isEmpty()) {
             request.setAttribute("message", "Empty fields");
@@ -54,6 +52,7 @@ public class LoginCustomerAction implements Action {
         if (customer != null) {
             session.setAttribute("customer", customer);
             session.setAttribute("status", UserStatus.CUSTOMER);
+            session.setAttribute("id", customer.getId());
             request.getRequestDispatcher(CUSTOMER_PERSONAL_ACCOUNT_PAGE).forward(request, response);
         } else {
             request.setAttribute("message", "the customer does not exist");

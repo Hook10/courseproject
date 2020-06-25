@@ -12,7 +12,7 @@ public class Invoice implements Serializable {
     private long data;
     private long cost;
 
-    public Invoice(){
+    public Invoice() {
 
     }
 

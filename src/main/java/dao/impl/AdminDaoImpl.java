@@ -25,11 +25,8 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
 
     private HashFunction hashPassword = new HashFunction();
 
-
-
     @Override
     public void add(Admin admin) throws SQLException {
-
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_ADMIN)) {
@@ -53,8 +50,8 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
     public List<Admin> getAll() throws SQLException {
         List<Admin> adminList = new ArrayList<>();
 
-        try ( Connection connection = DBUtil.getDataSource().getConnection();
-              Statement statement = connection.createStatement()) {
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(GET_ALL_ADMINS);
 
             while (resultSet.next()) {
@@ -74,8 +71,8 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
     public Admin getById(Long id) throws SQLException {
 
         Admin admin = new Admin();
-        try(Connection connection = DBUtil.getDataSource().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_ADMIN_BY_ID)) {
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ADMIN_BY_ID)) {
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -120,7 +117,8 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
             e.printStackTrace();
         }
     }
-    public Admin getAdminByLoginAndPassword(String login, String password)  {
+
+    public Admin getAdminByLoginAndPassword(String login, String password) {
 
         Admin admin = null;
 

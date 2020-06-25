@@ -27,7 +27,6 @@ public class MainController extends HttpServlet {
         getAction(request, response);
     }
 
-
     private void getAction(HttpServletRequest request, HttpServletResponse response) {
         try {
             Action action = ActionFactory.getInstance().getAction(request);

@@ -21,11 +21,8 @@ public class DeleteDataAction implements Action {
         long id = Long.parseLong(request.getParameter("id"));
         int id_supplier = Integer.parseInt(request.getParameter("id_supplier"));
         DataDaoImpl dataDao = new DataDaoImpl();
-        System.out.println(id + "id method delete");
-        System.out.println(id_supplier + " this is id_supplier");
         dataDao.removeOneById(id);
 
         EditCustomerDataAction.supplierForward(request, response, id_supplier, GAS_SUPPLIER);
-
     }
 }

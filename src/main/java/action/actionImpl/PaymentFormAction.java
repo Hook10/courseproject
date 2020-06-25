@@ -13,10 +13,6 @@ import static constants.ActionConstants.PAY_INVOICE_FORM;
 public class PaymentFormAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-
         request.getRequestDispatcher(PAY_INVOICE_FORM).forward(request, response);
-
     }
 }

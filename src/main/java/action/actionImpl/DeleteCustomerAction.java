@@ -16,12 +16,11 @@ public class DeleteCustomerAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
-        long id=Long.parseLong(request.getParameter("id"));
+        long id = Long.parseLong(request.getParameter("id"));
         CustomerDaoImpl customerDao = new CustomerDaoImpl();
         System.out.println(id + " id method delete");
         customerDao.removeOneById(id);
 
-        new ShowAllCustomersAction().execute(request,response);
-
+        new ShowAllCustomersAction().execute(request, response);
     }
 }

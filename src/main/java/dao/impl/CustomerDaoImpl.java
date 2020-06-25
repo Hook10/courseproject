@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CustomerDaoImpl implements BaseDAO<Customer> {
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomerDaoImpl.class);
-    private static final String ADD_CUSTOMER =  "INSERT INTO CUSTOMERS(ID, FIRST_NAME, SURNAME, EMAIL, PASSWORD, CITY, " +
+    private static final String ADD_CUSTOMER = "INSERT INTO CUSTOMERS(ID, FIRST_NAME, SURNAME, EMAIL, PASSWORD, CITY, " +
             "ADDRESS, IIN) VALUES(?,?,?,?,?,?,?,?)";
     private static final String GET_ALL_CUSTOMERS = "SELECT ID, FIRST_NAME, SURNAME, EMAIL, PASSWORD, CITY, ADDRESS, " +
             "IIN FROM CUSTOMERS";
@@ -22,7 +22,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
             "CITY=?, ADDRESS=?, IIN=? WHERE ID = ? ";
     private static final String DELETE_CUSTOMER_BY_ID = "DELETE FROM CUSTOMERS WHERE ID=?";
     private static final String GET_CUSTOMER_BY_EMAIL_AND_PASSWORD = "select * from customers where email = ? and password = ? ";
-//PASSWORD=?,
+
     @Override
     public void add(Customer customer) throws SQLException {
 
@@ -80,8 +80,8 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
     public Customer getById(Long id) throws SQLException {
 
         Customer customer = new Customer();
-        try(Connection connection = DBUtil.getDataSource().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_CUSTOMER_BY_ID)) {
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_CUSTOMER_BY_ID)) {
 
             preparedStatement.setLong(1, id);
 
@@ -110,8 +110,8 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
     @Override
     public void update(long id, Customer customer) throws SQLException {
         System.out.println("Update MySql Customer");
-        try(Connection connection = DBUtil.getDataSource().getConnection();
-            PreparedStatement preparedStatement= connection.prepareStatement(UPDATE_CUSTOMERS) ) {
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_CUSTOMERS)) {
             preparedStatement.setLong(8, id);
             preparedStatement.setString(1, customer.getFirstName());
             preparedStatement.setString(2, customer.getSurname());
@@ -140,6 +140,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
             e.printStackTrace();
         }
     }
+
     public void removeOneById(long id) {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
@@ -153,7 +154,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
         }
     }
 
-    public Customer getCustomerByEmailAndPassword(String email, String password)  {
+    public Customer getCustomerByEmailAndPassword(String email, String password) {
 
         Customer customer = null;
 

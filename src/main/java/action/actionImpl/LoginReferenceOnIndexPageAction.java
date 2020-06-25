@@ -16,8 +16,6 @@ public class LoginReferenceOnIndexPageAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.getRequestDispatcher(LOGIN_CUSTOMER).forward(request, response);
-
     }
 }

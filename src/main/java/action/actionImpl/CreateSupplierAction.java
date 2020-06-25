@@ -30,12 +30,12 @@ public class CreateSupplierAction implements Action {
         String name = request.getParameter("name");
         String bin = request.getParameter("bin");
 
-        if(name.isEmpty() || bin.isEmpty()) {
+        if (name.isEmpty() || bin.isEmpty()) {
             request.setAttribute("message", "empty fields");
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
 
-        if(!new NameValidation().isValidUserName(name) || !new IINValidation().isValidIIN(bin)) {
+        if (!new NameValidation().isValidUserName(name) || !new IINValidation().isValidIIN(bin)) {
             request.setAttribute("message", "Incorrect input");
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
@@ -46,7 +46,7 @@ public class CreateSupplierAction implements Action {
 
         try {
             supplierDao.add(supplier);
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             LOGGER.info("Supplier creating sql error");
             e.printStackTrace();
         }

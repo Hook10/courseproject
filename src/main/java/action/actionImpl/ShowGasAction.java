@@ -24,10 +24,9 @@ public class ShowGasAction implements Action {
 
     static void showDataBySupplier(HttpServletRequest request, HttpServletResponse response, int gasSupplier, String showGasDataPersonList) throws ServletException, IOException {
         DataDaoImpl dataDao = new DataDaoImpl();
+
         List<Data> dataList = null;
-
         try {
-
             dataList = dataDao.getAllBySupplierId(gasSupplier);
         } catch (SQLException e) {
             e.printStackTrace();

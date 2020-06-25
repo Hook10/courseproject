@@ -22,9 +22,8 @@ public class LogoutAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         HttpSession session = request.getSession(false);
-        if(session != null)
+        if (session != null)
             session.invalidate();
-        request.getRequestDispatcher(INDEX_URL).forward(request,response);
-
+        request.getRequestDispatcher(INDEX_URL).forward(request, response);
     }
 }

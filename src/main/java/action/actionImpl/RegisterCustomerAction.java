@@ -19,6 +19,7 @@ import static constants.ActionConstants.*;
 
 public class RegisterCustomerAction implements Action {
     private HashFunction hashFunction = new HashFunction();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CustomerDaoImpl customerDao = new CustomerDaoImpl();
@@ -47,7 +48,7 @@ public class RegisterCustomerAction implements Action {
             return;
         }
 
-      password = hashFunction.getHashFunction(password);
+        password = hashFunction.getHashFunction(password);
 
         Customer customer = new Customer();
         customer.setFirstName(firstName);

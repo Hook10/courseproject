@@ -1,38 +1,39 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<c:set var="theLocale" value="${not empty param.theLocale ? param.theLocale : not empty theLocale ? theLocale : pageContext.request.locale}"
-       scope="session" />
-<fmt:setLocale value="${theLocale}" />
-<fmt:setBundle basename="myLabels" />
-
+<c:set var="theLocale"
+       value="${not empty param.theLocale ? param.theLocale : not empty theLocale ? theLocale : pageContext.request.locale}"
+       scope="session"/>
+<fmt:setLocale value="${theLocale}"/>
+<fmt:setBundle basename="myLabels"/>
 <div class="container-sm">
     <nav class="navbar navbar-dark bg-primary">
         <a class="navbar-brand" href="${pageContext.request.contextPath}/"><fmt:message key="home"/></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-
-                <c:if test="${sessionScope.status != 'GUEST' || sessionScope.status == null}">
                 <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/home/logout">Logout <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/home/logout">Logout <span
+                            class="sr-only">(current)</span></a>
                 </li>
-                </c:if>
-
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/">Main Page</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Additional
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/home/show_gas">Gas Page</a>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/home/show_water">Water Page</a>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/home/show_electricity">Electricity Page</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/home/show_water">Water
+                            Page</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/home/show_electricity">Electricity
+                            Page</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>

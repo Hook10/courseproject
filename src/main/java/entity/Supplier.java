@@ -8,7 +8,7 @@ public class Supplier implements Serializable {
     private String companyName;
     private String bin;
 
-    public Supplier(){
+    public Supplier() {
 
     }
 

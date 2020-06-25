@@ -1,7 +1,7 @@
 package filter;
 
 
-import userstatus.UserStatus;
+import entity.UserStatus;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +13,7 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-
     }
-
-
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -26,7 +23,7 @@ public class AuthenticationFilter implements Filter {
         UserStatus status = (UserStatus) session.getAttribute("status");
 
         if (status == null) {
-            session.setAttribute("role", UserStatus.GUEST);
+            session.setAttribute("status", UserStatus.GUEST);
         }
         filterChain.doFilter(request, response);
     }
@@ -34,7 +31,6 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void destroy() {
-
     }
 
 

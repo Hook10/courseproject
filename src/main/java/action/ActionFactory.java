@@ -11,7 +11,7 @@ public class ActionFactory {
     private static Map<String, Action> actions = new ConcurrentHashMap<>();
     private static ActionFactory instance = null;
 
-    private ActionFactory(){
+    private ActionFactory() {
 
     }
 

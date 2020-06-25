@@ -17,11 +17,11 @@ public class ShowAllCustomersAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CustomerDaoImpl customerDao = new CustomerDaoImpl();
-        List<Customer> customerList=null;
+        List<Customer> customerList = null;
 
         try {
-            customerList= customerDao.getAll();
-        } catch (SQLException e){
+            customerList = customerDao.getAll();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         request.setAttribute("customerList", customerList);
