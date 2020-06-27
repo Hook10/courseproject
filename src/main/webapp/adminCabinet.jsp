@@ -35,6 +35,8 @@
                class="btn btn-secondary"><fmt:message key="create.supplier"/></a>
             <a href="${pageContext.request.contextPath}/home/show_all_customers" type="button" class="btn btn-info">Show
                 all customers</a>
+            <a href="${pageContext.request.contextPath}/home/show_all_suppliers" type="button" class="btn btn-info">Show
+                all suppliers</a>
         </c:when>
         <c:otherwise>
             <a href="${pageContext.request.contextPath}/home/login_admin_button" type="button"

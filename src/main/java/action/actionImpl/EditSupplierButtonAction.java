@@ -9,22 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static constants.ActionConstants.EDIT_CUSTOMER_DATA;
 
+import static constants.ActionConstants.EDIT_SUPPLIER;
 
-public class EditCustomerDataButtonAction implements Action {
-    private static final Logger LOGGER = LoggerFactory.getLogger(EditCustomerDataButtonAction.class);
+public class EditSupplierButtonAction implements Action {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EditSupplierButtonAction.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
 
         request.setAttribute("id", request.getParameter("id"));
-        request.setAttribute("id_customer", request.getParameter("id_customer"));
-        request.setAttribute("data", request.getParameter("data"));
-        request.setAttribute("month", request.getParameter("month"));
-        request.getRequestDispatcher(EDIT_CUSTOMER_DATA).forward(request, response);
+        request.setAttribute("companyName", request.getParameter("companyName"));
+        request.setAttribute("bin", request.getParameter("bin"));
+        System.out.println(request.getParameter("companyName")+ "companyName ");
 
 
+
+        request.getRequestDispatcher(EDIT_SUPPLIER).forward(request, response);
     }
 }

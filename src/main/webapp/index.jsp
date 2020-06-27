@@ -20,8 +20,8 @@
 <body>
 <div class="container-lg">
     View this page in: <br/>
-    <a href="${pageContext.request.contextPath}/home/index?theLocale=en_US">English (US)</a> |
-    <a href="${pageContext.request.contextPath}/home/index?theLocale=ru_RU">Русский (RU)</a>
+    <a href="${pageContext.request.contextPath}/home/index?theLocale=en_US" type="button" class="btn btn-info">English (US)</a> |
+    <a href="${pageContext.request.contextPath}/home/index?theLocale=ru_RU" type="button" class="btn btn-info">Русский (RU)</a>
     <br/><br/>
     Selected language: ${theLocale}
     <hr>

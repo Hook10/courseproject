@@ -16,8 +16,10 @@
 <body>
 <div class="container-lg">
     View this page in: <br/>
-    <a href="${pageContext.request.contextPath}/home/create_supplier_button?theLocale=en_US" type="button" class="btn btn-info">English (US)</a> |
-    <a href="${pageContext.request.contextPath}/home/create_supplier_button?theLocale=ru_RU" type="button" class="btn btn-info">Русский (RU)</a>
+    <a href="${pageContext.request.contextPath}/home/create_supplier_button?theLocale=en_US" type="button"
+       class="btn btn-info">English (US)</a> |
+    <a href="${pageContext.request.contextPath}/home/create_supplier_button?theLocale=ru_RU" type="button"
+       class="btn btn-info">Русский (RU)</a>
     <br/><br/>
     Selected language: ${theLocale}
     <hr>
@@ -26,16 +28,17 @@
 <c:choose>
     <c:when test="${sessionScope.status == 'WEBSITEADMIN' }">
         <div align="center">
-            <h1><fmt:message key="supplier.registration.form"/></h1>
-            <form action="${pageContext.request.contextPath}/home/create_supplier" method="post">
+            <h1><fmt:message key="supplier.edit.form.message"/></h1>
+            <form action="${pageContext.request.contextPath}/home/editSupplier" method="post">
+                <input type="hidden" name="id" value="${requestScope.id}">
                 <table style="with: 80%">
                     <tr>
                         <td><fmt:message key="company.name"/></td>
-                        <td><input type="text" name="name"/></td>
+                        <td><input type="text" name="companyName" value="${requestScope.companyName}"/></td>
                     </tr>
                     <tr>
                         <td><fmt:message key="BIN"/></td>
-                        <td><input type="text" name="bin"/></td>
+                        <td><input type="text" name="bin" value="${requestScope.bin}"/></td>
                     </tr>
                 </table>
                 <input type="submit" value="Submit"/>

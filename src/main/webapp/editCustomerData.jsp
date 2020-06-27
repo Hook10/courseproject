@@ -8,6 +8,8 @@
 <fmt:setBundle basename="myLabels"/>
 <html>
 <head>
+    <jsp:include page="backButtonRestrict.jsp"/>
+
     <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
     <title><fmt:message key="edit.data"/></title>
@@ -15,12 +17,19 @@
 <body>
 <div class="container-lg">
     View this page in: <br/>
-    <a href="${pageContext.request.contextPath}/home/editCustomerDataButton?theLocale=en_US">English (US)</a> |
-    <a href="${pageContext.request.contextPath}/home/editCustomerDataButton?theLocale=ru_RU">Русский (RU)</a>
+    <a href="${pageContext.request.contextPath}/home/editCustomerDataButton?theLocale=en_US" type="button" class="btn btn-info">English (US)</a> |
+    <a href="${pageContext.request.contextPath}/home/editCustomerDataButton?theLocale=ru_RU" type="button" class="btn btn-info">Русский (RU)</a>
     <br/><br/>
     Selected language: ${theLocale}
     <hr>
-    <br/><br/>
+
+</div>
+
+<div class="container-sm">
+    <div class="btn-group-toggle " role="group" aria-label="Basic example">
+        <a href="${pageContext.request.contextPath}/home/customerPersonalAccountPage" type="button"
+           class="btn btn-info"><fmt:message key="back.to.cabinet"/></a>
+    </div>
 </div>
 <c:choose>
     <c:when test="${sessionScope.status == 'CUSTOMER' || sessionScope.status == 'WEBSITEADMIN' }">
@@ -44,11 +53,11 @@
                             <table style="align-items: normal">
                                 <tr>
                                     <td><fmt:message key="month"/></td>
-                                    <td><input type="month" name="month"/></td>
+                                    <td><input type="month" name="month" value="${requestScope.month}"/></td>
                                 </tr>
                                 <tr>
                                     <td><fmt:message key="add.your.data"/></td>
-                                    <td><input type="number" name="data"/></td>
+                                    <td><input type="text" name="data" value="${requestScope.data}"/></td>
                                 </tr>
 
                                 <tr>

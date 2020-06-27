@@ -13,8 +13,27 @@
     <title><fmt:message key="pay.page"/></title>
 </head>
 <body>
+<div class="container-lg">
+
+    View this page in: <br/>
+    <a href="${pageContext.request.contextPath}/home/payInvoiceButton?theLocale=en_US " type="button"
+       class="btn btn-info">English (US)</a> |
+    <a href="${pageContext.request.contextPath}/home/payInvoiceButton?theLocale=ru_RU" type="button"
+       class="btn btn-info">Русский (RU)</a>
+    <br/><br/>
+    Selected language: ${theLocale}
+    <hr>
+
+</div>
+<div class="container-sm">
+    <div class="btn-group-toggle " role="group" aria-label="Basic example">
+        <a href="${pageContext.request.contextPath}/home/customerPersonalAccountPage" type="button"
+           class="btn btn-info"><fmt:message key="back.to.cabinet"/></a>
+    </div>
+</div>
 <c:choose>
     <c:when test="${sessionScope.status == 'CUSTOMER' ||sessionScope.status == 'WEBSITEADMIN' }">
+
         <div class="container-sm">
             <h3>
                 <fmt:message key="payment.received.message"/>

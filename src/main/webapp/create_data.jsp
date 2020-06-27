@@ -10,6 +10,7 @@
 
 
 <head>
+    <jsp:include page="backButtonRestrict.jsp"/>
     <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
 
@@ -18,12 +19,19 @@
 <body>
 <div class="container-lg">
     View this page in: <br/>
-    <a href="${pageContext.request.contextPath}/home/add_data?theLocale=en_US">English (US)</a> |
-    <a href="${pageContext.request.contextPath}/home/add_data?theLocale=ru_RU">Русский (RU)</a>
+    <a href="${pageContext.request.contextPath}/home/add_data?theLocale=en_US" type="button" class="btn btn-info">English (US)</a> |
+    <a href="${pageContext.request.contextPath}/home/add_data?theLocale=ru_RU" type="button" class="btn btn-info">Русский (RU)</a>
     <br/><br/>
     Selected language: ${theLocale}
     <hr>
-    <br/><br/>
+
+</div>
+<%--todo--%> create if customer back to cust cab or if admin forward to admin cabinet
+<div class="container-sm">
+    <div class="btn-group-toggle " role="group" aria-label="Basic example">
+        <a href="${pageContext.request.contextPath}/home/customerPersonalAccountPage" type="button"
+           class="btn btn-info"><fmt:message key="back.to.cabinet"/></a>
+    </div>
 </div>
 <c:choose>
     <c:when test="${sessionScope.status == 'CUSTOMER' ||sessionScope.status == 'WEBSITEADMIN' }">

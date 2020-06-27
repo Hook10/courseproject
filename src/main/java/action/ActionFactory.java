@@ -41,9 +41,13 @@ public class ActionFactory {
         actions.put("/showInvoice", new ShowInvoiceAction());
         actions.put("/paymentForm", new PaymentFormAction());
         actions.put("/show_all_customers", new ShowAllCustomersAction());
+        actions.put("/show_all_suppliers", new ShowAllSuppliersAction());
         actions.put("/delete_customer", new DeleteCustomerAction());
         actions.put("/editCustomerButton", new EditCustomerButtonAction());
         actions.put("/editCustomer", new EditCustomerAction());
+        actions.put("/editSupplierButton", new EditSupplierButtonAction());
+        actions.put("/editSupplier", new EditSupplierAction());
+        actions.put("/delete_supplier", new DeleteSupplierAction());
 
 
     }

@@ -87,9 +87,9 @@ public class SupplierDaoImpl implements BaseDAO<Supplier> {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SUPPLIER)) {
+            preparedStatement.setLong(3, id);
             preparedStatement.setString(1, supplier.getCompanyName());
             preparedStatement.setString(2, supplier.getBin());
-            preparedStatement.setLong(3, supplier.getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -108,6 +108,18 @@ public class SupplierDaoImpl implements BaseDAO<Supplier> {
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
+        }
+    }
+    public void removeOneById(long id) {
+
+        try (Connection connection = DBUtil.getDataSource().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SUPPLIER_BY_ID)) {
+
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
         }
     }
 }

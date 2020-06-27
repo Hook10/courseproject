@@ -8,27 +8,28 @@ import org.slf4j.LoggerFactory;
 import validation.IINValidation;
 import validation.NameValidation;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import static constants.ActionConstants.ADMIN_CABINET;
 import static constants.ActionConstants.ERROR_URL;
 
-public class CreateSupplierAction implements Action {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreateSupplierAction.class);
+public class EditSupplierAction implements Action {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EditSupplierAction.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
-        SupplierDaoImpl supplierDao = new SupplierDaoImpl();
 
-        String name = request.getParameter("name");
+        SupplierDaoImpl supplierDao = new SupplierDaoImpl();
+        long id = Long.parseLong(String.valueOf(request.getParameter("id")));
+        String name = request.getParameter("companyName");
         String bin = request.getParameter("bin");
+        System.out.println("this is id" + id);
+        System.out.println("this is companyName" + name);
+        System.out.println("this is bin" + bin);
 
         if (name.isEmpty() || bin.isEmpty()) {
             request.setAttribute("message", "empty fields");
@@ -45,14 +46,10 @@ public class CreateSupplierAction implements Action {
         supplier.setBin(bin);
 
         try {
-            supplierDao.add(supplier);
-        } catch (SQLException e) {
-            LOGGER.info("Supplier creating sql error");
+            supplierDao.update(id,supplier);
+        } catch(SQLException e){
             e.printStackTrace();
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher(ADMIN_CABINET);
-        dispatcher.forward(request, response);
-
+        new ShowAllSuppliersAction().execute(request, response);
     }
 }
-//

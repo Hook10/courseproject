@@ -22,7 +22,12 @@
     <br/><br/>
     Selected language: ${theLocale}
     <hr>
-    <br/><br/>
+</div>
+<div class="container-sm">
+<div class="btn-group-toggle " role="group" aria-label="Basic example">
+    <a href="${pageContext.request.contextPath}/home/customerPersonalAccountPage" type="button"
+       class="btn btn-info"><fmt:message key="back.to.cabinet"/></a>
+</div>
 </div>
 <c:choose>
     <c:when test="${sessionScope.status == 'CUSTOMER' ||sessionScope.status == 'WEBSITEADMIN' }">
@@ -57,6 +62,9 @@
                             <form action="${pageContext.request.contextPath}/home/editCustomerDataButton" method="post">
                                 <input type="hidden" name="id_customer" value="${dataList.idCustomer}">
                                 <input type="hidden" name="id" value="${dataList.id}">
+                                <input type="hidden" name="month" value="${dataList.month}">
+                                <input type="hidden" name="month" value="${dataList.data}">
+
                                 <button type="submit"
                                         class="btn  btn-sm btn-info"><fmt:message key="Edit"/></button>
                             </form>

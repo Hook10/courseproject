@@ -8,6 +8,8 @@
 <fmt:setBundle basename="myLabels"/>
 <html>
 <head>
+
+    <jsp:include page="backButtonRestrict.jsp"/>
     <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
     <title><fmt:message key="admin.login.page"/></title>

@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <jsp:include page="backButtonRestrict.jsp"/>
     <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
     <title>Edit customer</title>
@@ -16,8 +17,8 @@
 <body>
 <div class="container-lg">
     View this page in: <br/>
-    <a href="${pageContext.request.contextPath}/home/editCustomerButton?theLocale=en_US">English (US)</a> |
-    <a href="${pageContext.request.contextPath}/home/editCustmoerButton?theLocale=ru_RU">Русский (RU)</a>
+    <a href="${pageContext.request.contextPath}/home/editCustomerButton?theLocale=en_US" type="button" class="btn btn-info">English (US)</a> |
+    <a href="${pageContext.request.contextPath}/home/editCustmoerButton?theLocale=ru_RU" type="button" class="btn btn-info">Русский (RU)</a>
     <br/><br/>
     Selected language: ${theLocale}
     <hr>

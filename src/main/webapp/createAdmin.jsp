@@ -8,6 +8,7 @@
 <fmt:setBundle basename="myLabels"/>
 <html>
 <head>
+    <jsp:include page="backButtonRestrict.jsp"/>
     <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
     <title><fmt:message key="create.admin"/></title>
@@ -15,8 +16,8 @@
 <body>
 <div class="container-lg">
     View this page in: <br/>
-    <a href="${pageContext.request.contextPath}/home/create_admin_button?theLocale=en_US">English (US)</a> |
-    <a href="${pageContext.request.contextPath}/home/create_admin_button?theLocale=ru_RU">Русский (RU)</a>
+    <a href="${pageContext.request.contextPath}/home/create_admin_button?theLocale=en_US" type="button" class="btn btn-info">English (US)</a> |
+    <a href="${pageContext.request.contextPath}/home/create_admin_button?theLocale=ru_RU" type="button" class="btn btn-info">Русский (RU)</a>
     <br/><br/>
     Selected language: ${theLocale}
     <hr>
@@ -25,7 +26,7 @@
 <c:choose>
     <c:when test="${sessionScope.status == 'WEBSITEADMIN' }">
         <div align="center">
-            <h1>Customer Registration Form</h1>
+            <h1><fmt:message key="customer.registration.form"/></h1>
             <form action="${pageContext.request.contextPath}/home/create_admin" method="post">
                 <table style="with: 80%">
                     <tr>
@@ -45,18 +46,16 @@
                         <td><input type="text" name="email"/></td>
                     </tr>
                     <tr>
-                        <td>Company name</td>
+                        <td><fmt:message key="company.name"/></td>
                         <td><input type="text" name="company_name"/></td>
                     </tr>
-
-
                 </table>
                 <input type="submit" value="Submit"/>
             </form>
         </div>
     </c:when>
     <c:otherwise>
-        <a href="${pageContext.request.contextPath}/home/login_admin_button" type="button" class="btn btn-info">Administration</a>
+        <a href="${pageContext.request.contextPath}/home/login_admin_button" type="button" class="btn btn-info"><fmt:message key="administration"/></a>
     </c:otherwise>
 </c:choose>
 </body>

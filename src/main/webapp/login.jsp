@@ -8,6 +8,7 @@
 <fmt:setBundle basename="myLabels"/>
 <html lang="${theLocale}">
 <head>
+    <jsp:include page="backButtonRestrict.jsp"/>
     <jsp:include page="navbar.jsp"/>
     <jsp:include page="style.jsp"/>
     <title>Login Page</title>
