@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class EmailValidation {
 
-    private String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+    public static final String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
     private Pattern emailPat;
     private Matcher matcher;
 
