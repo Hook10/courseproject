@@ -24,7 +24,6 @@
     <hr>
 
 </div>
-
 <div class="container-sm">
     <div class="btn-group-toggle " role="group" aria-label="Basic example">
         <a href="${pageContext.request.contextPath}/home/customerPersonalAccountPage" type="button"
@@ -50,6 +49,7 @@
 
                             <input type="hidden" name="id" value="${requestScope.id}">
                             <input type="hidden" name="id_customer" value="${requestScope.id_customer}">
+                            <input type="hidden" name="id_supplier" value="${requestScope.id_supplier}">
                             <table style="align-items: normal">
                                 <tr>
                                     <td><fmt:message key="month"/></td>
@@ -60,16 +60,6 @@
                                     <td><input type="text" name="data" value="${requestScope.data}"/></td>
                                 </tr>
 
-                                <tr>
-                                    <td>
-                                        <select name="id_supplier">
-                                            <option value="1"><fmt:message key="gas"/></option>
-                                            <option value="2"><fmt:message key="water"/></option>
-                                            <option value="3"><fmt:message key="electricity"/></option>
-
-                                        </select>
-                                    </td>
-                                </tr>
                             </table>
                             <input type="submit" value="Submit"/>
                         </form>

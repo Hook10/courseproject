@@ -31,8 +31,6 @@
                 <fmt:message key="This.is.your.cabinet"/>
                     ${sessionScope.customer.firstName} <br> <fmt:message
                     key="your.email.is"/>: ${sessionScope.customer.email}
-                You id is ${sessionScope.customer.id}
-
 
             </h3>
             <br>

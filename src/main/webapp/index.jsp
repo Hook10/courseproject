@@ -45,12 +45,43 @@
         </div>
     </c:otherwise>
     </c:choose>
-
+<c:choose>
+    <c:when test="${sessionScope.theLocale== 'ru_RU'}">
     <p>
         <br>
+        Данный сайт создан, что бы  сделать Вашу жизнь еще удобнее.
+        Здесь можно внести показания ваших приборов учета воды, газа, электричества и  оплатить счета с помощью
+        платежных карт VISA/MasterCard.
 
-        Данный сайт создан, что бы помочь Вам внести данные 
     </p>
+    <br>
+    <br>
+    <br>
+    <p>
+        Надеемся, что Вам понравится наш сервис.<br>
+        С уважением,<br>
+    &lt;EPAM&gt; systems - делаем Вашу жизнь лучше!
+
+    </p>
+    </c:when>
+    <c:otherwise>
+        <p>
+            <br>
+            This site was created to make your life even more convenient.
+            Here you can enter the readings of your metering devices for water, gas, electricity and pay bills using
+            VISA / MasterCard payment cards.
+        </p>
+        <br>
+        <br>
+        <br>
+        <p>
+            We hope you enjoy our service.<br>
+            Best regards,<br>
+            &lt;EPAM&gt; systems - makes your life better!
+        </p>
+
+    </c:otherwise>
+</c:choose>
 </div>
 </body>
 </html>

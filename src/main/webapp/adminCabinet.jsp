@@ -15,8 +15,8 @@
 <body>
 <div class="container-lg">
     View this page in: <br/>
-    <a href="${pageContext.request.contextPath}/home/login_button?theLocale=en_US">English (US)</a> |
-    <a href="${pageContext.request.contextPath}/home/login_button?theLocale=ru_RU">Русский (RU)</a>
+    <a href="${pageContext.request.contextPath}/home/admin_cabinet?theLocale=en_US">English (US)</a> |
+    <a href="${pageContext.request.contextPath}/home/admin_cabinet?theLocale=ru_RU">Русский (RU)</a>
     <br/><br/>
     Selected language: ${theLocale}
     <hr>
@@ -33,10 +33,10 @@
                class="btn btn-secondary"> <fmt:message key="create.admin"/></a>
             <a href="${pageContext.request.contextPath}/home/create_supplier_button" type="button"
                class="btn btn-secondary"><fmt:message key="create.supplier"/></a>
-            <a href="${pageContext.request.contextPath}/home/show_all_customers" type="button" class="btn btn-info">Show
-                all customers</a>
-            <a href="${pageContext.request.contextPath}/home/show_all_suppliers" type="button" class="btn btn-info">Show
-                all suppliers</a>
+            <a href="${pageContext.request.contextPath}/home/show_all_customers" type="button" class="btn btn-info">
+                <fmt:message key="show.all.customers"/></a>
+            <a href="${pageContext.request.contextPath}/home/show_all_suppliers" type="button" class="btn btn-info">
+                <fmt:message key="show.all.suppliers"/></a>
         </c:when>
         <c:otherwise>
             <a href="${pageContext.request.contextPath}/home/login_admin_button" type="button"

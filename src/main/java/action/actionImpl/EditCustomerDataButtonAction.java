@@ -23,6 +23,7 @@ public class EditCustomerDataButtonAction implements Action {
         request.setAttribute("id_customer", request.getParameter("id_customer"));
         request.setAttribute("data", request.getParameter("data"));
         request.setAttribute("month", request.getParameter("month"));
+        request.setAttribute("id_supplier", request.getParameter("id_supplier"));
         request.getRequestDispatcher(EDIT_CUSTOMER_DATA).forward(request, response);
 
 

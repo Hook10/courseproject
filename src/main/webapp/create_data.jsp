@@ -26,7 +26,7 @@
     <hr>
 
 </div>
-<%--todo--%> create if customer back to cust cab or if admin forward to admin cabinet
+
 <div class="container-sm">
     <div class="btn-group-toggle " role="group" aria-label="Basic example">
         <a href="${pageContext.request.contextPath}/home/customerPersonalAccountPage" type="button"
@@ -34,7 +34,7 @@
     </div>
 </div>
 <c:choose>
-    <c:when test="${sessionScope.status == 'CUSTOMER' ||sessionScope.status == 'WEBSITEADMIN' }">
+    <c:when test="${sessionScope.status == 'CUSTOMER' || sessionScope.status == 'WEBSITEADMIN' }">
         <div class="container-sm">
             <div align="center">
                 <h1><fmt:message key="add.your.data"/></h1>

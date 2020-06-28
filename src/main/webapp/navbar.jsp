@@ -6,9 +6,26 @@
        scope="session"/>
 <fmt:setLocale value="${theLocale}"/>
 <fmt:setBundle basename="myLabels"/>
+
+
 <div class="container-sm">
     <nav class="navbar navbar-dark bg-primary">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/"><fmt:message key="home"/></a>
+        <c:choose>
+            <c:when test="${sessionScope.status == null || sessionScope.status == 'GUEST'  }">
+                <a class="navbar-brand"
+                   href="${pageContext.request.contextPath}/"><fmt:message
+                        key="home"/></a>
+            </c:when>
+            <c:when test="${sessionScope.status == 'CUSTOMER'  }">
+                <a class="navbar-brand"
+                   href="${pageContext.request.contextPath}/home/customerPersonalAccountPage"><fmt:message
+                        key="home"/></a>
+            </c:when>
+            <c:otherwise>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/home/admin_cabinet"><fmt:message
+                        key="home"/></a>
+            </c:otherwise>
+        </c:choose>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,7 +38,23 @@
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/">Main Page</a>
+                    <c:choose>
+                        <c:when test="${sessionScope.status == null || sessionScope.status == 'GUEST'  }">
+                            <a class="navbar-brand"
+                               href="${pageContext.request.contextPath}/"><fmt:message
+                                    key="home"/></a>
+                        </c:when>
+                        <c:when test="${sessionScope.status == 'CUSTOMER' }">
+                            <a class="navbar-brand"
+                               href="${pageContext.request.contextPath}/home/customerPersonalAccountPage"><fmt:message
+                                    key="home"/></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="navbar-brand"
+                               href="${pageContext.request.contextPath}/home/admin_cabinet"><fmt:message
+                                    key="home"/></a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -49,3 +82,4 @@
         </div>
     </nav>
 </div>
+

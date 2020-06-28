@@ -23,7 +23,6 @@
     <br/><br/>
     Selected language: ${theLocale}
     <hr>
-
 </div>
 <div class="container-sm">
     <div class="btn-group-toggle " role="group" aria-label="Basic example">

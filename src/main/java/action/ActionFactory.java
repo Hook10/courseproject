@@ -48,6 +48,7 @@ public class ActionFactory {
         actions.put("/editSupplierButton", new EditSupplierButtonAction());
         actions.put("/editSupplier", new EditSupplierAction());
         actions.put("/delete_supplier", new DeleteSupplierAction());
+        actions.put("/admin_cabinet", new EnterAdminCabinetAction());
 
 
     }

@@ -20,13 +20,16 @@
     <br/><br/>
     Selected language: ${theLocale}
     <hr>
-    <br/><br/>
+</div>
+<div class="container-sm">
+    <div class="btn-group-toggle " role="group" aria-label="Basic example">
+        <a href="${pageContext.request.contextPath}/home/customerPersonalAccountPage" type="button"
+           class="btn btn-info"><fmt:message key="back.to.cabinet"/></a>
+    </div>
 </div>
 <div class="container-sm">
     <fmt:message key="warning"/>
     <fmt:message key="error"/> <h3>${requestScope.message}</h3>
-
 </div>
-
 </body>
 </html>

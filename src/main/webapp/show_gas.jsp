@@ -63,8 +63,8 @@
                                 <input type="hidden" name="id_customer" value="${dataList.idCustomer}">
                                 <input type="hidden" name="id" value="${dataList.id}">
                                 <input type="hidden" name="month" value="${dataList.month}">
-                                <input type="hidden" name="month" value="${dataList.data}">
-
+                                <input type="hidden" name="data" value="${dataList.data}">
+                                <input type="hidden" name="id_supplier" value="${dataList.idSupplier}">
                                 <button type="submit"
                                         class="btn  btn-sm btn-info"><fmt:message key="Edit"/></button>
                             </form>
