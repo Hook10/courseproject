@@ -50,15 +50,15 @@
                     </tr>
                     <tr>
                         <td><fmt:message key="city"/></td>
-                        <td><input type="text" name="city" value="${requestScope.city}"/></td>
+                        <td><input type="text" name="city" value="${requestScope.city}" required="true"/></td>
                     </tr>
                     <tr>
                         <td><fmt:message key="address"/></td>
-                        <td><input type="text" name="address" value="${requestScope.address}"/></td>
+                        <td><input type="text" name="address" value="${requestScope.address}" required="true"/></td>
                     </tr>
                     <tr>
                         <td><fmt:message key="IIN"/></td>
-                        <td><input type="text" name="iin" value="${requestScope.iin}"/></td>
+                        <td><input type="text" name="iin" value="${requestScope.iin}" required="true"/></td>
                     </tr>
                 </table>
                 <input type="submit" value="Submit"/>

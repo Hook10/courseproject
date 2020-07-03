@@ -26,11 +26,9 @@ public class ShowGasAction implements Action {
         DataDaoImpl dataDao = new DataDaoImpl();
 
         List<Data> dataList = null;
-        try {
+
             dataList = dataDao.getAllBySupplierId(gasSupplier);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
 
         request.setAttribute("dataList", dataList);
         request.getRequestDispatcher(showGasDataPersonList).forward(request, response);

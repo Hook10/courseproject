@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import static action.actionImpl.ShowElectrAction.ELECTRICITY_SUPPLIER;
 import static action.actionImpl.ShowWaterAction.WATER_SUPPLIER;
 import static constants.ActionConstants.*;
+import static constants.ErrorConstants.WRONG_SUPPLIER;
+import static constants.ErrorConstants.ERROR_MESSAGE;
 
 public class EditCustomerDataAction implements Action {
     public static final int GAS_SUPPLIER = 1;
@@ -43,11 +45,9 @@ public class EditCustomerDataAction implements Action {
         dataFromCustomer.setIdCustomer(id_customer);
         dataFromCustomer.setIdSupplier(id_supplier);
 
-        try {
+
             dataDao.update(id, dataFromCustomer);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         supplierForward(request, response, id_supplier, GAS_SUPPLIER);
     }
 
@@ -62,7 +62,7 @@ public class EditCustomerDataAction implements Action {
             RequestDispatcher dispatcher = request.getRequestDispatcher(FORWARD_TO_SHOW_ELECTR_DATA);
             dispatcher.forward(request, response);
         } else {
-            request.setAttribute("message", "wrong supplier");
+            request.setAttribute(ERROR_MESSAGE, WRONG_SUPPLIER);
             RequestDispatcher dispatcher = request.getRequestDispatcher(ERROR_URL);
             dispatcher.forward(request, response);
         }

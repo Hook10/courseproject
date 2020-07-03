@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import static constants.ActionConstants.ADMIN_CABINET;
 import static constants.ActionConstants.ERROR_URL;
+import static constants.ErrorConstants.*;
 
 public class LoginAdminAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginAdminAction.class);
@@ -36,7 +37,7 @@ public class LoginAdminAction implements Action {
         password = request.getParameter("password");
 
         if (login.isEmpty() || password.isEmpty()) {
-            request.setAttribute("message", "Empty fields");
+            request.setAttribute(ERROR_MESSAGE, EMPTY_FIELDS);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
@@ -50,7 +51,7 @@ public class LoginAdminAction implements Action {
             session.setAttribute("status", UserStatus.WEBSITEADMIN);
             request.getRequestDispatcher(ADMIN_CABINET).forward(request, response);
         } else {
-            request.setAttribute("message", "the admin does not exist");
+            request.setAttribute(ERROR_MESSAGE, ADMIN_DOES_NOT_EXIST);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
     }

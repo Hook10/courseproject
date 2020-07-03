@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import static constants.ActionConstants.ERROR_URL;
+import static constants.ErrorConstants.*;
 
 public class EditSupplierAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditSupplierAction.class);
@@ -32,12 +33,12 @@ public class EditSupplierAction implements Action {
         System.out.println("this is bin" + bin);
 
         if (name.isEmpty() || bin.isEmpty()) {
-            request.setAttribute("message", "empty fields");
+            request.setAttribute(ERROR_MESSAGE, EMPTY_FIELDS);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
 
         if (!new NameValidation().isValidUserName(name) || !new IINValidation().isValidIIN(bin)) {
-            request.setAttribute("message", "Incorrect input");
+            request.setAttribute(ERROR_MESSAGE, INCORRECT_INPUT);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
 
@@ -45,11 +46,9 @@ public class EditSupplierAction implements Action {
         supplier.setCompanyName(name);
         supplier.setBin(bin);
 
-        try {
+
             supplierDao.update(id,supplier);
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
+
         new ShowAllSuppliersAction().execute(request, response);
     }
 }

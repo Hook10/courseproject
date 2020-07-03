@@ -28,11 +28,9 @@ public class ShowAllSuppliersAction implements Action {
         SupplierDaoImpl supplierDao = new SupplierDaoImpl();
         List<Supplier> supplierList = null;
 
-        try {
+
             supplierList = supplierDao.getAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         request.setAttribute("supplierList", supplierList);
         request.getRequestDispatcher(SHOW_SUPPLIERS).forward(request, response);
     }

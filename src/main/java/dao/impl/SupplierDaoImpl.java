@@ -18,25 +18,36 @@ public class SupplierDaoImpl implements BaseDAO<Supplier> {
     private static final String UPDATE_SUPPLIER = "UPDATE SUPPLIERS SET NAME=?, BIN=? WHERE ID=?";
     private static final String DELETE_SUPPLIER_BY_ID = "DELETE FROM SUPPLIERS WHERE ID = ?";
 
+    private static final String ID_PARAM = "ID";
+    private static final String COMPANY_NAME_PARAM = "NAME";
+    private static final String BIN_PARAM = "BIN";
+
+    private static final int ID_PARAM_INDEX = 1;
+    private static final int COMPANY_NAME_PARAM_INDEX = 2;
+    private static final int BIN_PARAM_INDEX = 3;
+
+    private static final int UPDATE_ID_PARAM_INDEX = 3;
+    private static final int UPDATE_COMPANY_NAME_PARAM = 1;
+    private static final int UPDATE_BIN_PARAM = 2;
+
     @Override
-    public void add(Supplier supplier) throws SQLException {
+    public void add(Supplier supplier)  {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_SUPPLIER)) {
 
-            preparedStatement.setLong(1, supplier.getId());
-            preparedStatement.setString(2, supplier.getCompanyName());
-            preparedStatement.setString(3, supplier.getBin());
+            preparedStatement.setLong(ID_PARAM_INDEX, supplier.getId());
+            preparedStatement.setString(COMPANY_NAME_PARAM_INDEX, supplier.getCompanyName());
+            preparedStatement.setString(BIN_PARAM_INDEX, supplier.getBin());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
     }
 
     @Override
-    public List<Supplier> getAll() throws SQLException {
+    public List<Supplier> getAll() {
         List<Supplier> supplierList = new ArrayList<>();
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
@@ -45,69 +56,66 @@ public class SupplierDaoImpl implements BaseDAO<Supplier> {
 
             while (resultSet.next()) {
                 Supplier supplier = new Supplier();
-                supplier.setId(resultSet.getLong("ID"));
-                supplier.setCompanyName(resultSet.getString("NAME"));
-                supplier.setBin(resultSet.getString("BIN"));
+                supplier.setId(resultSet.getLong(ID_PARAM));
+                supplier.setCompanyName(resultSet.getString(COMPANY_NAME_PARAM));
+                supplier.setBin(resultSet.getString(BIN_PARAM));
 
                 supplierList.add(supplier);
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return supplierList;
     }
 
     @Override
-    public Supplier getById(Long id) throws SQLException {
+    public Supplier getById(Long id)  {
 
         Supplier supplier = new Supplier();
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_SUPPLIER_BY_ID)) {
 
-            preparedStatement.setLong(1, id);
+            preparedStatement.setLong(ID_PARAM_INDEX, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            supplier.setId(resultSet.getLong("ID"));
-            supplier.setCompanyName(resultSet.getString("NAME"));
-            supplier.setBin(resultSet.getString("BIN"));
+            supplier.setId(resultSet.getLong(ID_PARAM));
+            supplier.setCompanyName(resultSet.getString(COMPANY_NAME_PARAM));
+            supplier.setBin(resultSet.getString(BIN_PARAM));
 
             preparedStatement.executeUpdate();
         } catch (SQLException e ) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return supplier;
     }
 
+
     @Override
-    public void update(long id, Supplier supplier) throws SQLException {
+    public void update(long id, Supplier supplier)  {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SUPPLIER)) {
-            preparedStatement.setLong(3, id);
-            preparedStatement.setString(1, supplier.getCompanyName());
-            preparedStatement.setString(2, supplier.getBin());
+            preparedStatement.setLong(UPDATE_ID_PARAM_INDEX, id);
+            preparedStatement.setString(UPDATE_COMPANY_NAME_PARAM, supplier.getCompanyName());
+            preparedStatement.setString(UPDATE_BIN_PARAM, supplier.getBin());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
     }
 
     @Override
-    public void remove(Supplier supplier) throws SQLException {
+    public void remove(Supplier supplier)  {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SUPPLIER_BY_ID)) {
-            preparedStatement.setLong(1, supplier.getId());
+            preparedStatement.setLong(ID_PARAM_INDEX, supplier.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
     }
     public void removeOneById(long id) {
@@ -115,7 +123,7 @@ public class SupplierDaoImpl implements BaseDAO<Supplier> {
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SUPPLIER_BY_ID)) {
 
-            preparedStatement.setLong(1, id);
+            preparedStatement.setLong(ID_PARAM_INDEX, id);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

@@ -14,9 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static constants.ActionConstants.ERROR_URL;
+import static constants.ErrorConstants.*;
 
 public class EditCustomerAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditCustomerAction.class);
@@ -41,13 +41,13 @@ public class EditCustomerAction implements Action {
                 email.isEmpty() || password.isEmpty() ||
                 city.isEmpty() || address.isEmpty() ||
                 iin.isEmpty()) {
-            request.setAttribute("message", "empty fields");
+            request.setAttribute(ERROR_MESSAGE, EMPTY_FIELDS);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
         if (!new NameValidation().isValidUserName(firstName) || !new NameValidation().isValidUserName(surName) ||
                 !new EmailValidation().isValidEmail(email) || !new IINValidation().isValidIIN(iin)) {
-            request.setAttribute("message", "Incorrect  input");
+            request.setAttribute(ERROR_MESSAGE, INCORRECT_INPUT);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
@@ -63,11 +63,9 @@ public class EditCustomerAction implements Action {
         customer.setAddress(address);
         customer.setIin(iin);
 
-        try {
+
             customerDao.update(id, customer);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
 
         new ShowAllCustomersAction().execute(request, response);
     }

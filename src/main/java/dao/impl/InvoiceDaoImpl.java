@@ -25,29 +25,55 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
     private static final String GET_ALL_INVOICES_BY_SUPPLIER_ID_AND_CUSTOMER_ID = "SELECT * FROM invoices WHERE " +
             "ID_SUP = ? AND ID_CUST=?";
 
+    private static final String ID_INVOICE_PARAM="ID_INVOICE";
+    private static final String ID_DATA_PARAM="ID_DATA";
+    private static final String ID_SUPPLIER_PARAM="ID_SUP";
+    private static final String ID_CUSTOMER_PARAM="ID_CUST";
+    private static final String MONTH_PARAM="MONTH";
+    private static final String DATA_PARAM="DATA";
+    private static final String COST_PARAM="COST";
+
+    private static final int ID_INVOICE_PARAM_INDEX = 1;
+    private static final int ID_DATA_PARAM_INDEX = 2;
+    private static final int ID_SUPPLIER_PARAM_INDEX = 3;
+    private static final int ID_CUSTOMER_PARAM_INDEX = 4;
+    private static final int MONTH_PARAM_INDEX = 5;
+    private static final int DATA_PARAM_INDEX = 6;
+    private static final int COST_PARAM_INDEX = 7;
+
+    private static final int UPDATE_ID_INVOICE_PARAM_INDEX = 7;
+    private static final int UPDATE_ID_DATA_PARAM_INDEX = 1;
+    private static final int UPDATE_ID_SUPPLIER_PARAM_INDEX = 2;
+    private static final int UPDATE_ID_CUSTOMER_PARAM_INDEX = 3;
+    private static final int UPDATE_MONTH_PARAM_INDEX = 4;
+    private static final int UPDATE_DATA_PARAM_INDEX = 5;
+    private static final int UPDATE_COST_PARAM_INDEX = 6;
+
+    private static final int GET_ALL_BY_SUPPLIER_ID_AND_CUSTOMER_ID_ID_SUPPLIER_PARAM_INDEX = 1;
+    private static final int GET_ALL_BY_SUPPLIER_ID_AND_CUSTOMER_ID_ID_CUSTOMER_PARAM_INDEX = 2;
+
     @Override
-    public void add(Invoice invoice) throws SQLException {
+    public void add(Invoice invoice) {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_INVOICE)) {
 
-            preparedStatement.setLong(1, invoice.getIdInvoice());
-            preparedStatement.setLong(2, invoice.getIdData());
-            preparedStatement.setLong(3, invoice.getIdSupplier());
-            preparedStatement.setLong(4, invoice.getIdCustomer());
-            preparedStatement.setString(5, invoice.getMonth());
-            preparedStatement.setLong(6, invoice.getData());
-            preparedStatement.setLong(7, invoice.getCost());
+            preparedStatement.setLong(ID_INVOICE_PARAM_INDEX, invoice.getIdInvoice());
+            preparedStatement.setLong(ID_DATA_PARAM_INDEX, invoice.getIdData());
+            preparedStatement.setLong(ID_SUPPLIER_PARAM_INDEX, invoice.getIdSupplier());
+            preparedStatement.setLong(ID_CUSTOMER_PARAM_INDEX, invoice.getIdCustomer());
+            preparedStatement.setString(MONTH_PARAM_INDEX, invoice.getMonth());
+            preparedStatement.setLong(DATA_PARAM_INDEX, invoice.getData());
+            preparedStatement.setLong(COST_PARAM_INDEX, invoice.getCost());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
     }
 
     @Override
-    public List<Invoice> getAll() throws SQLException {
+    public List<Invoice> getAll() {
         List<Invoice> invoicesList = new ArrayList<>();
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
@@ -57,95 +83,96 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
             resultSetNext(invoicesList, resultSet);
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return invoicesList;
     }
 
+
     private void resultSetNext(List<Invoice> invoicesList, ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
             Invoice invoice = new Invoice();
-            invoice.setIdInvoice(resultSet.getLong("ID_INVOICE"));
-            invoice.setIdData(resultSet.getLong("ID_DATA"));
-            invoice.setIdSupplier(resultSet.getLong("ID_SUP"));
-            invoice.setIdCustomer(resultSet.getLong("ID_CUST"));
-            invoice.setMonth(resultSet.getString("MONTH"));
-            invoice.setData(resultSet.getLong("DATA"));
-            invoice.setCost(resultSet.getLong("COST"));
+            invoice.setIdInvoice(resultSet.getLong(ID_INVOICE_PARAM));
+            invoice.setIdData(resultSet.getLong(ID_DATA_PARAM));
+            invoice.setIdSupplier(resultSet.getLong(ID_SUPPLIER_PARAM));
+            invoice.setIdCustomer(resultSet.getLong(ID_CUSTOMER_PARAM));
+            invoice.setMonth(resultSet.getString(MONTH_PARAM));
+            invoice.setData(resultSet.getLong(DATA_PARAM));
+            invoice.setCost(resultSet.getLong(COST_PARAM));
 
             invoicesList.add(invoice);
         }
     }
 
     @Override
-    public Invoice getById(Long id) throws SQLException {
+    public Invoice getById(Long id)  {
 
         Invoice invoice = new Invoice();
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_INVOICE_BY_ID)) {
 
-            preparedStatement.setLong(1, id);
+            preparedStatement.setLong(ID_INVOICE_PARAM_INDEX, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            invoice.setIdInvoice(resultSet.getLong("ID_INVOICE"));
-            invoice.setIdInvoice(resultSet.getLong("ID_DATA"));
-            invoice.setIdSupplier(resultSet.getLong("ID_SUP"));
-            invoice.setIdCustomer(resultSet.getLong("ID_CUST"));
-            invoice.setMonth(resultSet.getString("MONTH"));
-            invoice.setData(resultSet.getLong("DATA"));
-            invoice.setCost(resultSet.getLong("COST"));
+            invoice.setIdInvoice(resultSet.getLong(ID_INVOICE_PARAM));
+            invoice.setIdInvoice(resultSet.getLong(ID_DATA_PARAM));
+            invoice.setIdSupplier(resultSet.getLong(ID_SUPPLIER_PARAM));
+            invoice.setIdCustomer(resultSet.getLong(ID_CUSTOMER_PARAM));
+            invoice.setMonth(resultSet.getString(MONTH_PARAM));
+            invoice.setData(resultSet.getLong(DATA_PARAM));
+            invoice.setCost(resultSet.getLong(COST_PARAM));
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return invoice;
     }
 
+
+
     @Override
-    public void update(long id, Invoice invoice) throws SQLException {
+    public void update(long id, Invoice invoice)  {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_INVOICE)) {
-            preparedStatement.setLong(7, id);
-            preparedStatement.setLong(1, invoice.getIdData());
-            preparedStatement.setLong(2, invoice.getIdSupplier());
-            preparedStatement.setLong(3, invoice.getIdCustomer());
-            preparedStatement.setString(4, invoice.getMonth());
-            preparedStatement.setLong(5, invoice.getData());
-            preparedStatement.setLong(6, invoice.getCost());
+            preparedStatement.setLong(UPDATE_ID_INVOICE_PARAM_INDEX, id);
+            preparedStatement.setLong(UPDATE_ID_DATA_PARAM_INDEX, invoice.getIdData());
+            preparedStatement.setLong(UPDATE_ID_SUPPLIER_PARAM_INDEX, invoice.getIdSupplier());
+            preparedStatement.setLong(UPDATE_ID_CUSTOMER_PARAM_INDEX, invoice.getIdCustomer());
+            preparedStatement.setString(UPDATE_MONTH_PARAM_INDEX, invoice.getMonth());
+            preparedStatement.setLong(UPDATE_DATA_PARAM_INDEX, invoice.getData());
+            preparedStatement.setLong(UPDATE_COST_PARAM_INDEX, invoice.getCost());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
     }
 
     @Override
-    public void remove(Invoice invoice) throws SQLException {
+    public void remove(Invoice invoice) {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_INVOICE_BY_ID)) {
-            preparedStatement.setLong(1, invoice.getIdInvoice());
+            preparedStatement.setLong(ID_INVOICE_PARAM_INDEX, invoice.getIdInvoice());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
     }
 
-    public List<Invoice> getAllBySupplierIdAndCustomerId(long id_supplier, long id_customer) throws SQLException {
+
+
+    public List<Invoice> getAllBySupplierIdAndCustomerId(long id_supplier, long id_customer)  {
         List<Invoice> invoicesList = new ArrayList<>();
 
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_INVOICES_BY_SUPPLIER_ID_AND_CUSTOMER_ID)) {
 
-            preparedStatement.setLong(1, id_supplier);
-            preparedStatement.setLong(2, id_customer);
+            preparedStatement.setLong(GET_ALL_BY_SUPPLIER_ID_AND_CUSTOMER_ID_ID_SUPPLIER_PARAM_INDEX, id_supplier);
+            preparedStatement.setLong(GET_ALL_BY_SUPPLIER_ID_AND_CUSTOMER_ID_ID_CUSTOMER_PARAM_INDEX, id_customer);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -153,25 +180,23 @@ public class InvoiceDaoImpl implements BaseDAO<Invoice> {
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return invoicesList;
     }
 
-    public List<Invoice> getAllByDataId(long id_data) throws SQLException {
+    public List<Invoice> getAllByDataId(long id_data) {
         List<Invoice> invoicesList = new ArrayList<>();
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_INVOICE_BY_DATA_ID)) {
 
-            preparedStatement.setLong(1, id_data);
+            preparedStatement.setLong(ID_INVOICE_PARAM_INDEX, id_data);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSetNext(invoicesList, resultSet);
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return invoicesList;
     }

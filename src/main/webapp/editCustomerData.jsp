@@ -53,11 +53,11 @@
                             <table style="align-items: normal">
                                 <tr>
                                     <td><fmt:message key="month"/></td>
-                                    <td><input type="month" name="month" value="${requestScope.month}"/></td>
+                                    <td><input type="month" name="month" value="${requestScope.month}"required="true"/></td>
                                 </tr>
                                 <tr>
                                     <td><fmt:message key="add.your.data"/></td>
-                                    <td><input type="text" name="data" value="${requestScope.data}"/></td>
+                                    <td><input type="text" name="data" value="${requestScope.data}"required="true"/></td>
                                 </tr>
 
                             </table>

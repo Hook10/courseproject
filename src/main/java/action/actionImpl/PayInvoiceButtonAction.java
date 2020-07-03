@@ -18,6 +18,8 @@ import static action.actionImpl.AddDataAction.GAS_SUPPLIER;
 import static action.actionImpl.ShowElectrAction.ELECTRICITY_SUPPLIER;
 import static action.actionImpl.ShowWaterAction.WATER_SUPPLIER;
 import static constants.ActionConstants.*;
+import static constants.ErrorConstants.WRONG_SUPPLIER;
+import static constants.ErrorConstants.ERROR_MESSAGE;
 import static constants.TariffConstants.*;
 
 public class PayInvoiceButtonAction implements Action {
@@ -43,7 +45,7 @@ public class PayInvoiceButtonAction implements Action {
         } else if (id_supplier == ELECTRICITY_SUPPLIER) {
             cost = data * ELECTR_TARIFF_FROM_11_06_2020__KZT_FOR_1_KILOWATT;
         } else {
-            request.setAttribute("message", "wrong supplier");
+            request.setAttribute(ERROR_MESSAGE, WRONG_SUPPLIER);
             RequestDispatcher dispatcher = request.getRequestDispatcher(ERROR_URL);
             dispatcher.forward(request, response);
         }
@@ -56,11 +58,9 @@ public class PayInvoiceButtonAction implements Action {
         invoice.setCost(cost);
 
         InvoiceDaoImpl invoiceDao = new InvoiceDaoImpl();
-        try {
+
             invoiceDao.add(invoice);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
 
         request.setAttribute("id_data", request.getParameter("id"));
         request.setAttribute("id_supplier", request.getParameter("id_supplier"));

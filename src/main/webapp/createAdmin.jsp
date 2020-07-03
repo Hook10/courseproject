@@ -37,23 +37,23 @@
                 <table style="with: 80%">
                     <tr>
                         <td><fmt:message key="login"/></td>
-                        <td><input type="text" name="login"/></td>
+                        <td><input type="text" name="login" required="true"/></td>
                     </tr>
                     <tr>
                         <td><fmt:message key="password"/></td>
-                        <td><input type="password" name="password"/></td>
+                        <td><input type="password" name="password" required="true"/></td>
                     </tr>
                     <tr>
                         <td><fmt:message key="ID_supplier"/></td>
-                        <td><input type="text" name="supplier_id"/></td>
+                        <td><input type="text" name="supplier_id" required="true"/></td>
                     </tr>
                     <tr>
                         <td><fmt:message key="email"/></td>
-                        <td><input type="text" name="email"/></td>
+                        <td><input type="text" name="email" required="true"/></td>
                     </tr>
                     <tr>
                         <td><fmt:message key="company.name"/></td>
-                        <td><input type="text" name="company_name"/></td>
+                        <td><input type="text" name="company_name" required="true"/></td>
                     </tr>
                 </table>
                 <input type="submit" value="Submit"/>

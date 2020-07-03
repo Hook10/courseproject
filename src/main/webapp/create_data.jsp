@@ -43,11 +43,11 @@
                     <table style="align-items: center">
                         <tr>
                             <td><fmt:message key="month"/></td>
-                            <td><input type="month" name="month"/></td>
+                            <td><input type="month" name="month" required="true"/></td>
                         </tr>
                         <tr>
                             <td><fmt:message key="add.your.data"/></td>
-                            <td><input type="number" name="Gas_data"/></td>
+                            <td><input type="number" name="Gas_data" required="true"/></td>
                         </tr>
 
                         <tr>

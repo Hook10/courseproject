@@ -14,10 +14,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static constants.ActionConstants.ERROR_URL;
 import static constants.ActionConstants.LOGIN_ADMIN;
+import static constants.ErrorConstants.*;
 
 public class CreateAdminAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateAdminAction.class);
@@ -36,13 +36,13 @@ public class CreateAdminAction implements Action {
 
         if (login.isEmpty() || password.isEmpty() ||
                 email.isEmpty() || company_name.isEmpty()) {
-            request.setAttribute("message", "empty fields");
+            request.setAttribute(ERROR_MESSAGE, EMPTY_FIELDS);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
 
         if (!new NameValidation().isValidUserName(login) || !new EmailValidation().isValidEmail(email)) {
-            request.setAttribute("message", "Incorrect input");
+            request.setAttribute(ERROR_MESSAGE, INCORRECT_INPUT);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
@@ -54,12 +54,9 @@ public class CreateAdminAction implements Action {
         admin.setEmail(email);
         admin.setCompanyName(company_name);
 
-        try {
+
             adminDao.add(admin);
-        } catch (SQLException e) {
-            LOGGER.info("Admin creating sql error");
-            e.printStackTrace();
-        }
+
         RequestDispatcher dispatcher = request.getRequestDispatcher(LOGIN_ADMIN);
         dispatcher.forward(request, response);
 

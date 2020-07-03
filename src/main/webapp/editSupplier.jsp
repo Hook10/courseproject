@@ -34,11 +34,11 @@
                 <table style="with: 80%">
                     <tr>
                         <td><fmt:message key="company.name"/></td>
-                        <td><input type="text" name="companyName" value="${requestScope.companyName}"/></td>
+                        <td><input type="text" name="companyName" value="${requestScope.companyName}" required="true"/></td>
                     </tr>
                     <tr>
                         <td><fmt:message key="BIN"/></td>
-                        <td><input type="text" name="bin" value="${requestScope.bin}"/></td>
+                        <td><input type="text" name="bin" value="${requestScope.bin}" required="true"/></td>
                     </tr>
                 </table>
                 <input type="submit" value="Submit"/>

@@ -1,28 +1,31 @@
 package connectionpool;
 
 import com.zaxxer.hikari.HikariDataSource;
+import dao.impl.AdminDaoImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.sql.SQLException;
 import java.util.Properties;
 
 public class DBUtil {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DBUtil.class);
     private static final String DB_USERNAME = "db.username";
     private static final String DB_PASSWORD = "db.password";
     private static final String DB_URL = "db.url";
     private static final String DB_DRIVER_CLASS = "driver.class.name";
 
+
     private static Properties properties = null;
     private static HikariDataSource dataSource;
 
+
     static {
         try {
-
             properties = new Properties();
-            properties.load(new FileInputStream("C:/java_projects/courseproject/src/main/resources/database.properties"));
-
+            properties.load(DBUtil.class.getClassLoader().getResourceAsStream("database.properties"));
 
             dataSource = new HikariDataSource();
             dataSource.setDriverClassName(properties.getProperty(DB_DRIVER_CLASS));
@@ -36,6 +39,7 @@ public class DBUtil {
             dataSource.setAutoCommit(true);
             dataSource.setLoginTimeout(3);
         } catch (IOException | SQLException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
     }

@@ -29,7 +29,7 @@
 </div>
 <div class="container-sm">
     <fmt:message key="warning"/>
-    <fmt:message key="error"/> <h3>${requestScope.message}</h3>
+    <h3> <fmt:message key="error"/> <fmt:message key="${requestScope.message}"/></h3>
 </div>
 </body>
 </html>

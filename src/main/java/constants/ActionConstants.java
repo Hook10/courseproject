@@ -25,4 +25,6 @@ public class ActionConstants {
     public static final String EDIT_CUSTOMER = "/editCustomer.jsp";
     public static final String EDIT_SUPPLIER = "/editSupplier.jsp";
 
+    private ActionConstants() {
+    }
 }

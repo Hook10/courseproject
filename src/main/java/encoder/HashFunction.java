@@ -1,10 +1,15 @@
 package encoder;
 
+import dao.impl.AdminDaoImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class HashFunction {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HashFunction.class);
 
     public String getHashFunction(String string) {
         MessageDigest messageDigest = null;
@@ -16,6 +21,7 @@ public class HashFunction {
             messageDigest.update(string.getBytes());
             digest = messageDigest.digest();
         } catch (NoSuchAlgorithmException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         }
         BigInteger bigInt = new BigInteger(1, digest);
@@ -27,7 +33,5 @@ public class HashFunction {
         return md5Hex;
     }
 
-    public static void main(String[] args) {
-        System.out.println(System.getProperty("java.util.logging.config.file"));
-    }
+   
 }

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import static constants.ActionConstants.*;
+import static constants.ErrorConstants.*;
 
 public class RegisterCustomerAction implements Action {
     private HashFunction hashFunction = new HashFunction();
@@ -36,14 +37,14 @@ public class RegisterCustomerAction implements Action {
                 email.isEmpty() || password.isEmpty() ||
                 city.isEmpty() || address.isEmpty() ||
                 iin.isEmpty()) {
-            request.setAttribute("message", "empty fields");
+            request.setAttribute(ERROR_MESSAGE, EMPTY_FIELDS);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
 
         if (!new NameValidation().isValidUserName(firstName) || !new NameValidation().isValidUserName(surName) ||
                 !new EmailValidation().isValidEmail(email) || !new IINValidation().isValidIIN(iin)) {
-            request.setAttribute("message", "Incorrect  input");
+            request.setAttribute(ERROR_MESSAGE, INCORRECT_INPUT);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
@@ -59,11 +60,10 @@ public class RegisterCustomerAction implements Action {
         customer.setAddress(address);
         customer.setIin(iin);
 
-        try {
-            customerDao.add(customer);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        customerDao.add(customer);
+
+
         RequestDispatcher dispatcher = request.getRequestDispatcher(LOGIN_CUSTOMER);
         dispatcher.forward(request, response);
     }

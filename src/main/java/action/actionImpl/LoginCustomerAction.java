@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import static constants.ActionConstants.CUSTOMER_PERSONAL_ACCOUNT_PAGE;
 import static constants.ActionConstants.ERROR_URL;
+import static constants.ErrorConstants.*;
 
 public class LoginCustomerAction implements Action {
     String email;
@@ -34,13 +35,13 @@ public class LoginCustomerAction implements Action {
         password = request.getParameter("password");
 
         if (email.isEmpty() || password.isEmpty()) {
-            request.setAttribute("message", "Empty fields");
+            request.setAttribute(ERROR_MESSAGE, EMPTY_FIELDS);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
 
         if (!new EmailValidation().isValidEmail(email) || !new PasswordValidation().isValidPassword(password)) {
-            request.setAttribute("message", "incorrect input");
+            request.setAttribute(ERROR_MESSAGE, INCORRECT_INPUT);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
@@ -55,7 +56,7 @@ public class LoginCustomerAction implements Action {
             session.setAttribute("id", customer.getId());
             request.getRequestDispatcher(CUSTOMER_PERSONAL_ACCOUNT_PAGE).forward(request, response);
         } else {
-            request.setAttribute("message", "the customer does not exist");
+            request.setAttribute(ERROR_MESSAGE, CUSTOMER_DOES_NOT_EXIST);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
 

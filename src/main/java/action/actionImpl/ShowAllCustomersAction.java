@@ -19,11 +19,9 @@ public class ShowAllCustomersAction implements Action {
         CustomerDaoImpl customerDao = new CustomerDaoImpl();
         List<Customer> customerList = null;
 
-        try {
-            customerList = customerDao.getAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        customerList = customerDao.getAll();
+
         request.setAttribute("customerList", customerList);
         request.getRequestDispatcher(SHOW_CUSTOMERS).forward(request, response);
     }

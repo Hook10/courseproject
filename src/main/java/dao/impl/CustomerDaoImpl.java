@@ -23,29 +23,60 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
     private static final String DELETE_CUSTOMER_BY_ID = "DELETE FROM CUSTOMERS WHERE ID=?";
     private static final String GET_CUSTOMER_BY_EMAIL_AND_PASSWORD = "select * from customers where email = ? and password = ? ";
 
+    private static final String ID_PARAM = "ID";
+    private static final String FIRST_NAME_PARAM = "FIRST_NAME";
+    private static final String SURNAME_PARAM = "SURNAME";
+    private static final String EMAIL_PARAM = "EMAIL";
+    private static final String PASSWORD_PARAM = "PASSWORD";
+    private static final String CITY_PARAM = "CITY";
+    private static final String ADDRESS_PARAM = "ADDRESS";
+    private static final String IIN_PARAM = "IIN";
+
+    private static final int ID_PARAM_INDEX = 1;
+    private static final int FIRST_NAME_PARAM_INDEX = 2;
+    private static final int SURNAME_PARAM_INDEX = 3;
+    private static final int EMAIL_PARAM_INDEX = 4;
+    private static final int PASSWORD_PARAM_INDEX = 5;
+    private static final int CITY_PARAM_INDEX = 6;
+    private static final int ADDRESS_PARAM_INDEX = 7;
+    private static final int IIN_PARAM_INDEX = 8;
+
+    private static final int UPDATE_FIRST_NAME_PARAM_INDEX = 1;
+    private static final int UPDATE_SURNAME_PARAM_INDEX = 2;
+    private static final int UPDATE_EMAIL_PARAM_INDEX = 3;
+    private static final int UPDATE_PASSWORD_PARAM_INDEX = 4;
+    private static final int UPDATE_CITY_PARAM_INDEX = 5;
+    private static final int UPDATE_ADDRESS_PARAM_INDEX = 6;
+    private static final int UPDATE_IIN_PARAM_INDEX = 7;
+    private static final int UPDATE_ID_PARAM_INDEX = 8;
+
+    private static final int GET_CUSTOMER_BY_EMAIL_AND_PASSWORD_EMAIL_PARAM_INDEX = 1;
+    private static final int GET_CUSTOMER_BY_EMAIL_AND_PASSWORD_PASSWORD_PARAM_INDEX = 2;
+
+
+
     @Override
-    public void add(Customer customer) throws SQLException {
+    public void add(Customer customer) {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_CUSTOMER)) {
-            preparedStatement.setLong(1, customer.getId());
-            preparedStatement.setString(2, customer.getFirstName());
-            preparedStatement.setString(3, customer.getSurname());
-            preparedStatement.setString(4, customer.getEmail());
-            preparedStatement.setString(5, customer.getPassword());
-            preparedStatement.setString(6, customer.getCity());
-            preparedStatement.setString(7, customer.getAddress());
-            preparedStatement.setString(8, customer.getIin());
+            preparedStatement.setLong(ID_PARAM_INDEX, customer.getId());
+            preparedStatement.setString(FIRST_NAME_PARAM_INDEX, customer.getFirstName());
+            preparedStatement.setString(SURNAME_PARAM_INDEX, customer.getSurname());
+            preparedStatement.setString(EMAIL_PARAM_INDEX, customer.getEmail());
+            preparedStatement.setString(PASSWORD_PARAM_INDEX, customer.getPassword());
+            preparedStatement.setString(CITY_PARAM_INDEX, customer.getCity());
+            preparedStatement.setString(ADDRESS_PARAM_INDEX, customer.getAddress());
+            preparedStatement.setString(IIN_PARAM_INDEX, customer.getIin());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
     }
 
     @Override
-    public List<Customer> getAll() throws SQLException {
+    public List<Customer> getAll() {
         List<Customer> customerList = new ArrayList<>();
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
@@ -60,30 +91,30 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return customerList;
     }
 
+
     private void SetFields(ResultSet resultSet, Customer customer) throws SQLException {
-        customer.setId(resultSet.getLong("ID"));
-        customer.setFirstName(resultSet.getString("FIRST_NAME"));
-        customer.setSurname(resultSet.getString("SURNAME"));
-        customer.setEmail(resultSet.getString("EMAIL"));
-        customer.setPassword(resultSet.getString("PASSWORD"));
-        customer.setCity(resultSet.getString("CITY"));
-        customer.setAddress(resultSet.getString("ADDRESS"));
-        customer.setIin(resultSet.getString("IIN"));
+        customer.setId(resultSet.getLong(ID_PARAM));
+        customer.setFirstName(resultSet.getString(FIRST_NAME_PARAM));
+        customer.setSurname(resultSet.getString(SURNAME_PARAM));
+        customer.setEmail(resultSet.getString(EMAIL_PARAM));
+        customer.setPassword(resultSet.getString(PASSWORD_PARAM));
+        customer.setCity(resultSet.getString(CITY_PARAM));
+        customer.setAddress(resultSet.getString(ADDRESS_PARAM));
+        customer.setIin(resultSet.getString(IIN_PARAM));
     }
 
     @Override
-    public Customer getById(Long id) throws SQLException {
+    public Customer getById(Long id) {
 
         Customer customer = new Customer();
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_CUSTOMER_BY_ID)) {
 
-            preparedStatement.setLong(1, id);
+            preparedStatement.setLong(ID_PARAM_INDEX, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -93,13 +124,12 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return customer;
 
     }
 
-    public Customer getCustomer(Customer customer, ResultSet resultSet) throws SQLException {
+    private Customer getCustomer(Customer customer, ResultSet resultSet) throws SQLException {
         if (resultSet.next()) {
             customer = new Customer();
             SetFields(resultSet, customer);
@@ -107,37 +137,35 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
         return customer;
     }
 
+
     @Override
-    public void update(long id, Customer customer) throws SQLException {
-        System.out.println("Update MySql Customer");
+    public void update(long id, Customer customer) {
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_CUSTOMERS)) {
-            preparedStatement.setLong(8, id);
-            preparedStatement.setString(1, customer.getFirstName());
-            preparedStatement.setString(2, customer.getSurname());
-            preparedStatement.setString(3, customer.getEmail());
-            preparedStatement.setString(4, customer.getPassword());
-            preparedStatement.setString(5, customer.getCity());
-            preparedStatement.setString(6, customer.getAddress());
-            preparedStatement.setString(7, customer.getIin());
+            preparedStatement.setLong(UPDATE_ID_PARAM_INDEX, id);
+            preparedStatement.setString(UPDATE_FIRST_NAME_PARAM_INDEX, customer.getFirstName());
+            preparedStatement.setString(UPDATE_SURNAME_PARAM_INDEX, customer.getSurname());
+            preparedStatement.setString(UPDATE_EMAIL_PARAM_INDEX, customer.getEmail());
+            preparedStatement.setString(UPDATE_PASSWORD_PARAM_INDEX, customer.getPassword());
+            preparedStatement.setString(UPDATE_CITY_PARAM_INDEX, customer.getCity());
+            preparedStatement.setString(UPDATE_ADDRESS_PARAM_INDEX, customer.getAddress());
+            preparedStatement.setString(UPDATE_IIN_PARAM_INDEX, customer.getIin());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
     }
 
     @Override
-    public void remove(Customer customer) throws SQLException {
+    public void remove(Customer customer) {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CUSTOMER_BY_ID)) {
-            preparedStatement.setLong(1, customer.getId());
+            preparedStatement.setLong(ID_PARAM_INDEX, customer.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
     }
 
@@ -146,7 +174,7 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CUSTOMER_BY_ID)) {
 
-            preparedStatement.setLong(1, id);
+            preparedStatement.setLong(ID_PARAM_INDEX, id);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -154,19 +182,19 @@ public class CustomerDaoImpl implements BaseDAO<Customer> {
         }
     }
 
+
     public Customer getCustomerByEmailAndPassword(String email, String password) {
 
         Customer customer = null;
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_CUSTOMER_BY_EMAIL_AND_PASSWORD)) {
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password);
+            preparedStatement.setString(GET_CUSTOMER_BY_EMAIL_AND_PASSWORD_EMAIL_PARAM_INDEX, email);
+            preparedStatement.setString(GET_CUSTOMER_BY_EMAIL_AND_PASSWORD_PASSWORD_PARAM_INDEX, password);
             return getCustomer(customer, preparedStatement.executeQuery());
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return customer;
     }

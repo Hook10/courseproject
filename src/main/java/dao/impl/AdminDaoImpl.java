@@ -23,31 +23,55 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
     private static final String DELETE_ADMIN_BY_ID = "DELETE FROM ADMIN WHERE ID = ?";
     private static final String GET_ADMIN_BY_LOGIN_AND_PASSWORD = "select * from ADMIN where login = ? and password = ? ";
 
+    private static final int ID_PARAM_INDEX = 1;
+    private static final int LOGIN_PARAM_INDEX = 2;
+    private static final int PASSWORD_PARAM_INDEX = 3;
+    private static final int SUPPLIER_ID_PARAM_INDEX = 4;
+    private static final int EMAIL_PARAM_INDEX = 5;
+    private static final int COMPANY_NAME_PARAM_INDEX = 6;
+
+    private static final int UPDATE_ID_PARAM_INDEX = 6;
+    private static final int UPDATE_LOGIN_PARAM_INDEX = 1;
+    private static final int UPDATE_PASSWORD_PARAM_INDEX = 2;
+    private static final int UPDATE_SUPPLIER_ID_PARAM_INDEX = 3;
+    private static final int UPDATE_EMAIL_PARAM_INDEX = 4;
+    private static final int UPDATE_COMPANY_NAME_PARAM_INDEX = 5;
+
+    private static final int GET_ADMIN_BY_LOGIN_AND_PASSWORD_LOGIN_PARAM_INDEX = 1;
+    private static final int GET_ADMIN_BY_LOGIN_AND_PASSWORD_PASSWORD_PARAM_INDEX = 2;
+
+    private static final String ID_PARAM = "ID";
+    private static final String LOGIN_PARAM = "LOGIN";
+    private static final String PASSWORD_PARAM = "PASSWORD";
+    private static final String SUPPLIER_ID_PARAM = "SUPPLIER_ID";
+    private static final String EMAIL_PARAM = "EMAIL";
+    private static final String COMPANY_NAME_PARAM = "COMPANY_NAME";
+
+
     private HashFunction hashPassword = new HashFunction();
 
     @Override
-    public void add(Admin admin) throws SQLException {
+    public void add(Admin admin) {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_ADMIN)) {
 
-            preparedStatement.setLong(1, admin.getId());
-            preparedStatement.setString(2, admin.getLogin());
-            preparedStatement.setString(3, hashPassword.getHashFunction(admin.getPassword()));
-            preparedStatement.setLong(4, admin.getSupplier_id());
-            preparedStatement.setString(5, admin.getEmail());
-            preparedStatement.setString(6, admin.getCompanyName());
+            preparedStatement.setLong(ID_PARAM_INDEX, admin.getId());
+            preparedStatement.setString(LOGIN_PARAM_INDEX, admin.getLogin());
+            preparedStatement.setString(PASSWORD_PARAM_INDEX, hashPassword.getHashFunction(admin.getPassword()));
+            preparedStatement.setLong(SUPPLIER_ID_PARAM_INDEX, admin.getSupplier_id());
+            preparedStatement.setString(EMAIL_PARAM_INDEX, admin.getEmail());
+            preparedStatement.setString(COMPANY_NAME_PARAM_INDEX, admin.getCompanyName());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
 
     }
 
     @Override
-    public List<Admin> getAll() throws SQLException {
+    public List<Admin> getAll() {
         List<Admin> adminList = new ArrayList<>();
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
@@ -62,18 +86,17 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return adminList;
     }
 
     @Override
-    public Admin getById(Long id) throws SQLException {
+    public Admin getById(Long id) {
 
         Admin admin = new Admin();
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_ADMIN_BY_ID)) {
-            preparedStatement.setLong(1, id);
+            preparedStatement.setLong(ID_PARAM_INDEX, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -83,40 +106,41 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return admin;
     }
 
+
     private Admin getAdmin(Admin admin, ResultSet resultSet) throws SQLException {
         if (resultSet.next()) {
             admin = new Admin();
-            admin.setId(resultSet.getLong("ID"));
-            admin.setLogin(resultSet.getString("LOGIN"));
-            admin.setPassword(resultSet.getString("PASSWORD"));
-            admin.setSupplier_id(resultSet.getLong("SUPPLIER_ID"));
-            admin.setEmail(resultSet.getString("EMAIL"));
-            admin.setCompanyName(resultSet.getString("COMPANY_NAME"));
+            admin.setId(resultSet.getLong(ID_PARAM));
+            admin.setLogin(resultSet.getString(LOGIN_PARAM));
+            admin.setPassword(resultSet.getString(PASSWORD_PARAM));
+            admin.setSupplier_id(resultSet.getLong(SUPPLIER_ID_PARAM));
+            admin.setEmail(resultSet.getString(EMAIL_PARAM));
+            admin.setCompanyName(resultSet.getString(COMPANY_NAME_PARAM));
         }
         return admin;
     }
 
     @Override
-    public void update(long id, Admin admin) throws SQLException {
+    public void update(long id, Admin admin) {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ADMIN)) {
-            preparedStatement.setString(2, admin.getLogin());
-            preparedStatement.setString(3, admin.getPassword());
-            preparedStatement.setLong(4, admin.getSupplier_id());
-            preparedStatement.setString(5, admin.getEmail());
-            preparedStatement.setString(6, admin.getCompanyName());
+            preparedStatement.setLong(UPDATE_ID_PARAM_INDEX, id);
+            preparedStatement.setString(UPDATE_LOGIN_PARAM_INDEX, admin.getLogin());
+            preparedStatement.setString(UPDATE_PASSWORD_PARAM_INDEX, admin.getPassword());
+            preparedStatement.setLong(UPDATE_SUPPLIER_ID_PARAM_INDEX, admin.getSupplier_id());
+            preparedStatement.setString(UPDATE_EMAIL_PARAM_INDEX, admin.getEmail());
+            preparedStatement.setString(UPDATE_COMPANY_NAME_PARAM_INDEX, admin.getCompanyName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
     }
+
 
     public Admin getAdminByLoginAndPassword(String login, String password) {
 
@@ -124,28 +148,26 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_ADMIN_BY_LOGIN_AND_PASSWORD)) {
-            preparedStatement.setString(1, login);
-            preparedStatement.setString(2, password);
+            preparedStatement.setString(GET_ADMIN_BY_LOGIN_AND_PASSWORD_LOGIN_PARAM_INDEX, login);
+            preparedStatement.setString(GET_ADMIN_BY_LOGIN_AND_PASSWORD_PASSWORD_PARAM_INDEX, password);
             return getAdmin(admin, preparedStatement.executeQuery());
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
         return admin;
     }
 
     @Override
-    public void remove(Admin admin) throws SQLException {
+    public void remove(Admin admin) {
 
         try (Connection connection = DBUtil.getDataSource().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ADMIN_BY_ID)) {
 
-            preparedStatement.setLong(1, admin.getId());
+            preparedStatement.setLong(ID_PARAM_INDEX, admin.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
         }
     }
 }
