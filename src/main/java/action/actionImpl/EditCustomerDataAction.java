@@ -30,13 +30,13 @@ public class EditCustomerDataAction implements Action {
         DataDaoImpl dataDao = new DataDaoImpl();
 
         long id = Long.parseLong(String.valueOf(request.getParameter("id")));
-        System.out.println(id);
+        LOGGER.info(id + " id EditCustomerDataAction");
 
         String month = request.getParameter("month");
         long data = Long.parseLong(request.getParameter("data"));
         int id_supplier = Integer.parseInt(request.getParameter("id_supplier"));
         long id_customer = Long.parseLong(String.valueOf(request.getParameter("id_customer")));
-        System.out.println(id_customer);
+        LOGGER.info(id_customer + " id_customer EditCustomerDataAction");
 
         Data dataFromCustomer = new Data();
 
@@ -46,13 +46,13 @@ public class EditCustomerDataAction implements Action {
         dataFromCustomer.setIdSupplier(id_supplier);
 
 
-            dataDao.update(id, dataFromCustomer);
+        dataDao.update(id, dataFromCustomer);
 
         supplierForward(request, response, id_supplier, GAS_SUPPLIER);
     }
 
     static void supplierForward(HttpServletRequest request, HttpServletResponse response, int id_supplier, int gasSupplier) throws ServletException, IOException {
-        if(id_supplier == gasSupplier) {
+        if (id_supplier == gasSupplier) {
             RequestDispatcher dispatcher = request.getRequestDispatcher(FORWARD_TO_SHOW_GAS_DATA);
             dispatcher.forward(request, response);
         } else if (id_supplier == WATER_SUPPLIER) {

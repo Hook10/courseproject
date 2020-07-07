@@ -22,9 +22,7 @@ public class EditSupplierButtonAction implements Action {
         request.setAttribute("id", request.getParameter("id"));
         request.setAttribute("companyName", request.getParameter("companyName"));
         request.setAttribute("bin", request.getParameter("bin"));
-        System.out.println(request.getParameter("companyName")+ "companyName ");
-
-
+        LOGGER.info(request.getParameter("companyName")+ " companyName EditSupplierButtonAction");
 
         request.getRequestDispatcher(EDIT_SUPPLIER).forward(request, response);
     }

@@ -19,7 +19,9 @@ public class DeleteSupplierAction implements Action {
 
         long id = Long.parseLong(request.getParameter("id"));
         SupplierDaoImpl supplierDao = new SupplierDaoImpl();
-        System.out.println(id + "id supplier delete method");
+
+        LOGGER.info(id + " id supplier DeleteSupplierAction");
+
         supplierDao.removeOneById(id);
 
         new ShowAllSuppliersAction().execute(request, response);

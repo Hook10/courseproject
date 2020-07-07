@@ -6,23 +6,19 @@ import entity.Customer;
 import entity.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import validation.NumericValidator;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static action.actionImpl.EditCustomerDataAction.supplierForward;
-import static action.actionImpl.ShowElectrAction.ELECTRICITY_SUPPLIER;
-import static action.actionImpl.ShowWaterAction.WATER_SUPPLIER;
 import static constants.ActionConstants.*;
 import static constants.ErrorConstants.*;
 
 public class AddDataAction implements Action {
     public static final int GAS_SUPPLIER = 1;
-    private static final Logger LOGGER = LoggerFactory.getLogger(AddDataButtonAction.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AddDataAction.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

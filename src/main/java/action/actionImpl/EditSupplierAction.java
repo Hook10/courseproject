@@ -12,13 +12,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static constants.ActionConstants.ERROR_URL;
 import static constants.ErrorConstants.*;
 
 public class EditSupplierAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditSupplierAction.class);
+    NameValidation nameValidation = new NameValidation();
+    IINValidation iinValidation = new IINValidation();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,16 +29,17 @@ public class EditSupplierAction implements Action {
         long id = Long.parseLong(String.valueOf(request.getParameter("id")));
         String name = request.getParameter("companyName");
         String bin = request.getParameter("bin");
-        System.out.println("this is id" + id);
-        System.out.println("this is companyName" + name);
-        System.out.println("this is bin" + bin);
+
+        LOGGER.info(id + " id EditSupplierAction");
+        LOGGER.info(name + " name EditSupplierAction");
+        LOGGER.info(bin + " bin EditSupplierAction");
 
         if (name.isEmpty() || bin.isEmpty()) {
             request.setAttribute(ERROR_MESSAGE, EMPTY_FIELDS);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
 
-        if (!new NameValidation().isValidUserName(name) || !new IINValidation().isValidIIN(bin)) {
+        if (nameValidation.isNotValidUserName(name) || iinValidation.isNotValidIIN(bin)) {
             request.setAttribute(ERROR_MESSAGE, INCORRECT_INPUT);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
@@ -46,8 +48,7 @@ public class EditSupplierAction implements Action {
         supplier.setCompanyName(name);
         supplier.setBin(bin);
 
-
-            supplierDao.update(id,supplier);
+        supplierDao.update(id, supplier);
 
         new ShowAllSuppliersAction().execute(request, response);
     }

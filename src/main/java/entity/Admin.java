@@ -7,7 +7,7 @@ public class Admin implements Serializable {
     private long id;
     private String login;
     private String password;
-    private long supplier_id;
+    private long supplierId;
     private String email;
     private String companyName;
 
@@ -18,7 +18,7 @@ public class Admin implements Serializable {
         this.id = id;
         this.login = login;
         this.password = password;
-        this.supplier_id = supplier_id;
+        this.supplierId = supplier_id;
         this.email = email;
         this.companyName = companyName;
     }
@@ -47,12 +47,12 @@ public class Admin implements Serializable {
         this.password = password;
     }
 
-    public long getSupplier_id() {
-        return supplier_id;
+    public long getSupplierId() {
+        return supplierId;
     }
 
-    public void setSupplier_id(long supplier_id) {
-        this.supplier_id = supplier_id;
+    public void setSupplierId(long supplierId) {
+        this.supplierId = supplierId;
     }
 
     public String getEmail() {
@@ -77,7 +77,7 @@ public class Admin implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Admin admin = (Admin) o;
         return id == admin.id &&
-                supplier_id == admin.supplier_id &&
+                supplierId == admin.supplierId &&
                 login.equals(admin.login) &&
                 password.equals(admin.password) &&
                 email.equals(admin.email) &&
@@ -86,7 +86,7 @@ public class Admin implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password, supplier_id, email, companyName);
+        return Objects.hash(id, login, password, supplierId, email, companyName);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Admin implements Serializable {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                ", supplier_id=" + supplier_id +
+                ", supplier_id=" + supplierId +
                 ", email='" + email + '\'' +
                 ", companyName='" + companyName + '\'' +
                 '}';

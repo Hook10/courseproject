@@ -21,7 +21,8 @@ import static constants.ErrorConstants.*;
 
 public class CreateAdminAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateAdminAction.class);
-    private HashFunction hashFunction = new HashFunction();
+    private NameValidation nameValidation = new NameValidation();
+    private EmailValidation emailValidation = new EmailValidation();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,21 +42,21 @@ public class CreateAdminAction implements Action {
             return;
         }
 
-        if (!new NameValidation().isValidUserName(login) || !new EmailValidation().isValidEmail(email)) {
+        if (nameValidation.isNotValidUserName(login) || emailValidation.isNotValidEmail(email)) {
             request.setAttribute(ERROR_MESSAGE, INCORRECT_INPUT);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
 
+
         Admin admin = new Admin();
         admin.setLogin(login);
         admin.setPassword(password);
-        admin.setSupplier_id(supplier_id);
+        admin.setSupplierId(supplier_id);
         admin.setEmail(email);
         admin.setCompanyName(company_name);
 
-
-            adminDao.add(admin);
+        adminDao.add(admin);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(LOGIN_ADMIN);
         dispatcher.forward(request, response);

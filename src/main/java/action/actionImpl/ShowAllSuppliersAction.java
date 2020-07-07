@@ -29,7 +29,7 @@ public class ShowAllSuppliersAction implements Action {
         List<Supplier> supplierList = null;
 
 
-            supplierList = supplierDao.getAll();
+        supplierList = supplierDao.getAll();
 
         request.setAttribute("supplierList", supplierList);
         request.getRequestDispatcher(SHOW_SUPPLIERS).forward(request, response);

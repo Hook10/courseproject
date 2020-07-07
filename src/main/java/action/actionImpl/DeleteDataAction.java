@@ -20,6 +20,10 @@ public class DeleteDataAction implements Action {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         long id = Long.parseLong(request.getParameter("id"));
         int id_supplier = Integer.parseInt(request.getParameter("id_supplier"));
+
+        LOGGER.info(id + " id method DeleteDataAction");
+        LOGGER.info(id_supplier + " id_supplier method DeleteDataAction");
+
         DataDaoImpl dataDao = new DataDaoImpl();
         dataDao.removeOneById(id);
 

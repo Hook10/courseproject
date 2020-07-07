@@ -12,8 +12,8 @@ public class IINValidation {
         pattern = Pattern.compile(IIN_PATTERN);
     }
 
-    public boolean isValidIIN(String iin) {
+    public boolean isNotValidIIN(String iin) {
         matcher = pattern.matcher(iin);
-        return matcher.matches();
+        return !matcher.matches();
     }
 }

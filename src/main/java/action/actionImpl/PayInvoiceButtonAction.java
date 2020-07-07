@@ -23,7 +23,7 @@ import static constants.ErrorConstants.ERROR_MESSAGE;
 import static constants.TariffConstants.*;
 
 public class PayInvoiceButtonAction implements Action {
-    private static final Logger LOGGER = LoggerFactory.getLogger(EditCustomerDataButtonAction.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PayInvoiceButtonAction.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +35,8 @@ public class PayInvoiceButtonAction implements Action {
         long id_customer = Long.parseLong(request.getParameter("id_customer"));
         String month = request.getParameter("month");
         long data = Long.parseLong(String.valueOf(request.getParameter("data")));
-        System.out.println(id_data);
+        LOGGER.info(id_data + " id_data PayInvoiceButtonAction");
+
 
         long cost = 0;
         if (id_supplier == GAS_SUPPLIER) {
@@ -59,7 +60,7 @@ public class PayInvoiceButtonAction implements Action {
 
         InvoiceDaoImpl invoiceDao = new InvoiceDaoImpl();
 
-            invoiceDao.add(invoice);
+        invoiceDao.add(invoice);
 
 
         request.setAttribute("id_data", request.getParameter("id"));

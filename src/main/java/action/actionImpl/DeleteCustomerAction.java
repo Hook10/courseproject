@@ -18,7 +18,7 @@ public class DeleteCustomerAction implements Action {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         long id = Long.parseLong(request.getParameter("id"));
         CustomerDaoImpl customerDao = new CustomerDaoImpl();
-        System.out.println(id + " id method delete");
+        LOGGER.info(id + " id method delete");
         customerDao.removeOneById(id);
 
         new ShowAllCustomersAction().execute(request, response);

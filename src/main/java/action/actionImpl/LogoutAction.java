@@ -15,7 +15,6 @@ import static constants.ActionConstants.INDEX_URL;
 import static constants.ActionConstants.LOGIN_CUSTOMER;
 
 public class LogoutAction implements Action {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(LogoutAction.class);
 
     @Override

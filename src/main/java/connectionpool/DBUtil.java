@@ -1,7 +1,6 @@
 package connectionpool;
 
 import com.zaxxer.hikari.HikariDataSource;
-import dao.impl.AdminDaoImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,13 +17,12 @@ public class DBUtil {
     private static final String DB_DRIVER_CLASS = "driver.class.name";
 
 
-    private static Properties properties = null;
     private static HikariDataSource dataSource;
 
 
     static {
         try {
-            properties = new Properties();
+            Properties properties = new Properties();
             properties.load(DBUtil.class.getClassLoader().getResourceAsStream("database.properties"));
 
             dataSource = new HikariDataSource();

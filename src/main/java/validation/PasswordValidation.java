@@ -15,9 +15,9 @@ public class PasswordValidation {
         pattern = Pattern.compile(PASSWORD_PATTERN);
     }
 
-    public  boolean isValidPassword(String password) {
+    public  boolean isNotValidPassword(String password) {
         Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
+        return !matcher.matches();
     }
 
 }

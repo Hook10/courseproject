@@ -1,6 +1,8 @@
 package action.actionImpl;
 
 import action.Action;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +12,11 @@ import java.io.IOException;
 import static constants.ActionConstants.INDEX_URL;
 
 public class LandingPageAction implements Action {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LandingPageAction.class);
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         request.getRequestDispatcher(INDEX_URL).forward(request, response);
     }
 }

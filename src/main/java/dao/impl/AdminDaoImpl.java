@@ -59,7 +59,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
             preparedStatement.setLong(ID_PARAM_INDEX, admin.getId());
             preparedStatement.setString(LOGIN_PARAM_INDEX, admin.getLogin());
             preparedStatement.setString(PASSWORD_PARAM_INDEX, hashPassword.getHashFunction(admin.getPassword()));
-            preparedStatement.setLong(SUPPLIER_ID_PARAM_INDEX, admin.getSupplier_id());
+            preparedStatement.setLong(SUPPLIER_ID_PARAM_INDEX, admin.getSupplierId());
             preparedStatement.setString(EMAIL_PARAM_INDEX, admin.getEmail());
             preparedStatement.setString(COMPANY_NAME_PARAM_INDEX, admin.getCompanyName());
 
@@ -117,7 +117,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
             admin.setId(resultSet.getLong(ID_PARAM));
             admin.setLogin(resultSet.getString(LOGIN_PARAM));
             admin.setPassword(resultSet.getString(PASSWORD_PARAM));
-            admin.setSupplier_id(resultSet.getLong(SUPPLIER_ID_PARAM));
+            admin.setSupplierId(resultSet.getLong(SUPPLIER_ID_PARAM));
             admin.setEmail(resultSet.getString(EMAIL_PARAM));
             admin.setCompanyName(resultSet.getString(COMPANY_NAME_PARAM));
         }
@@ -132,7 +132,7 @@ public class AdminDaoImpl implements BaseDAO<Admin> {
             preparedStatement.setLong(UPDATE_ID_PARAM_INDEX, id);
             preparedStatement.setString(UPDATE_LOGIN_PARAM_INDEX, admin.getLogin());
             preparedStatement.setString(UPDATE_PASSWORD_PARAM_INDEX, admin.getPassword());
-            preparedStatement.setLong(UPDATE_SUPPLIER_ID_PARAM_INDEX, admin.getSupplier_id());
+            preparedStatement.setLong(UPDATE_SUPPLIER_ID_PARAM_INDEX, admin.getSupplierId());
             preparedStatement.setString(UPDATE_EMAIL_PARAM_INDEX, admin.getEmail());
             preparedStatement.setString(UPDATE_COMPANY_NAME_PARAM_INDEX, admin.getCompanyName());
             preparedStatement.executeUpdate();

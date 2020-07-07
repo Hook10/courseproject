@@ -6,6 +6,8 @@ import action.Action;
 import dao.impl.CustomerDaoImpl;
 import entity.Customer;
 import entity.UserStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import validation.EmailValidation;
 import validation.PasswordValidation;
 
@@ -21,15 +23,18 @@ import static constants.ActionConstants.ERROR_URL;
 import static constants.ErrorConstants.*;
 
 public class LoginCustomerAction implements Action {
-    String email;
-    String password;
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginCustomerAction.class);
+    private String email;
+    private String password;
     private HashFunction hashPassword = new HashFunction();
     private Customer customer;
+    private EmailValidation emailValidation = new EmailValidation();
+    private PasswordValidation passwordValidation = new PasswordValidation();
     CustomerDaoImpl customerDao;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         HttpSession session = request.getSession();
         email = request.getParameter("email");
         password = request.getParameter("password");
@@ -40,7 +45,7 @@ public class LoginCustomerAction implements Action {
             return;
         }
 
-        if (!new EmailValidation().isValidEmail(email) || !new PasswordValidation().isValidPassword(password)) {
+        if (emailValidation.isNotValidEmail(email) || passwordValidation.isNotValidPassword(password)) {
             request.setAttribute(ERROR_MESSAGE, INCORRECT_INPUT);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;

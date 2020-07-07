@@ -4,6 +4,8 @@ import encoder.HashFunction;
 import action.Action;
 import dao.impl.CustomerDaoImpl;
 import entity.Customer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import validation.EmailValidation;
 import validation.IINValidation;
 import validation.NameValidation;
@@ -13,16 +15,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static constants.ActionConstants.*;
 import static constants.ErrorConstants.*;
 
 public class RegisterCustomerAction implements Action {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterCustomerAction.class);
     private HashFunction hashFunction = new HashFunction();
+    NameValidation nameValidation = new NameValidation();
+    EmailValidation emailValidation = new EmailValidation();
+    IINValidation iinValidation = new IINValidation();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         CustomerDaoImpl customerDao = new CustomerDaoImpl();
 
         String firstName = request.getParameter("firstName");
@@ -42,8 +48,8 @@ public class RegisterCustomerAction implements Action {
             return;
         }
 
-        if (!new NameValidation().isValidUserName(firstName) || !new NameValidation().isValidUserName(surName) ||
-                !new EmailValidation().isValidEmail(email) || !new IINValidation().isValidIIN(iin)) {
+        if (nameValidation.isNotValidUserName(firstName) || nameValidation.isNotValidUserName(surName) ||
+                emailValidation.isNotValidEmail(email) || iinValidation.isNotValidIIN(iin)) {
             request.setAttribute(ERROR_MESSAGE, INCORRECT_INPUT);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;

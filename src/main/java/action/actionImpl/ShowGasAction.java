@@ -3,6 +3,8 @@ package action.actionImpl;
 import action.Action;
 import dao.impl.DataDaoImpl;
 import entity.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +17,12 @@ import java.util.List;
 import static constants.ActionConstants.SHOW_GAS_DATA_PERSON_LIST;
 
 public class ShowGasAction implements Action {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ShowGasAction.class);
     public static final int GAS_SUPPLIER = 1;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         showDataBySupplier(request, response, GAS_SUPPLIER, SHOW_GAS_DATA_PERSON_LIST);
     }
 
@@ -27,8 +31,7 @@ public class ShowGasAction implements Action {
 
         List<Data> dataList = null;
 
-            dataList = dataDao.getAllBySupplierId(gasSupplier);
-
+        dataList = dataDao.getAllBySupplierId(gasSupplier);
 
         request.setAttribute("dataList", dataList);
         request.getRequestDispatcher(showGasDataPersonList).forward(request, response);

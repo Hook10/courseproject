@@ -19,8 +19,9 @@ import static constants.ActionConstants.ERROR_URL;
 import static constants.ErrorConstants.*;
 
 public class CreateSupplierAction implements Action {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateSupplierAction.class);
+    private NameValidation nameValidation = new NameValidation();
+    private IINValidation iinValidation = new IINValidation();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +36,7 @@ public class CreateSupplierAction implements Action {
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
 
-        if (!new NameValidation().isValidUserName(name) || !new IINValidation().isValidIIN(bin)) {
+        if (nameValidation.isNotValidUserName(name) || iinValidation.isNotValidIIN(bin)) {
             request.setAttribute(ERROR_MESSAGE, INCORRECT_INPUT);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
         }
@@ -52,4 +53,4 @@ public class CreateSupplierAction implements Action {
 
     }
 }
-//
+

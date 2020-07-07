@@ -21,6 +21,9 @@ import static constants.ErrorConstants.*;
 public class EditCustomerAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditCustomerAction.class);
     private HashFunction hashFunction = new HashFunction();
+    private final NameValidation nameValidation = new NameValidation();
+    private final EmailValidation emailValidation = new EmailValidation();
+    private final IINValidation iinValidation = new IINValidation();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,8 +48,8 @@ public class EditCustomerAction implements Action {
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
-        if (!new NameValidation().isValidUserName(firstName) || !new NameValidation().isValidUserName(surName) ||
-                !new EmailValidation().isValidEmail(email) || !new IINValidation().isValidIIN(iin)) {
+        if (nameValidation.isNotValidUserName(firstName) || nameValidation.isNotValidUserName(surName) ||
+                emailValidation.isNotValidEmail(email) || iinValidation.isNotValidIIN(iin)) {
             request.setAttribute(ERROR_MESSAGE, INCORRECT_INPUT);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
@@ -64,7 +67,7 @@ public class EditCustomerAction implements Action {
         customer.setIin(iin);
 
 
-            customerDao.update(id, customer);
+        customerDao.update(id, customer);
 
 
         new ShowAllCustomersAction().execute(request, response);

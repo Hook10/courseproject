@@ -1,8 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8"  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="theLocale"
        value="${not empty param.theLocale ? param.theLocale : not empty theLocale ? theLocale : pageContext.request.locale}"
+
        scope="session"/>
 <fmt:setLocale value="${theLocale}"/>
 <fmt:setBundle basename="myLabels"/>
@@ -18,7 +19,7 @@
 <div class="container-lg">
     View this page in: <br/>
     <a href="${pageContext.request.contextPath}/home/editCustomerButton?theLocale=en_US" type="button" class="btn btn-info">English (US)</a> |
-    <a href="${pageContext.request.contextPath}/home/editCustmoerButton?theLocale=ru_RU" type="button" class="btn btn-info">Русский (RU)</a>
+    <a href="${pageContext.request.contextPath}/home/editCustomerButton?theLocale=ru_RU" type="button" class="btn btn-info">Русский (RU)</a>
     <br/><br/>
     Selected language: ${theLocale}
     <hr>
