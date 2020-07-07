@@ -29,9 +29,7 @@ public class ShowGasAction implements Action {
     static void showDataBySupplier(HttpServletRequest request, HttpServletResponse response, int gasSupplier, String showGasDataPersonList) throws ServletException, IOException {
         DataDaoImpl dataDao = new DataDaoImpl();
 
-        List<Data> dataList = null;
-
-        dataList = dataDao.getAllBySupplierId(gasSupplier);
+        List<Data> dataList = dataDao.getAllBySupplierId(gasSupplier);
 
         request.setAttribute("dataList", dataList);
         request.getRequestDispatcher(showGasDataPersonList).forward(request, response);

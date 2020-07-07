@@ -29,9 +29,7 @@ public class ShowInvoiceAction implements Action {
 
         InvoiceDaoImpl invoiceDao1 = new InvoiceDaoImpl();
 
-        List<Invoice> invoicesList = null;
-
-        invoicesList = invoiceDao1.getAllByDataId(id_data);
+        List<Invoice> invoicesList = invoiceDao1.getAllByDataId(id_data);
 
         request.setAttribute("invoicesList", invoicesList);
         request.getRequestDispatcher(PAY_INVOICE).forward(request, response);

@@ -22,10 +22,7 @@ public class ShowAllCustomersAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         CustomerDaoImpl customerDao = new CustomerDaoImpl();
-        List<Customer> customerList = null;
-
-
-        customerList = customerDao.getAll();
+        List<Customer> customerList = customerDao.getAll();
 
         request.setAttribute("customerList", customerList);
         request.getRequestDispatcher(SHOW_CUSTOMERS).forward(request, response);

@@ -26,10 +26,8 @@ public class ShowAllSuppliersAction implements Action {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
 
         SupplierDaoImpl supplierDao = new SupplierDaoImpl();
-        List<Supplier> supplierList = null;
+        List<Supplier> supplierList = supplierDao.getAll();
 
-
-        supplierList = supplierDao.getAll();
 
         request.setAttribute("supplierList", supplierList);
         request.getRequestDispatcher(SHOW_SUPPLIERS).forward(request, response);

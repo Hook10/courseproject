@@ -34,28 +34,32 @@ public class PayInvoiceButtonAction implements Action {
         long id_supplier = Long.parseLong(request.getParameter("id_supplier"));
         long id_customer = Long.parseLong(request.getParameter("id_customer"));
         String month = request.getParameter("month");
-        long data = Long.parseLong(String.valueOf(request.getParameter("data")));
+        long dataFromCustomersWaterGasElectricityMeter = Long.parseLong(String.valueOf(request.getParameter("data")));
         LOGGER.info(id_data + " id_data PayInvoiceButtonAction");
 
-
         long cost = 0;
-        if (id_supplier == GAS_SUPPLIER) {
-            cost = data * GAS_TARIFF_FROM_11_06_2020_KZT_FOR_1_CUBIC_METER;
-        } else if (id_supplier == WATER_SUPPLIER) {
-            cost = data * WATER_TARIFF_FROM_11_06_2020_KZT_FOR_1_CUBIC_METER;
-        } else if (id_supplier == ELECTRICITY_SUPPLIER) {
-            cost = data * ELECTR_TARIFF_FROM_11_06_2020__KZT_FOR_1_KILOWATT;
-        } else {
-            request.setAttribute(ERROR_MESSAGE, WRONG_SUPPLIER);
-            RequestDispatcher dispatcher = request.getRequestDispatcher(ERROR_URL);
-            dispatcher.forward(request, response);
+        switch ((int) id_supplier) {
+            case (GAS_SUPPLIER):
+                cost = dataFromCustomersWaterGasElectricityMeter * GAS_TARIFF_FROM_11_06_2020_KZT_FOR_1_CUBIC_METER;
+                break;
+            case (WATER_SUPPLIER):
+                cost = dataFromCustomersWaterGasElectricityMeter * WATER_TARIFF_FROM_11_06_2020_KZT_FOR_1_CUBIC_METER;
+                break;
+            case (ELECTRICITY_SUPPLIER):
+                cost = dataFromCustomersWaterGasElectricityMeter * ELECTR_TARIFF_FROM_11_06_2020__KZT_FOR_1_KILOWATT;
+                break;
+            default:
+                request.setAttribute(ERROR_MESSAGE, WRONG_SUPPLIER);
+                RequestDispatcher dispatcher = request.getRequestDispatcher(ERROR_URL);
+                dispatcher.forward(request, response);
         }
+
 
         invoice.setIdData(id_data);
         invoice.setIdSupplier(id_supplier);
         invoice.setIdCustomer(id_customer);
         invoice.setMonth(month);
-        invoice.setData(data);
+        invoice.setData(dataFromCustomersWaterGasElectricityMeter);
         invoice.setCost(cost);
 
         InvoiceDaoImpl invoiceDao = new InvoiceDaoImpl();
