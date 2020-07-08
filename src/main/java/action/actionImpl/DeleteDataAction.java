@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static action.actionImpl.ShowGasAction.GAS_SUPPLIER;
+import static constants.ParamAndAttributeConstants.*;
 
 public class DeleteDataAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(DeleteDataAction.class);
@@ -18,8 +19,8 @@ public class DeleteDataAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
-        long id = Long.parseLong(request.getParameter("id"));
-        int id_supplier = Integer.parseInt(request.getParameter("id_supplier"));
+        long id = Long.parseLong(request.getParameter(ID));
+        int id_supplier = Integer.parseInt(request.getParameter(ID_SUPPLIER));
 
         LOGGER.info(id + " id method DeleteDataAction");
         LOGGER.info(id_supplier + " id_supplier method DeleteDataAction");

@@ -15,6 +15,7 @@ import java.io.IOException;
 import static action.actionImpl.EditCustomerDataAction.supplierForward;
 import static constants.ActionConstants.*;
 import static constants.ErrorConstants.*;
+import static constants.ParamAndAttributeConstants.*;
 
 public class AddDataAction implements Action {
     public static final int GAS_SUPPLIER = 1;
@@ -25,17 +26,17 @@ public class AddDataAction implements Action {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         Customer customer = null;
 
-        if (request.getSession().getAttribute("customer") instanceof Customer) {
-            customer = (Customer) request.getSession().getAttribute("customer");
+        if (request.getSession().getAttribute(CUSTOMER) instanceof Customer) {
+            customer = (Customer) request.getSession().getAttribute(CUSTOMER);
         } else {
             request.setAttribute(ERROR_MESSAGE, NEED_REGISTRATION);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
         }
-        String month = request.getParameter("month");
-        long data = Long.parseLong(request.getParameter("Gas_data"));
+        String month = request.getParameter(MONTH);
+        long data = Long.parseLong(request.getParameter(GAS_DATA));
         Long id_customer = customer.getId();
-        int id_supplier = Integer.parseInt(request.getParameter("id_supplier"));
+        int id_supplier = Integer.parseInt(request.getParameter(ID_SUPPLIER));
 
 
         Data dataFromCustomer = new Data();

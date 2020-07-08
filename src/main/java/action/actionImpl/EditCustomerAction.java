@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import static constants.ActionConstants.ERROR_URL;
 import static constants.ErrorConstants.*;
+import static constants.ParamAndAttributeConstants.*;
 
 public class EditCustomerAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditCustomerAction.class);
@@ -31,14 +32,14 @@ public class EditCustomerAction implements Action {
 
         CustomerDaoImpl customerDao = new CustomerDaoImpl();
 
-        long id = Long.parseLong(String.valueOf(request.getParameter("id")));
-        String firstName = request.getParameter("firstName");
-        String surName = request.getParameter("surname");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String city = request.getParameter("city");
-        String address = request.getParameter("address");
-        String iin = request.getParameter("iin");
+        long id = Long.parseLong(String.valueOf(request.getParameter(ID)));
+        String firstName = request.getParameter(FIRST_NAME);
+        String surName = request.getParameter(SURNAME);
+        String email = request.getParameter(EMAIL);
+        String password = request.getParameter(PASSWORD);
+        String city = request.getParameter(CITY);
+        String address = request.getParameter(ADDRESS);
+        String iin = request.getParameter(IIN);
 
         if (firstName.isEmpty() || surName.isEmpty() ||
                 email.isEmpty() || password.isEmpty() ||

@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 
 import static action.actionImpl.AddDataAction.GAS_SUPPLIER;
@@ -20,6 +19,7 @@ import static action.actionImpl.ShowWaterAction.WATER_SUPPLIER;
 import static constants.ActionConstants.*;
 import static constants.ErrorConstants.WRONG_SUPPLIER;
 import static constants.ErrorConstants.ERROR_MESSAGE;
+import static constants.ParamAndAttributeConstants.*;
 import static constants.TariffConstants.*;
 
 public class PayInvoiceButtonAction implements Action {
@@ -30,11 +30,11 @@ public class PayInvoiceButtonAction implements Action {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
 
         Invoice invoice = new Invoice();
-        long id_data = Long.parseLong(request.getParameter("id_data"));
-        long id_supplier = Long.parseLong(request.getParameter("id_supplier"));
-        long id_customer = Long.parseLong(request.getParameter("id_customer"));
+        long id_data = Long.parseLong(request.getParameter(ID_DATA));
+        long id_supplier = Long.parseLong(request.getParameter(ID_SUPPLIER));
+        long id_customer = Long.parseLong(request.getParameter(ID_CUSTOMER));
         String month = request.getParameter("month");
-        long dataFromCustomersWaterGasElectricityMeter = Long.parseLong(String.valueOf(request.getParameter("data")));
+        long dataFromCustomersWaterGasElectricityMeter = Long.parseLong(String.valueOf(request.getParameter(DATA)));
         LOGGER.info(id_data + " id_data PayInvoiceButtonAction");
 
         long cost = 0;
@@ -67,11 +67,11 @@ public class PayInvoiceButtonAction implements Action {
         invoiceDao.add(invoice);
 
 
-        request.setAttribute("id_data", request.getParameter("id"));
-        request.setAttribute("id_supplier", request.getParameter("id_supplier"));
-        request.setAttribute("id_customer", request.getParameter("id_customer"));
-        request.setAttribute("month", request.getParameter("month"));
-        request.setAttribute("data", request.getParameter("data"));
+        request.setAttribute(ID_DATA, request.getParameter(ID_DATA));
+        request.setAttribute(ID_SUPPLIER, request.getParameter(ID_SUPPLIER));
+        request.setAttribute(ID_CUSTOMER, request.getParameter(ID_CUSTOMER));
+        request.setAttribute(MONTH, request.getParameter(MONTH));
+        request.setAttribute(DATA, request.getParameter(DATA));
 
         new ShowInvoiceAction().execute(request, response);
     }

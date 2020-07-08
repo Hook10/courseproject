@@ -1,6 +1,5 @@
 package action.actionImpl;
 
-import encoder.HashFunction;
 import action.Action;
 import dao.impl.AdminDaoImpl;
 import entity.Admin;
@@ -18,6 +17,7 @@ import java.io.IOException;
 import static constants.ActionConstants.ERROR_URL;
 import static constants.ActionConstants.LOGIN_ADMIN;
 import static constants.ErrorConstants.*;
+import static constants.ParamAndAttributeConstants.*;
 
 public class CreateAdminAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateAdminAction.class);
@@ -29,11 +29,11 @@ public class CreateAdminAction implements Action {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         AdminDaoImpl adminDao = new AdminDaoImpl();
 
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        Long supplier_id = Long.parseLong(request.getParameter("supplier_id"));
-        String email = request.getParameter("email");
-        String company_name = request.getParameter("company_name");
+        String login = request.getParameter(LOGIN);
+        String password = request.getParameter(PASSWORD);
+        Long supplier_id = Long.parseLong(request.getParameter(ID_SUPPLIER));
+        String email = request.getParameter(EMAIL);
+        String company_name = request.getParameter(COMPANY_NAME);
 
         if (login.isEmpty() || password.isEmpty() ||
                 email.isEmpty() || company_name.isEmpty()) {

@@ -45,7 +45,7 @@
                     </tr>
                     <tr>
                         <td><fmt:message key="ID_supplier"/></td>
-                        <td><input type="text" name="supplier_id" required="true"/></td>
+                        <td><input type="text" name="id_supplier" required="true"/></td>
                     </tr>
                     <tr>
                         <td><fmt:message key="email"/></td>
@@ -53,7 +53,7 @@
                     </tr>
                     <tr>
                         <td><fmt:message key="company.name"/></td>
-                        <td><input type="text" name="company_name" required="true"/></td>
+                        <td><input type="text" name="companyName" required="true"/></td>
                     </tr>
                 </table>
                 <input type="submit" value="Submit"/>

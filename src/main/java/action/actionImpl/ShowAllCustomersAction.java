@@ -10,10 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import static constants.ActionConstants.SHOW_CUSTOMERS;
+import static constants.ParamAndAttributeConstants.CUSTOMER_LIST;
 
 public class ShowAllCustomersAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(ShowAllCustomersAction.class);
@@ -24,7 +24,7 @@ public class ShowAllCustomersAction implements Action {
         CustomerDaoImpl customerDao = new CustomerDaoImpl();
         List<Customer> customerList = customerDao.getAll();
 
-        request.setAttribute("customerList", customerList);
+        request.setAttribute(CUSTOMER_LIST, customerList);
         request.getRequestDispatcher(SHOW_CUSTOMERS).forward(request, response);
     }
 }

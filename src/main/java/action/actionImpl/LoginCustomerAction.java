@@ -21,6 +21,7 @@ import java.io.IOException;
 import static constants.ActionConstants.CUSTOMER_PERSONAL_ACCOUNT_PAGE;
 import static constants.ActionConstants.ERROR_URL;
 import static constants.ErrorConstants.*;
+import static constants.ParamAndAttributeConstants.*;
 
 public class LoginCustomerAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginCustomerAction.class);
@@ -36,8 +37,8 @@ public class LoginCustomerAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         HttpSession session = request.getSession();
-        email = request.getParameter("email");
-        password = request.getParameter("password");
+        email = request.getParameter(EMAIL);
+        password = request.getParameter(PASSWORD);
 
         if (email.isEmpty() || password.isEmpty()) {
             request.setAttribute(ERROR_MESSAGE, EMPTY_FIELDS);
@@ -56,9 +57,9 @@ public class LoginCustomerAction implements Action {
         customer = customerDao.getCustomerByEmailAndPassword(email, password);
 
         if (customer != null) {
-            session.setAttribute("customer", customer);
-            session.setAttribute("status", UserStatus.CUSTOMER);
-            session.setAttribute("id", customer.getId());
+            session.setAttribute(CUSTOMER, customer);
+            session.setAttribute(USER_STATUS, UserStatus.CUSTOMER);
+            session.setAttribute(ID, customer.getId());
             request.getRequestDispatcher(CUSTOMER_PERSONAL_ACCOUNT_PAGE).forward(request, response);
         } else {
             request.setAttribute(ERROR_MESSAGE, CUSTOMER_DOES_NOT_EXIST);

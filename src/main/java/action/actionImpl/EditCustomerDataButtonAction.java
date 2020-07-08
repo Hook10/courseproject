@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static constants.ActionConstants.EDIT_CUSTOMER_DATA;
+import static constants.ParamAndAttributeConstants.*;
 
 
 public class EditCustomerDataButtonAction implements Action {
@@ -19,11 +20,11 @@ public class EditCustomerDataButtonAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
 
-        request.setAttribute("id", request.getParameter("id"));
-        request.setAttribute("id_customer", request.getParameter("id_customer"));
-        request.setAttribute("data", request.getParameter("data"));
-        request.setAttribute("month", request.getParameter("month"));
-        request.setAttribute("id_supplier", request.getParameter("id_supplier"));
+        request.setAttribute(ID, request.getParameter(ID));
+        request.setAttribute(ID_CUSTOMER, request.getParameter(ID_CUSTOMER));
+        request.setAttribute(DATA, request.getParameter(DATA));
+        request.setAttribute(MONTH, request.getParameter(MONTH));
+        request.setAttribute(ID_SUPPLIER, request.getParameter(ID_SUPPLIER));
         request.getRequestDispatcher(EDIT_CUSTOMER_DATA).forward(request, response);
 
 

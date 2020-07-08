@@ -11,13 +11,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static action.actionImpl.ShowElectrAction.ELECTRICITY_SUPPLIER;
 import static action.actionImpl.ShowWaterAction.WATER_SUPPLIER;
 import static constants.ActionConstants.*;
+import static constants.ParamAndAttributeConstants.*;
 import static constants.ErrorConstants.WRONG_SUPPLIER;
 import static constants.ErrorConstants.ERROR_MESSAGE;
+
 
 public class EditCustomerDataAction implements Action {
     public static final int GAS_SUPPLIER = 1;
@@ -29,13 +30,13 @@ public class EditCustomerDataAction implements Action {
 
         DataDaoImpl dataDao = new DataDaoImpl();
 
-        long id = Long.parseLong(String.valueOf(request.getParameter("id")));
+        long id = Long.parseLong(String.valueOf(request.getParameter(ID)));
         LOGGER.info(id + " id EditCustomerDataAction");
 
-        String month = request.getParameter("month");
-        long data = Long.parseLong(request.getParameter("data"));
-        int id_supplier = Integer.parseInt(request.getParameter("id_supplier"));
-        long id_customer = Long.parseLong(String.valueOf(request.getParameter("id_customer")));
+        String month = request.getParameter(MONTH);
+        long data = Long.parseLong(request.getParameter(DATA));
+        int id_supplier = Integer.parseInt(request.getParameter(ID_SUPPLIER));
+        long id_customer = Long.parseLong(String.valueOf(request.getParameter(ID_CUSTOMER)));
         LOGGER.info(id_customer + " id_customer EditCustomerDataAction");
 
         Data dataFromCustomer = new Data();

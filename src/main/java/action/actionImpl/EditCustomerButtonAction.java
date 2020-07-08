@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static constants.ActionConstants.EDIT_CUSTOMER;
-import static constants.ActionConstants.EDIT_CUSTOMER_DATA;
+import static constants.ParamAndAttributeConstants.*;
 
 public class EditCustomerButtonAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditCustomerButtonAction.class);
@@ -19,14 +19,14 @@ public class EditCustomerButtonAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
 
-        request.setAttribute("id", request.getParameter("id"));
-        request.setAttribute("firstName", request.getParameter("firstName"));
-        request.setAttribute("surname", request.getParameter("surname"));
-        request.setAttribute("email", request.getParameter("email"));
-        request.setAttribute("password", request.getParameter("password"));
-        request.setAttribute("city", request.getParameter("city"));
-        request.setAttribute("address", request.getParameter("address"));
-        request.setAttribute("iin", request.getParameter("iin"));
+        request.setAttribute(ID, request.getParameter(ID));
+        request.setAttribute(FIRST_NAME, request.getParameter(FIRST_NAME));
+        request.setAttribute(SURNAME, request.getParameter(SURNAME));
+        request.setAttribute(EMAIL, request.getParameter(EMAIL));
+        request.setAttribute(PASSWORD, request.getParameter(PASSWORD));
+        request.setAttribute(CITY, request.getParameter(CITY));
+        request.setAttribute(ADDRESS, request.getParameter(ADDRESS));
+        request.setAttribute(IIN, request.getParameter(IIN));
 
         request.getRequestDispatcher(EDIT_CUSTOMER).forward(request, response);
     }

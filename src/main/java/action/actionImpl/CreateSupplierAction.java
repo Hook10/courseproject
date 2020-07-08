@@ -17,6 +17,7 @@ import java.io.IOException;
 import static constants.ActionConstants.ADMIN_CABINET;
 import static constants.ActionConstants.ERROR_URL;
 import static constants.ErrorConstants.*;
+import static constants.ParamAndAttributeConstants.*;
 
 public class CreateSupplierAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateSupplierAction.class);
@@ -28,8 +29,8 @@ public class CreateSupplierAction implements Action {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         SupplierDaoImpl supplierDao = new SupplierDaoImpl();
 
-        String name = request.getParameter("name");
-        String bin = request.getParameter("bin");
+        String name = request.getParameter(NAME);
+        String bin = request.getParameter(BIN);
 
         if (name.isEmpty() || bin.isEmpty()) {
             request.setAttribute(ERROR_MESSAGE, EMPTY_FIELDS);

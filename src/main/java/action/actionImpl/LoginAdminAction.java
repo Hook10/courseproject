@@ -18,6 +18,7 @@ import java.io.IOException;
 import static constants.ActionConstants.ADMIN_CABINET;
 import static constants.ActionConstants.ERROR_URL;
 import static constants.ErrorConstants.*;
+import static constants.ParamAndAttributeConstants.*;
 
 public class LoginAdminAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginAdminAction.class);
@@ -33,8 +34,8 @@ public class LoginAdminAction implements Action {
 
         HttpSession session = request.getSession();
 
-        login = request.getParameter("login");
-        password = request.getParameter("password");
+        login = request.getParameter(LOGIN);
+        password = request.getParameter(PASSWORD);
 
         if (login.isEmpty() || password.isEmpty()) {
             request.setAttribute(ERROR_MESSAGE, EMPTY_FIELDS);
@@ -47,8 +48,8 @@ public class LoginAdminAction implements Action {
         admin = adminDao.getAdminByLoginAndPassword(login, password);
 
         if (admin != null) {
-            session.setAttribute("admin", admin);
-            session.setAttribute("status", UserStatus.WEBSITEADMIN);
+            session.setAttribute(ADMIN, admin);
+            session.setAttribute(USER_STATUS, UserStatus.WEBSITEADMIN);
             request.getRequestDispatcher(ADMIN_CABINET).forward(request, response);
         } else {
             request.setAttribute(ERROR_MESSAGE, ADMIN_DOES_NOT_EXIST);
