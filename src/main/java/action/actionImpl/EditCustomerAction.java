@@ -21,7 +21,7 @@ import static constants.ParamAndAttributeConstants.*;
 
 public class EditCustomerAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditCustomerAction.class);
-    private HashFunction hashFunction = new HashFunction();
+    private final HashFunction hashFunction = new HashFunction();
     private final NameValidation nameValidation = new NameValidation();
     private final EmailValidation emailValidation = new EmailValidation();
     private final IINValidation iinValidation = new IINValidation();

@@ -22,8 +22,8 @@ import static constants.ParamAndAttributeConstants.*;
 
 public class LoginAdminAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginAdminAction.class);
-    String login;
-    String password;
+    private String login;
+    private String password;
     private HashFunction hashPassword = new HashFunction();
     private Admin admin;
     AdminDaoImpl adminDao;

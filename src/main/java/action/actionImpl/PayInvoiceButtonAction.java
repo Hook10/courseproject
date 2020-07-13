@@ -30,15 +30,15 @@ public class PayInvoiceButtonAction implements Action {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
 
         Invoice invoice = new Invoice();
-        long id_data = Long.parseLong(request.getParameter(ID_DATA));
-        long id_supplier = Long.parseLong(request.getParameter(ID_SUPPLIER));
-        long id_customer = Long.parseLong(request.getParameter(ID_CUSTOMER));
+        long idData = Long.parseLong(request.getParameter(ID_DATA));
+        long idSupplier = Long.parseLong(request.getParameter(ID_SUPPLIER));
+        long idCustomer = Long.parseLong(request.getParameter(ID_CUSTOMER));
         String month = request.getParameter("month");
         long dataFromCustomersWaterGasElectricityMeter = Long.parseLong(String.valueOf(request.getParameter(DATA)));
-        LOGGER.info(id_data + " id_data PayInvoiceButtonAction");
+        LOGGER.info(idData + " id_data PayInvoiceButtonAction");
 
         long cost = 0;
-        switch ((int) id_supplier) {
+        switch ((int) idSupplier) {
             case (GAS_SUPPLIER):
                 cost = dataFromCustomersWaterGasElectricityMeter * GAS_TARIFF_FROM_11_06_2020_KZT_FOR_1_CUBIC_METER;
                 break;
@@ -55,9 +55,9 @@ public class PayInvoiceButtonAction implements Action {
         }
 
 
-        invoice.setIdData(id_data);
-        invoice.setIdSupplier(id_supplier);
-        invoice.setIdCustomer(id_customer);
+        invoice.setIdData(idData);
+        invoice.setIdSupplier(idSupplier);
+        invoice.setIdCustomer(idCustomer);
         invoice.setMonth(month);
         invoice.setData(dataFromCustomersWaterGasElectricityMeter);
         invoice.setCost(cost);

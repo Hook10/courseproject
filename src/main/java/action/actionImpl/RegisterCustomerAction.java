@@ -22,7 +22,7 @@ import static constants.ParamAndAttributeConstants.*;
 
 public class RegisterCustomerAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(RegisterCustomerAction.class);
-    private HashFunction hashFunction = new HashFunction();
+    private final HashFunction hashFunction = new HashFunction();
     NameValidation nameValidation = new NameValidation();
     EmailValidation emailValidation = new EmailValidation();
     IINValidation iinValidation = new IINValidation();

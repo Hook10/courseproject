@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static constants.ActionConstants.CREATE_ADMIN;
-import static constants.ActionConstants.CUSTOMER_REGISTRATION_PAGE;
+
 
 public class CreateAdminButtonAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateAdminButtonAction.class);

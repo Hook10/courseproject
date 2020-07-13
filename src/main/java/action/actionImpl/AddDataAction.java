@@ -24,7 +24,7 @@ public class AddDataAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
-        Customer customer = null;
+        Customer customer;
 
         if (request.getSession().getAttribute(CUSTOMER) instanceof Customer) {
             customer = (Customer) request.getSession().getAttribute(CUSTOMER);
@@ -35,8 +35,8 @@ public class AddDataAction implements Action {
         }
         String month = request.getParameter(MONTH);
         long data = Long.parseLong(request.getParameter(GAS_DATA));
-        Long id_customer = customer.getId();
-        int id_supplier = Integer.parseInt(request.getParameter(ID_SUPPLIER));
+        long idCustomer = customer.getId();
+        int idSupplier = Integer.parseInt(request.getParameter(ID_SUPPLIER));
 
 
         Data dataFromCustomer = new Data();
@@ -44,12 +44,12 @@ public class AddDataAction implements Action {
 
         dataFromCustomer.setMonth(month);
         dataFromCustomer.setData(data);
-        dataFromCustomer.setIdCustomer(id_customer);
-        dataFromCustomer.setIdSupplier(id_supplier);
+        dataFromCustomer.setIdCustomer(idCustomer);
+        dataFromCustomer.setIdSupplier(idSupplier);
 
         dataDao.add(dataFromCustomer);
 
-        supplierForward(request, response, id_supplier, GAS_SUPPLIER);
+        supplierForward(request, response, idSupplier, GAS_SUPPLIER);
 
     }
 }

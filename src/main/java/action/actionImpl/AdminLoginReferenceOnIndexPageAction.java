@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static constants.ActionConstants.LOGIN_ADMIN;
-import static constants.ActionConstants.LOGIN_CUSTOMER;
+
 
 public class AdminLoginReferenceOnIndexPageAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminLoginReferenceOnIndexPageAction.class);

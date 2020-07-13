@@ -35,31 +35,31 @@ public class EditCustomerDataAction implements Action {
 
         String month = request.getParameter(MONTH);
         long data = Long.parseLong(request.getParameter(DATA));
-        int id_supplier = Integer.parseInt(request.getParameter(ID_SUPPLIER));
-        long id_customer = Long.parseLong(String.valueOf(request.getParameter(ID_CUSTOMER)));
-        LOGGER.info(id_customer + " id_customer EditCustomerDataAction");
+        int idSupplier = Integer.parseInt(request.getParameter(ID_SUPPLIER));
+        long idCustomer = Long.parseLong(String.valueOf(request.getParameter(ID_CUSTOMER)));
+        LOGGER.info(idCustomer + " id_customer EditCustomerDataAction");
 
         Data dataFromCustomer = new Data();
 
         dataFromCustomer.setMonth(month);
         dataFromCustomer.setData(data);
-        dataFromCustomer.setIdCustomer(id_customer);
-        dataFromCustomer.setIdSupplier(id_supplier);
+        dataFromCustomer.setIdCustomer(idCustomer);
+        dataFromCustomer.setIdSupplier(idSupplier);
 
 
         dataDao.update(id, dataFromCustomer);
 
-        supplierForward(request, response, id_supplier, GAS_SUPPLIER);
+        supplierForward(request, response, idSupplier, GAS_SUPPLIER);
     }
 
-    static void supplierForward(HttpServletRequest request, HttpServletResponse response, int id_supplier, int gasSupplier) throws ServletException, IOException {
-        if (id_supplier == gasSupplier) {
+    static void supplierForward(HttpServletRequest request, HttpServletResponse response, int idSupplier, int gasSupplier) throws ServletException, IOException {
+        if (idSupplier == gasSupplier) {
             RequestDispatcher dispatcher = request.getRequestDispatcher(FORWARD_TO_SHOW_GAS_DATA);
             dispatcher.forward(request, response);
-        } else if (id_supplier == WATER_SUPPLIER) {
+        } else if (idSupplier == WATER_SUPPLIER) {
             RequestDispatcher dispatcher = request.getRequestDispatcher(FORWARD_TO_SHOW_WATER_DATA);
             dispatcher.forward(request, response);
-        } else if (id_supplier == ELECTRICITY_SUPPLIER) {
+        } else if (idSupplier == ELECTRICITY_SUPPLIER) {
             RequestDispatcher dispatcher = request.getRequestDispatcher(FORWARD_TO_SHOW_ELECTR_DATA);
             dispatcher.forward(request, response);
         } else {

@@ -21,8 +21,8 @@ import static constants.ParamAndAttributeConstants.*;
 
 public class CreateSupplierAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateSupplierAction.class);
-    private NameValidation nameValidation = new NameValidation();
-    private IINValidation iinValidation = new IINValidation();
+    private final NameValidation nameValidation = new NameValidation();
+    private final IINValidation iinValidation = new IINValidation();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

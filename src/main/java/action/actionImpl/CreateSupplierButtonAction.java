@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static constants.ActionConstants.CREATE_SUPPLIER;
-import static constants.ActionConstants.LOGIN_CUSTOMER;
+
 
 public class CreateSupplierButtonAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateSupplierButtonAction.class);

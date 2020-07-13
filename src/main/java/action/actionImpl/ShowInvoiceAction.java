@@ -22,14 +22,12 @@ public class ShowInvoiceAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
 
-        long id_supplier = Long.parseLong(request.getParameter(ID_SUPPLIER));
-        long id_customer = Long.parseLong(request.getParameter(ID_CUSTOMER));
-        long id_data = Long.parseLong(request.getParameter(ID_DATA));
+        long idData = Long.parseLong(request.getParameter(ID_DATA));
 
 
         InvoiceDaoImpl invoiceDao1 = new InvoiceDaoImpl();
 
-        List<Invoice> invoicesList = invoiceDao1.getAllByDataId(id_data);
+        List<Invoice> invoicesList = invoiceDao1.getAllByDataId(idData);
 
         request.setAttribute(INVOICES_LIST, invoicesList);
         request.getRequestDispatcher(PAY_INVOICE).forward(request, response);

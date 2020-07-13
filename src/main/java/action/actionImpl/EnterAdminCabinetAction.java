@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static constants.ActionConstants.ADMIN_CABINET;
-import static constants.ActionConstants.CUSTOMER_PERSONAL_ACCOUNT_PAGE;
+
 
 public class EnterAdminCabinetAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(EnterAdminCabinetAction.class);

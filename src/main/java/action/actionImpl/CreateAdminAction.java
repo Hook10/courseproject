@@ -21,8 +21,8 @@ import static constants.ParamAndAttributeConstants.*;
 
 public class CreateAdminAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateAdminAction.class);
-    private NameValidation nameValidation = new NameValidation();
-    private EmailValidation emailValidation = new EmailValidation();
+    private final NameValidation nameValidation = new NameValidation();
+    private final EmailValidation emailValidation = new EmailValidation();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,12 +31,12 @@ public class CreateAdminAction implements Action {
 
         String login = request.getParameter(LOGIN);
         String password = request.getParameter(PASSWORD);
-        Long supplier_id = Long.parseLong(request.getParameter(ID_SUPPLIER));
+        long supplierId = Long.parseLong(request.getParameter(ID_SUPPLIER));
         String email = request.getParameter(EMAIL);
-        String company_name = request.getParameter(COMPANY_NAME);
+        String companyName = request.getParameter(COMPANY_NAME);
 
         if (login.isEmpty() || password.isEmpty() ||
-                email.isEmpty() || company_name.isEmpty()) {
+                email.isEmpty() || companyName.isEmpty()) {
             request.setAttribute(ERROR_MESSAGE, EMPTY_FIELDS);
             request.getRequestDispatcher(ERROR_URL).forward(request, response);
             return;
@@ -52,9 +52,9 @@ public class CreateAdminAction implements Action {
         Admin admin = new Admin();
         admin.setLogin(login);
         admin.setPassword(password);
-        admin.setSupplierId(supplier_id);
+        admin.setSupplierId(supplierId);
         admin.setEmail(email);
-        admin.setCompanyName(company_name);
+        admin.setCompanyName(companyName);
 
         adminDao.add(admin);
 

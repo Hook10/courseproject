@@ -20,14 +20,14 @@ public class DeleteDataAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("Пришел запрос {} на URI: {}", request.getMethod(), request.getRequestURI());
         long id = Long.parseLong(request.getParameter(ID));
-        int id_supplier = Integer.parseInt(request.getParameter(ID_SUPPLIER));
+        int idSupplier = Integer.parseInt(request.getParameter(ID_SUPPLIER));
 
         LOGGER.info(id + " id method DeleteDataAction");
-        LOGGER.info(id_supplier + " id_supplier method DeleteDataAction");
+        LOGGER.info(idSupplier + " id_supplier method DeleteDataAction");
 
         DataDaoImpl dataDao = new DataDaoImpl();
         dataDao.removeOneById(id);
 
-        EditCustomerDataAction.supplierForward(request, response, id_supplier, GAS_SUPPLIER);
+        EditCustomerDataAction.supplierForward(request, response, idSupplier, GAS_SUPPLIER);
     }
 }
